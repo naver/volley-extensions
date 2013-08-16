@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.nhncorp.volleyextensions</groupId>
 	<artifactId>volley-extensions</artifactId>
-	<version>0.7.11</version>
+	<version>0.7.12</version>
 	<packaging>jar</packaging>
 	<name>Volley Extensions</name>
 
@@ -172,7 +172,7 @@
 			<!-- when testing volley, robolectric occurs errors at 2.1.x version. 
 				https://groups.google.com/forum/#!searchin/robolectric/sockettagger/robolectric/cTjuFmWKs7w/jgWycqy5xboJ 
 				robolectric 2.2.x version is currently not in maven repository . -->
-			<version>2.2-SNAPSHOT</version>
+			<version>2.1.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
