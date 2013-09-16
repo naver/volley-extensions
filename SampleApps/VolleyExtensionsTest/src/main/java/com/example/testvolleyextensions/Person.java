@@ -15,7 +15,6 @@ public class Person {
 	@JsonProperty("location")
 	private Location location;
 
-
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();
@@ -24,7 +23,6 @@ public class Person {
 		b.append("descrpition" + getDescription() + "\n");
 		
 		if (getLocation() != null) {
-
 			b.append("location.name : " + getLocation().name + "\n");
 			b.append("location.timezone" + getLocation().timezone + "\n");
 		}
@@ -32,16 +30,13 @@ public class Person {
 		return b.toString();
 	}
 
-
 	public String getOpenid() {
 		return openid;
 	}
 
-
 	public void setOpenid(String openid) {
 		this.openid = openid;
 	}
-
 
 	public String getNickname() {
 		return nickname;
@@ -52,21 +47,17 @@ public class Person {
 		this.nickname = nickname;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	public Location getLocation() {
 		return location;
 	}
-
 
 	public void setLocation(Location location) {
 		this.location = location;

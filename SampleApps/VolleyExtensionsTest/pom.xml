@@ -5,29 +5,26 @@
 	<artifactId>VolleyExtensionsTest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>apk</packaging>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<android.version>4.1.1.4</android.version>
 		<android.platform>17</android.platform>
 		<android-support.version>r7</android-support.version>
-		<android.home>/Users/NBP/Downloads/adt/sdk/</android.home>
 		<java.version>1.6</java.version>
+		<volley-ext.version>0.7.12</volley-ext.version>		
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>android</artifactId>
 			<version>4.1.1.4</version>
-			<scope>system</scope>
-			<systemPath>${android.home}/platforms/android-${android.platform}/android.jar</systemPath>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google</groupId>
 			<artifactId>volley</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.simpleframework</groupId>
 			<artifactId>simple-xml</artifactId>
@@ -50,12 +47,10 @@
 			</exclusions>
 			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.2.1</version>
-
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -65,34 +60,21 @@
 		<dependency>
 			<groupId>com.nhncorp.volleyextensions</groupId>
 			<artifactId>volley-extensions</artifactId>
-			<version>0.7.3</version>
+			<version>${volley-ext.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.nostra13.universalimageloader</groupId>
 			<artifactId>universal-image-loader</artifactId>
-			<version>1.8.5</version>
+			<version>1.8.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.squareup.okhttp</groupId>
 			<artifactId>okhttp</artifactId>
-			<version>1.1.1</version>
+			<version>1.2.1</version>
 		</dependency>
-
 	</dependencies>
-
-
 	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<testSourceDirectory>src/test/java</testSourceDirectory>
-		<testOutputDirectory>target/test-classes</testOutputDirectory>
-		<testResources>
-			<testResource>
-				<directory>src/test/resources</directory>
-			</testResource>
-		</testResources>
-		<directory>${project.basedir}/bin</directory>
 		<plugins>
-
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
@@ -101,14 +83,11 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-
-
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
-				<version>3.5.1</version>
+				<version>3.6.1</version>
 				<configuration>
-
 					<sdk>
 						<platform>${android.platform}</platform>
 						<path>${android.home}</path>
@@ -118,14 +97,8 @@
 					<proguard>
 						<skip>true</skip>
 					</proguard>
-
-
 				</configuration>
-
-				<!-- 간편 로그인 -->
 				<extensions>true</extensions>
-
-				<!-- 간편 로그인 -->
 				<executions>
 					<execution>
 						<id>alignApk</id>
