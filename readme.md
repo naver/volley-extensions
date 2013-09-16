@@ -70,8 +70,25 @@
 1. volley 라이브러리를 Depdendency에 추가한다.
 	- <http://devcafe.nhncorp.com//mappscafe/intro/entry/Volley> 참고 
 	- 아직 Volley의 공식 버전이 부여되지 않았기 때문에 현재 Volley-extensions에서는 Volley에 대한 의존성을 'optional'로 두고, 최종앱에서 명시적으로 Depdendency를 관리하도록 하였다.
-2. volley-extensions 라이브러리를 depdendency 추가한다.
-3. Jackson, SimpleXML, Android UniversalImageLoader 등 중 사용하려는 라이브러리의 Depdendency를 추가한다.  volley-extensions에서는 사용자가 이를 라이브러리를 선택적으로 사용한다고 가정을 하고, dependency를 optional로 설정했다. 따라서 사용하려는 라이브러리는 앱에서 명시적으로 추가해야 한다.
+2. volley-extensions 라이브러리의 저장소를 추가한다.
+
+		<repository>
+				<id>multiline-release-repo</id>
+				<url>http://hive.nhncorp.com/weblab/volley-extensions/rawcode/Download/</url>
+				<snapshots>
+					<enabled>false</enabled>
+				</snapshots>
+		</repository>
+		
+3. volley-extensions의 외존성을 추가한다.
+
+		<dependency>
+			<groupId>com.nhncorp.volleyextensions</groupId>
+			<artifactId>volley-extensions</artifactId>
+			<version>${volley-ext.version}</version>
+		</dependency>
+		
+4. Jackson, SimpleXML, Android UniversalImageLoader 등 중 사용하려는 라이브러리의 Depdendency를 추가한다.  volley-extensions에서는 사용자가 이를 라이브러리를 선택적으로 사용한다고 가정을 하고, dependency를 optional로 설정했다. 따라서 사용하려는 라이브러리는 앱에서 명시적으로 추가해야 한다.
 
 	- Jackson 1.x
 	
@@ -122,6 +139,8 @@
 ### 직접 jar 추가
 1. Volley의 jar를 직접 생성하거나 다운로드하고 프로젝트에 추가한다.
 	- <http://devcafe.nhncorp.com//mappscafe/intro/entry/Volley> 참고 
-2. Volley-extensions의 jar를 다운로드하고 프로젝트에 추가한다.
-3. Jackson, Simple, UniversalImageLoader 등에서 사용하려는 라이브러리의 jar파일을 추가한다.
+2. Volley-extensions의 jar를 다운로드한다. 
+	- [volley-extensions-0.7.12.jar](http://hive.nhncorp.com/weblab/volley-extensions/rawcode/Download/com/nhncorp/volleyextensions/volley-extensions/0.7.12/volley-extensions-0.7.12.jar)
+3. 프로젝트에 추가한다.
+4. Jackson, Simple, UniversalImageLoader 등에서 사용하려는 라이브러리의 jar파일을 추가한다.
 
