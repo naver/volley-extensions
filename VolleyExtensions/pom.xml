@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.nhncorp.volleyextensions</groupId>
 	<artifactId>volley-extensions</artifactId>
-	<version>0.7.12</version>
+	<version>0.7.13</version>
 	<packaging>jar</packaging>
 	<name>Volley Extensions</name>
 

@@ -5,10 +5,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 
-import javax.xml.stream.XMLStreamException;
-
 import org.simpleframework.xml.core.ElementException;
 import org.simpleframework.xml.core.Persister;
+import org.xmlpull.v1.XmlPullParserException;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -131,7 +130,7 @@ public class SimpleXmlRequest<T> extends AbstractConverterRequest<T> {
 					HttpHeaderParser.parseCacheHeaders(response));
 		} catch (UnsupportedEncodingException e) {
 			return Response.error(new ParseError(e));
-		} catch (XMLStreamException e) {
+		} catch (XmlPullParserException e) {
 			return Response.error(new ParseError(e));
 		} catch (ElementException e) {
 			return Response.error(new ParseError(e));
