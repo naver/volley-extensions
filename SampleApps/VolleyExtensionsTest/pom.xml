@@ -11,8 +11,17 @@
 		<android.platform>17</android.platform>
 		<android-support.version>r7</android-support.version>
 		<java.version>1.6</java.version>
-		<volley-ext.version>0.7.13</volley-ext.version>		
+		<volley-ext.version>0.7.13</volley-ext.version>
 	</properties>
+	<repositories>
+		<repository>
+			<id>multiline-release-repo</id>
+			<url>http://hive.nhncorp.com/weblab/volley-extensions/rawcode/Download/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.android</groupId>
