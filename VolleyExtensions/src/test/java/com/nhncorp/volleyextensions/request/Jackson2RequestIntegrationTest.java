@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -31,7 +30,6 @@ import com.nhncorp.volleyextensions.mock.ResponseHoldListener;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-@Ignore // This test needs Robolectric 2.2.
 public class Jackson2RequestIntegrationTest {
 	static final int THREAD_POOL_SIZE = 4;
 	static final int PORT = 51234;
