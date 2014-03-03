@@ -60,56 +60,6 @@
 			</reporting>
 		</profile>
 		<profile>
-			<id>clover</id>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>nhn-repository</id>
-					<name>NHN Maven2 Repository</name>
-					<url>http://repo.nhncorp.com/maven2</url>
-				</pluginRepository>
-				<pluginRepository>
-					<id>codehaus repository</id>
-					<name>Codehaus Maven2 Repository</name>
-					<url>http://repository.codehaus.org</url>
-				</pluginRepository>
-			</pluginRepositories>
-			<properties>
-				<clover.license>clover.license</clover.license>
-				<clover.version>3.0.2</clover.version>
-			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.atlassian.maven.plugins</groupId>
-						<artifactId>maven-clover2-plugin</artifactId>
-						<version>${clover.version}</version>
-						<configuration>
-							<includesTestSourceRoots>true</includesTestSourceRoots>
-							<licenseLocation>${clover.license}</licenseLocation>
-							<generateHtml>true</generateHtml>
-							<generateXml>true</generateXml>
-							<jdk>${java.version}</jdk>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-			<reporting>
-				<plugins>
-					<plugin>
-						<groupId>com.atlassian.maven.plugins</groupId>
-						<artifactId>maven-clover2-plugin</artifactId>
-						<version>${clover.version}</version>
-						<configuration>
-							<includesTestSourceRoots>true</includesTestSourceRoots>
-							<licenseLocation>${clover.license}</licenseLocation>
-							<encoding>UTF-8</encoding>
-							<jdk>${java.version}</jdk>
-						</configuration>
-					</plugin>
-				</plugins>
-			</reporting>
-		</profile>
-		<profile>
 			<id>klocwork</id>
 			<build>
 				<plugins>
