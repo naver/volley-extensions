@@ -30,7 +30,7 @@ public class CountingInputStreamTest {
 		// Given
 		InputStream is = openFromClassPath("test.txt");
 		CountingInputStream cis = new CountingInputStream(is);
-		//When
+		// When
 		String content = IOUtils.toString(cis);
 		IOUtils.closeQuietly(cis);
 		//Then

@@ -33,33 +33,33 @@ public class UniversalLruMemoryCacheTest {
 	
 	@Test
 	public void bitmapShouldBeCached(){
-    	//Given
+    	// Given
 		String url = "http://me.do/test1.jpg";
 		Bitmap image = ShadowBitmap.createBitmap(10, 10, Config.ALPHA_8);	
 		ImageCache cache = new UniversalLruMemoryCache(100);
-		//When
+		// When
 		cache.putBitmap(url, image);
-		//Then
+		// Then
 		Bitmap hit = cache.getBitmap(url);
 		assertNotNull(hit);
 	}
 	
 	@Test
 	public void bitmapShouldNotBeCachedWhenExceedLimitSize(){
-    	//Given
+    	// Given
 		String url = "http://me.do/test1.jpg";
 		Bitmap image = ShadowBitmap.createBitmap(100, 100, Config.ALPHA_8);	
 		ImageCache cache = new UniversalLruMemoryCache(10);
-		//When
+		// When
 		cache.putBitmap(url, image);
-		//Then
+		// Then
 		Bitmap hit = cache.getBitmap(url);
 		assertNull(hit);
 	}
 	
 	@Test
 	public void lruBitmapShouldNotBeRemovedWhenExceedLimitSize(){
-    	//Given
+    	// Given
 		String url1 = "http://me.do/test1.jpg";
 		Bitmap image1 = ShadowBitmap.createBitmap(1, 10, Config.ALPHA_8);	
 		String url2 = "http://me.do/test2.jpg";
@@ -67,13 +67,13 @@ public class UniversalLruMemoryCacheTest {
 		String url3 = "http://me.do/test3.jpg";
 		Bitmap image3 = ShadowBitmap.createBitmap(1, 30, Config.ALPHA_8);		
 		ImageCache cache = new UniversalLruMemoryCache(50);
-		//When
+		// When
 		cache.putBitmap(url1, image1);
 		cache.putBitmap(url2, image2);
 		cache.getBitmap(url1);
 		cache.putBitmap(url3, image3);
 		
-		//Then
+		// Then
 		assertNotNull(cache.getBitmap(url1));
 		assertNull(cache.getBitmap(url2));
 		assertNotNull(cache.getBitmap(url3));

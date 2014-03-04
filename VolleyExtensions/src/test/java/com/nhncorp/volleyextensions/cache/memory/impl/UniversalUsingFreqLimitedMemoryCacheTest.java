@@ -33,13 +33,13 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 public class UniversalUsingFreqLimitedMemoryCacheTest {
 	@Test
 	public void bitmapShouldBeCached(){
-    	//Given
+    	// Given
 		String url = "http://me.do/test1.jpg";
 		Bitmap image = ShadowBitmap.createBitmap(10, 10, Config.ALPHA_8);	
 		ImageCache cache = new UniversalUsingFreqLimitedMemoryCache(100);
-		//When
+		// When
 		cache.putBitmap(url, image);
-		//Then
+		// Then
 		Bitmap hit = cache.getBitmap(url);
 		assertNotNull(hit);
 	}

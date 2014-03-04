@@ -34,13 +34,13 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 public class UniversalFifoLimitedMemoryCacheTest {
 	@Test
 	public void bitmapShouldBeCached(){
-    	//Given
+    	// Given
 		String url = "http://me.do/test1.jpg";
 		Bitmap image = ShadowBitmap.createBitmap(100, 100, Config.ALPHA_8);	
 		ImageCache cache = new UniversalFifoLimitedMemoryCache(10);
-		//When
+		// When
 		cache.putBitmap(url, image);
-		//Then
+		// Then
 		Bitmap hit = cache.getBitmap(url);
 		assertThat("Bitmap should be cached by WeakReference event if it exceeds size limit of  UniversalFifoLimitedMemoryCache",
 				hit, is(image));

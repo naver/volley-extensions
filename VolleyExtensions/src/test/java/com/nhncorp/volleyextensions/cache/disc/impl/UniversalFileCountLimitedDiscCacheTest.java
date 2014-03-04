@@ -46,11 +46,11 @@ public class UniversalFileCountLimitedDiscCacheTest {
 	
     @Test
     public void cacheShouldBeHit() throws IOException {
-    	//Given
+    	// Given
     	Cache cache = new UniversalFileCountLimitedDiscCache(cacheDir, 30);
-		//When
+		// When
 		cache.put(key, entry);
-		//Then
+		// Then
 		Entry hit = cache.get(key);
 		assertThat(hit.data, is(value));
 		assertThat(cacheDir.list().length, is(1));
@@ -58,9 +58,9 @@ public class UniversalFileCountLimitedDiscCacheTest {
     
     @Test
     public void cacheShouldBeHitWithFileLimit() throws IOException, InterruptedException {
-    	//Given
+    	// Given
     	Cache cache = new UniversalFileCountLimitedDiscCache(cacheDir, 2);
-		//When
+		// When
 		cache.put(key + "1", entry);
 		TimeUnit.MILLISECONDS.sleep(10);
 		cache.put(key + "2", entry);
@@ -68,7 +68,7 @@ public class UniversalFileCountLimitedDiscCacheTest {
 		cache.put(key + "3", entry);
 		TimeUnit.MILLISECONDS.sleep(10);
 		
-		//Then
+		// Then
 		assertThat(cacheDir.list().length, is(2));
 		assertNotNull(cache.get(key + "3"));
 		assertNotNull(cache.get(key + "2"));
@@ -77,12 +77,12 @@ public class UniversalFileCountLimitedDiscCacheTest {
     
     @Test
     public void cacheShouldCreateMd5FileName() throws IOException {
-    	//Given
+    	// Given
     	Md5FileNameGenerator nameGenerator = new Md5FileNameGenerator();
     	Cache cache = new UniversalFileCountLimitedDiscCache(cacheDir, nameGenerator, 30);
-		//When
+		// When
 		cache.put(key, entry);
-		//Then
+		// Then
 		assertThat(cacheDir.list()[0], is("266ups70gzf5c2qtog8x4rzv4"));
     }
 }

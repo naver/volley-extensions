@@ -37,14 +37,14 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 public class UniversalLimitedAgeMemoryCacheTest {
 	@Test
     public void bitmapShouldBeCached() throws IOException, InterruptedException {
-    	//Given
+    	// Given
 		String url = "http://me.do/test1.jpg";
 		Bitmap image = ShadowBitmap.createBitmap(100, 100, Config.ALPHA_8);	
 		ImageCache cache = new UniversalFifoLimitedMemoryCache(1);
 
-		//When
+		// When
 		cache.putBitmap(url, image);
-		//Then
+		// Then
 		Bitmap hit = cache.getBitmap(url);
 		assertThat(hit, is(image));
 		

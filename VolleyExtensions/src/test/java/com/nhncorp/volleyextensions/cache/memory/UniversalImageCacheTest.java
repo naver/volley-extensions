@@ -55,9 +55,9 @@ public class UniversalImageCacheTest {
 
 	@Test
 	public void putShouldBeCalled() {
-		//When
+		// When
 		imageCache.put(key, value);
-		//Then
+		// Then
 		verify(delegate).put(key, value);
 	}
 
@@ -107,11 +107,11 @@ public class UniversalImageCacheTest {
 	
 	@Test
 	public void keysShouldContainCachedKey() {
-		//Given
+		// Given
 		given(delegate.keys()).willReturn(Arrays.asList(key));
-		//When
+		// When
 		Collection<String> keys = imageCache.keys();
-		//Then
+		// Then
 		assertTrue(keys.contains(key));
 	}
 }
