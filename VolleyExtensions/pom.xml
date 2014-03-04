@@ -144,7 +144,6 @@
 			<groupId>com.mcxiaoke.volley</groupId>
 			<artifactId>library</artifactId>
 			<version>1.0.2</version>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.simpleframework</groupId>
