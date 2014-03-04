@@ -6,6 +6,11 @@
 	<packaging>pom</packaging>
 	<version>0.8-snapshot</version>
 	<name>Volley Extensions</name>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>	
 	<modules>
 		<module>VolleyExtensions</module>
 		<module>SampleApps</module>
