@@ -31,7 +31,6 @@ import android.graphics.Bitmap.Config;
 
 import com.android.volley.toolbox.ImageLoader.ImageCache;
 
-
 @RunWith(RobolectricTestRunner.class)
 @org.robolectric.annotation.Config(manifest=org.robolectric.annotation.Config.NONE)
 public class UniversalLimitedAgeMemoryCacheTest {

@@ -15,7 +15,6 @@
  */
 package com.nhncorp.volleyextensions.cache.memory.impl;
 
-
 import com.nhncorp.volleyextensions.cache.memory.UniversalImageCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LRULimitedMemoryCache;
 /**

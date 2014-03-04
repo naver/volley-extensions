@@ -19,9 +19,6 @@ import java.util.List;
 
 import com.android.volley.toolbox.ImageLoader;
 
-
-//import com.android.volley.toolbox.ImageLoader;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

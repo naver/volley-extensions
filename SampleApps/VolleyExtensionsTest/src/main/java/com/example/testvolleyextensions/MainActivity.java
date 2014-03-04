@@ -17,7 +17,6 @@ package com.example.testvolleyextensions;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
-//import com.fasterxml.jackson.core.JsonParser;
 
 import android.os.Bundle;
 import android.app.Activity;

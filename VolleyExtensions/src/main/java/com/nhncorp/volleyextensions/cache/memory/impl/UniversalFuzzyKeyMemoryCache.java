@@ -22,7 +22,6 @@ import android.graphics.Bitmap;
 import com.nhncorp.volleyextensions.cache.memory.UniversalImageCache;
 import com.nostra13.universalimageloader.cache.memory.MemoryCacheAware;
 import com.nostra13.universalimageloader.cache.memory.impl.FuzzyKeyMemoryCache;
-//import com.nostra13.universalimageloader.core.assist.MemoryCacheUtil;
 /**
  * A wrapper class for {@link FuzzyKeyMemoryCache}
  * 

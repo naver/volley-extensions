@@ -15,7 +15,6 @@
  */
 package com.example.testvolleyextensions;
 
-
 import android.app.Application;
 
 public class MyApplication extends Application {

@@ -29,7 +29,6 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 import com.nostra13.universalimageloader.cache.memory.impl.FIFOLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.assist.MemoryCacheUtil;
 
-
 @RunWith(RobolectricTestRunner.class)
 @org.robolectric.annotation.Config(manifest=org.robolectric.annotation.Config.NONE)
 public class UniversalFuzzyKeyMemoryCacheTest {

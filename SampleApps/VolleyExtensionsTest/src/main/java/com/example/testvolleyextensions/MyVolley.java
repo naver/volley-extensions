@@ -17,7 +17,6 @@ package com.example.testvolleyextensions;
 
 import java.io.File;
 
-
 import android.content.Context;
 
 import com.android.volley.Cache;
