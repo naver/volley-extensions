@@ -1,17 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.nhncorp.volleyextensions</groupId>
 	<artifactId>VolleyExtensionsTest</artifactId>
 	<version>0.8-snapshot</version>
 	<packaging>apk</packaging>
+	<parent>
+			<groupId>com.nhncorp.volleyextensions</groupId>
+			<artifactId>samples</artifactId>
+			<version>0.8-snapshot</version>
+			<relativePath>../pom.xml</relativePath>
+	</parent>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<android.version>4.1.1.4</android.version>
 		<android.platform>17</android.platform>
 		<android-support.version>r7</android-support.version>
 		<java.version>1.6</java.version>
-		<volley-ext.version>0.7.13</volley-ext.version>
+		<volley-ext.version>${project.version}</volley-ext.version>
 	</properties>
 	<dependencies>
 		<dependency>
