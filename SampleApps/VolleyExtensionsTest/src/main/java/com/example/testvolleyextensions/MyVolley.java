@@ -32,7 +32,6 @@ import com.nhncorp.volleyextensions.cache.memory.impl.UniversalLimitedAgeMemoryC
 import com.nhncorp.volleyextensions.cache.memory.impl.UniversalLruMemoryCache;
 
 public class MyVolley {
-	private static final int DEFAULT_FILE_COUNT = 3;
 	private static final int DEFAULT_CACHE_SIZE = 10 * 1024 * 1024;
 	private static final long DEFAULT_MAX_AGE = 60;
 	private static RequestQueue requestQueue;

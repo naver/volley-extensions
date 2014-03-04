@@ -15,7 +15,6 @@
  */
 package com.example.testvolleyextensions;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -34,14 +33,12 @@ import android.widget.TextView;
 public class NaverShopListAdapter extends BaseAdapter {
 	List<ShoppingItem> items;
 	private ImageLoader loader;
-	private WeakReference<Context> contextReference;
 	private LayoutInflater inflater;
 
 	private int LAYOUT_LISTVIEW_ITEM_SHOPPING = R.layout.list_item;
 
 	public NaverShopListAdapter(Context context, List<ShoppingItem> items) {
 		super();
-		this.contextReference = new WeakReference<Context>(context);
 		this.inflater = LayoutInflater.from(context);
 		this.items = items;
 		

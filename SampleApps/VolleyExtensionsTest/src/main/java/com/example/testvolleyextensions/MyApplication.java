@@ -20,7 +20,6 @@ import android.app.Application;
 
 public class MyApplication extends Application {
 
-	private static final int DEFAULT_FILE_COUNT = 3;
 
 	@Override
 	public void onCreate() {
