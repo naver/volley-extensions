@@ -16,20 +16,14 @@
 package com.example.testvolleyextensions;
 
 import java.io.File;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import com.android.volley.Cache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.HurlStack.UrlRewriter;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageCache;
 import com.android.volley.toolbox.NoCache;

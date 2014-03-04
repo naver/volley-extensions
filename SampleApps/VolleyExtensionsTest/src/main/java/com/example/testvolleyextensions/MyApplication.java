@@ -15,7 +15,6 @@
  */
 package com.example.testvolleyextensions;
 
-import java.io.File;
 
 import android.app.Application;
 

@@ -16,26 +16,16 @@
 package com.example.testvolleyextensions;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
-import com.nhncorp.volleyextensions.request.Jackson2Request;
-import com.nhncorp.volleyextensions.request.SimpleXmlRequest;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageLoader.ImageContainer;
-import com.android.volley.toolbox.ImageLoader.ImageListener;
 //import com.fasterxml.jackson.core.JsonParser;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 
 public class MainActivity extends Activity {
 

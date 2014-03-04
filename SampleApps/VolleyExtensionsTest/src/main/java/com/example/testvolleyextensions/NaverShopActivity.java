@@ -17,13 +17,11 @@ package com.example.testvolleyextensions;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.ImageLoader;
-import com.nhncorp.volleyextensions.request.Jackson2Request;
 import com.nhncorp.volleyextensions.request.SimpleXmlRequest;
 
 public class NaverShopActivity extends Activity {

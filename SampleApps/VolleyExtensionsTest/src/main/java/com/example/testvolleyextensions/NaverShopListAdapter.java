@@ -24,7 +24,6 @@ import com.android.volley.toolbox.ImageLoader;
 //import com.android.volley.toolbox.ImageLoader;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
