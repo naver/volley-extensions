@@ -38,7 +38,7 @@ import com.nhncorp.volleyextensions.util.Assert;
 import com.nhncorp.volleyextensions.util.IoUtils;
 
 /**
- * A Request{@literal <T>} for which make a request and convert response data by Jackson 2.x Mapper.    
+ * A Request{@literal <T>} for which make a request and convert response data by Jackson 2.x ObjectMapper.    
  * @param <T> Specific type of an converted object from response data
  * 
  * @see AbstractConverterRequest
