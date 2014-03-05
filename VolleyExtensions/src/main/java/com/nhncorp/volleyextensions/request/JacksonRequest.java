@@ -35,7 +35,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.nhncorp.volleyextensions.util.Assert;
 
 /**
- * A Request{@literal <T>} for which make a request and convert response data by Jackson 1.9.x Mapper.   
+ * A Request{@literal <T>} for which make a request and convert response data by Jackson 1.9.x ObjectMapper.   
  * @param <T> Specific type of an converted object from response data
  * 
  * @see AbstractConverterRequest
