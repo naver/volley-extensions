@@ -1,80 +1,82 @@
-# 기능
-## Jackson json 지원
+# Features and usage
+## Request classes supporting JSON type of the response
 ### [JacksonRequest](code#/VolleyExtensions/src/main/java/com/nhncorp/volleyextensions/request/JacksonRequest.java)
-- [Jackson 1.x](http://jackson.codehaus.org/)를 이용한 Json 파싱
+- JSON parsing with [Jackson 1.x](http://jackson.codehaus.org/) library
 
 		Request<Person> request = new JacksonRequest<Person>(url, Person.class, listener, errorListener);
 		requestQueue.add(request);
 
 ### [Jackson2Request](code#/VolleyExtensions/src/main/java/com/nhncorp/volleyextensions/request/Jackson2Request.java)
-- [Jackson 2.x](http://wiki.fasterxml.com/JacksonHome)를 이용한 Json 파싱
+- JSON parsing with [Jackson 2.x](http://wiki.fasterxml.com/JacksonHome) library
 
 		Request<Person> request = new Jackson2Request<Person>(url, Person.class, listener, errorListener);
 		requestQueue.add(request);
 
-## [Simple XML](http://simple.sourceforge.net/) 지원
+## Request classes supporting XML type of the response
 ### [SimpleXmlRequest](code#/VolleyExtensions/src/main/java/com/nhncorp/volleyextensions/request/SimpleXmlRequest.java)
-- [Simple XML](http://simple.sourceforge.net/)을 활용한 XML 파싱
+- XML parsing with [Simple XML](http://simple.sourceforge.net/) library
 
 		Request<Person> request = new SimpleXmlRequest<Person>(url, Person.class, listener, errorListener);
 		requestQueue.add(request);
 		
-## [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader) 지원
+## Disk caches
 
-### DiskCache
+### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) disc caches
 #### UniversalFileCountLimitedDiscCache
-- 캐쉬 파일의 갯수를 제한하고 FIFO 규칙으로 삭제하는 캐쉬.
-- [FileCountLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/FileCountLimitedDiscCache.java)의 Adaptor.
+- Disc cache limited by file count. If file count in cache directory exceeds specified limit then file with the most oldest last usage date will be deleted.
+- An adapter class of [FileCountLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/FileCountLimitedDiscCache.java)
 
 #### UniversalLimitedAgeDiscCache
-- 지정된 시간동안만 생존하는 캐쉬.
-- [LimitedAgeDiscCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/LimitedAgeDiscCache.java)의 Adaptor.
+- Cache which deletes files which were loaded more than defined time. Cache size is unlimited.
+- An adapter class of [LimitedAgeDiscCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/LimitedAgeDiscCache.java)
 
 #### UniversalTotalSizeLimitedDiscCache
-- 제한된 용량을 넘어서면 가장 오래전에 사용된 파일을 삭제하는 캐쉬.
-- [TotalSizeLimitedDiscCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/TotalSizeLimitedDiscCache.java)의 Adaptor.
+- Cache limited by total cache size. If cache size exceeds specified limit then file with the most oldest last usage date will be deleted.
+- An adapter class of [TotalSizeLimitedDiscCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/TotalSizeLimitedDiscCache.java)
 
 #### UniversalUnlimitedDiscCache
-- 용량 제한이 없는 캐쉬. 
-- [UnlimitedDiscCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/UnlimitedDiscCache.java)의 Adaptor.
+- The fastest cache, doesn't limit cache size.
+- An adapter class of [UnlimitedDiscCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/UnlimitedDiscCache.java)
 
-### MemoryCache
+## Memory caches
 
+### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) memory caches
 #### UniversalFifoLimitedMemoryCache
-- 제한된 용량을 넘어서면 FIFO방식으로 이미지를 삭제하는 캐쉬.
-- [FIFOLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FIFOLimitedMemoryCache.java)의 Adaptor.
+- Size of all stored bitmaps will not to exceed size limit. When cache reaches limit size then cache clearing is processed by FIFO principle.
+- An adapter class of [FIFOLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FIFOLimitedMemoryCache.java)
 
 #### UniversalFuzzyKeyMemoryCache
-- 파일의 명명규칙으로 중복된 이미지를 인식하여 삭제하는 캐쉬.
-- [FuzzyKeyMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FuzzyKeyMemoryCache.java)의 Adaptor.
+- Some different keys are considered as equals using `java.util.Comparator`, And when you try to put some value into cache by key so entries with "equals" keys will be removed from cache before. (_NOTE : Normally you don't need to use this class._)
+- An adapter class of [FuzzyKeyMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FuzzyKeyMemoryCache.java)
 
 #### UniversalLargestLimitedMemoryCache
-- 제한된 용량을 넘어서면 가장 큰 이미지를 삭제하는 캐쉬.
-- [LargestLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LargestLimitedMemoryCache.java)의 Adaptor.
+- The largest bitmap is deleted when cache size limit is exceeded.
+- An adapter class of [LargestLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LargestLimitedMemoryCache.java)
 
 #### UniversalLimitedAgeMemoryCache
-- 지정된 시간동안만 생존하는 캐쉬.
-- [LimitedAgeMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LimitedAgeMemoryCache.java) 의 Adaptor.
+- Cached object is deleted when its age exceeds defined value.
+- An adapter class of [LimitedAgeMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LimitedAgeMemoryCache.java)
 
 #### UniversalLruLimitedMemoryCache
-- 제한된 용량을 넘어서면 LRU로직으로 이미지를 삭제하는 캐쉬
-- [LRULimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LRULimitedMemoryCache.java) 의 Adaptor.
+- Least recently used bitmap is deleted when cache size limit is exceeded.
+- An adapter class of [LRULimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LRULimitedMemoryCache.java)
 
 #### UniversalLruMemoryCache
-- 제한된 갯수를 넘어서면 LRU방식으로 이미지를 삭제하는 캐쉬.
-- [LruMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LruMemoryCache.java)의 Adaptor.
+- Least recently used bitmap is deleted when cache size limit is exceeded.
+- An adapter class of [LruMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LruMemoryCache.java)
 
 #### UniversalUsingFreqLimitedMemoryCache
-- 제한된 용량을 넘어서면 가장 자주 사용되지 않은 이미지를 삭제하는 캐쉬.
-- [UsingFreqLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/UsingFreqLimitedMemoryCache.java)의 Adaptor
+- Least frequently used bitmap is deleted when cache size limit is exceeded.
+- An adapter class of [UsingFreqLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/UsingFreqLimitedMemoryCache.java)
 
 #### UniversalWeakMemoryCache
-- WeakReference만 이용하는 캐쉬.
-- [WeakMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/WeakMemoryCache.java)의 Adaptor.
+- Cache using _only weak_ references
+- An adapter class of [WeakMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/WeakMemoryCache.java)
+_(NOTE : All of these descriptions of caches are extracted from README.md of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader))_
 
-# 사용방법
-### Maven 혹은 Gradle을 통한 의존성 관리
-1. volley-extensions의 외존성을 추가한다.
+# Install
+### How to setup for maven or gradle users
+1. Add the dependency below,
 
 		<dependency>
 			<groupId>com.nhncorp.volleyextensions</groupId>
@@ -82,23 +84,24 @@
 			<version>${volley-ext.version}</version>
 		</dependency>
 		
-2. Jackson, SimpleXML, Android UniversalImageLoader 등 중 사용하려는 라이브러리의 Depdendency를 추가한다.  volley-extensions에서는 사용자가 이를 라이브러리를 선택적으로 사용한다고 가정을 하고, dependency를 optional로 설정했다. 따라서 사용하려는 라이브러리는 앱에서 명시적으로 추가해야 한다.
+2. Add a dependency as per classes you are using. For example, if you are using `JacksonRequest`, you need to add a dependency of [Jackson 1.x](http://jackson.codehaus.org/) library , also, if using an memory cache, add a dependency of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader) library too. See the following settings below.
+_(NOTE : The dependencies below were set to be `optional` as default in pom.xml of the library. Because I assumed that each developer uses different parts of.)_
 
-	- Jackson 1.x
+	- Jackson 1.x (needed for JacksonRequest)
 	
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
 				<version>1.9.12</version>
 			</dependency>
-	- Jackson 2.x
+	- Jackson 2.x (needed for Jackson2Request)
 	
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>2.2.1</version>
 			</dependency>
-	- Simple XML
+	- Simple XML (needed for SimpleXmlRequest)
 	
 			<dependency>
 					<groupId>org.simpleframework</groupId>
@@ -121,7 +124,7 @@
 						</exclusion>
 					</exclusions>
 			</dependency>
-	- Android Universal Image Loader
+	- Android Universal Image Loader (needed for disk caches or memory caches)
 	
 			<dependency>
 					<groupId>com.nostra13.universalimageloader</groupId>
@@ -130,11 +133,11 @@
 			</dependency>
 
 
-### 직접 jar 추가
-1. Volley-extensions의 jar를 다운로드한다. 
+### How to add jar directly
+1. Download the jar package of volley-extensions
 	- [volley-extensions-0.7.13.jar](http://hive.nhncorp.com/weblab/volley-extensions/rawcode/Download/com/nhncorp/volleyextensions/volley-extensions/0.7.13/volley-extensions-0.7.13.jar)
-2. 프로젝트에 추가한다.
-3. Jackson, Simple, UniversalImageLoader 등에서 사용하려는 라이브러리의 jar파일을 추가한다.
+2. Import the jar package into your project
+3. Download and import Jackson, Simple XML, or Universal Image Loader as needed
 
 # License
 
