@@ -6,11 +6,36 @@
 	<packaging>pom</packaging>
 	<version>0.8-snapshot</version>
 	<name>Volley Extensions</name>
+	<description>This library helps you to develop apps easier when using Volley. It provides useful classes such as various requests, disc caches, and memory caches.</description>
+	<url>https://github.com/nhnopensource/volley-extensions</url>	
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
 	</parent>	
+	<licenses>
+		<license>
+			<name>Apache License Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/nhnopensource/volley-extensions</url>
+		<connection>scm:git:git://github.com/nhnopensource/volley-extensions.git</connection>
+		<developerConnection>scm:git:git@github.com:nhnopensource/volley-extensions.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+		<developers>
+			<developer>
+				<name>Sanghyuk Jung</name>
+				<id>benelog</id>
+			</developer>
+			<developer>
+				<name>Wonjun Kim</name>
+				<id>ncoolz</id>
+			</developer>		
+	</developers>		
 	<modules>
 		<module>VolleyExtensions</module>
 		<module>SampleApps</module>
