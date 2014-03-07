@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import android.util.Log;
 
@@ -79,7 +78,7 @@ public class UniversalDiscCache implements Cache {
 			cis = new CountingInputStream(new FileInputStream(file));
 
 			CacheHeader.readHeader(cis); // eat header
-			byte[] data = streamToBytes(cis,
+			byte[] data = StreamUtils.streamToBytes(cis,
 					(int) (file.length() - cis.bytesRead));
 
 			CacheHeader header = new CacheHeader();
@@ -142,22 +141,4 @@ public class UniversalDiscCache implements Cache {
 		// do nothing
 	}
 
-	/**
-	 * Reads the contents of an InputStream into a byte[].
-	 * */
-	private byte[] streamToBytes(InputStream in, int length)
-			throws IOException {
-		byte[] bytes = new byte[length];
-		int count;
-		int pos = 0;
-		while (pos < length
-				&& ((count = in.read(bytes, pos, length - pos)) != -1)) {
-			pos += count;
-		}
-		if (pos != length) {
-			throw new IOException("Expected " + length + " bytes, read " + pos
-					+ " bytes");
-		}
-		return bytes;
-	}
 }
