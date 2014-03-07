@@ -51,7 +51,8 @@ It provides useful classes such as various requests, disk caches, and memory cac
 - An adapter class of [FIFOLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FIFOLimitedMemoryCache.java)
 
 #### UniversalFuzzyKeyMemoryCache
-- Some different keys are considered as equals using `java.util.Comparator`, And when you try to put some value into cache by key so entries with "equals" keys will be removed from cache before. (_NOTE : Normally you don't need to use this class._)
+- Some different keys are considered as equals using `java.util.Comparator`, And when you try to put some value into cache by key so entries with "equals" keys will be removed from cache before. 
+(_NOTE : Normally you don't need to use this class._)
 - An adapter class of [FuzzyKeyMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FuzzyKeyMemoryCache.java)
 
 #### UniversalLargestLimitedMemoryCache
@@ -77,6 +78,7 @@ It provides useful classes such as various requests, disk caches, and memory cac
 #### UniversalWeakMemoryCache
 - Cache using _only weak_ references
 - An adapter class of [WeakMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/WeakMemoryCache.java)
+
 _(NOTE : All of these descriptions of caches are extracted from README.md of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader))_
 
 # Install
@@ -95,6 +97,7 @@ _(NOTE : All of these descriptions of caches are extracted from README.md of [An
 		}
 
 2. Add the appropriate dependency as per the classes you are using. For example, if you are using `JacksonRequest`, you need to add the dependency of [Jackson 1.x](http://jackson.codehaus.org/) library . If you are also using memory cache, add the dependency of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader) library as well. See the following settings below.
+
 _(NOTE : The dependencies below were set to be `optional` as default in pom.xml of the library. Because I assumed that each developer will use different parts of it.)_
 #### Maven
 	- Jackson 1.x (when using JacksonRequest)
