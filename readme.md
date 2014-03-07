@@ -21,7 +21,7 @@
 		
 ## Disk caches
 
-### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) disc caches
+### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) disk caches
 #### UniversalFileCountLimitedDiscCache
 - Disc cache limited by file count. If file count in cache directory exceeds specified limit then file with the most oldest last usage date will be deleted.
 - An adapter class of [FileCountLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/FileCountLimitedDiscCache.java)
@@ -84,24 +84,24 @@ _(NOTE : All of these descriptions of caches are extracted from README.md of [An
 			<version>${volley-ext.version}</version>
 		</dependency>
 		
-2. Add a dependency as per classes you are using. For example, if you are using `JacksonRequest`, you need to add a dependency of [Jackson 1.x](http://jackson.codehaus.org/) library , also, if using an memory cache, add a dependency of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader) library too. See the following settings below.
-_(NOTE : The dependencies below were set to be `optional` as default in pom.xml of the library. Because I assumed that each developer uses different parts of.)_
+2. Add the appropriate dependency as per the classes you are using. For example, if you are using `JacksonRequest`, you need to add the dependency of [Jackson 1.x](http://jackson.codehaus.org/) library . If you are also using memory cache, add the dependency of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader) library as well. See the following settings below.
+_(NOTE : The dependencies below were set to be `optional` as default in pom.xml of the library. Because I assumed that each developer will use different parts of it.)_
 
-	- Jackson 1.x (needed for JacksonRequest)
+	- Jackson 1.x (when using JacksonRequest)
 	
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
 				<version>1.9.12</version>
 			</dependency>
-	- Jackson 2.x (needed for Jackson2Request)
+	- Jackson 2.x (when using Jackson2Request)
 	
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>2.2.1</version>
 			</dependency>
-	- Simple XML (needed for SimpleXmlRequest)
+	- Simple XML (when using SimpleXmlRequest)
 	
 			<dependency>
 					<groupId>org.simpleframework</groupId>
@@ -124,7 +124,7 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 						</exclusion>
 					</exclusions>
 			</dependency>
-	- Android Universal Image Loader (needed for disk caches or memory caches)
+	- Android Universal Image Loader (when using disk caches or memory caches)
 	
 			<dependency>
 					<groupId>com.nostra13.universalimageloader</groupId>
@@ -134,10 +134,10 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 
 
 ### How to add jar directly
-1. Download the jar package of volley-extensions
+1. Download the jar package of volley-extensions.
 	- [volley-extensions-0.7.13.jar](http://hive.nhncorp.com/weblab/volley-extensions/rawcode/Download/com/nhncorp/volleyextensions/volley-extensions/0.7.13/volley-extensions-0.7.13.jar)
-2. Import the jar package into your project
-3. Download and import Jackson, Simple XML, or Universal Image Loader as needed
+2. Import the jar package into your project.
+3. Download and import Jackson, Simple XML, or Universal Image Loader as needed.
 
 # License
 
