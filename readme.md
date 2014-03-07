@@ -174,6 +174,10 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 2. Import the jar package into your project.
 3. Download and import Jackson, Simple XML, or Universal Image Loader as needed.
 
+# Volley mirror dependency
+This library depends on [Volley mirror project](https://github.com/mcxiaoke/android-volley). The mirror project keeps an up-to-date version of [Volley](https://android.googlesource.com/platform/frameworks/volley/) and automatically uploads to Maven Central. 
+
+The library will continue to keep this dependency until Volley provides an official package in Maven Central.
 # License
 
 	Copyright (C) 2014 Naver Business Platform Corp.
