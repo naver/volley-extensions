@@ -100,8 +100,8 @@ class CacheHeader {
 			// don't bother deleting, it'll get pruned eventually
 			throw new IOException();
 		}
-		entry.key = ois.readUTF();
-		entry.etag = ois.readUTF();
+		entry.key = ois.readUTF().intern();
+		entry.etag = ois.readUTF().intern();
 		if (entry.etag.equals("")) {
 			entry.etag = null;
 		}
