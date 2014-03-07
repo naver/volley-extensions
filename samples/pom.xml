@@ -5,7 +5,7 @@
 	<packaging>pom</packaging>
 	<name>Volley Extensions Samples</name>
 	<parent>
-		<groupId>com.nhncorp.volleyextensions</groupId>
+		<groupId>com.navercorp.volleyextensions</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.8-snapshot</version>
 		<relativePath>../pom.xml</relativePath>

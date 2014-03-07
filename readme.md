@@ -79,7 +79,7 @@ _(NOTE : All of these descriptions of caches are extracted from README.md of [An
 1. Add the dependency below,
 
 		<dependency>
-			<groupId>com.nhncorp.volleyextensions</groupId>
+			<groupId>com.navercorp.volleyextensions</groupId>
 			<artifactId>volley-extensions</artifactId>
 			<version>${volley-ext.version}</version>
 		</dependency>

@@ -4,8 +4,9 @@
 	<artifactId>sample-demos</artifactId>
 	<version>0.8-snapshot</version>
 	<packaging>apk</packaging>
+	<name>Volley Extensions Sample Application - demos</name>
 	<parent>
-			<groupId>com.nhncorp.volleyextensions</groupId>
+			<groupId>com.navercorp.volleyextensions</groupId>
 			<artifactId>samples</artifactId>
 			<version>0.8-snapshot</version>
 			<relativePath>../pom.xml</relativePath>
@@ -63,7 +64,7 @@
 			<version>1.9.12</version>
 		</dependency>
 		<dependency>
-			<groupId>com.nhncorp.volleyextensions</groupId>
+			<groupId>com.navercorp.volleyextensions</groupId>
 			<artifactId>volley-extensions</artifactId>
 			<version>${volley-ext.version}</version>
 		</dependency>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.nhncorp.volleyextensions</groupId>
+	<groupId>com.navercorp.volleyextensions</groupId>
 	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
 	<version>0.8-snapshot</version>
-	<name>Volley Extensions</name>
+	<name>Volley Extensions Parent</name>
 	<description>This library helps you to develop apps easier when using Volley. It provides useful classes such as various requests, disc caches, and memory caches.</description>
 	<url>https://github.com/nhnopensource/volley-extensions</url>
 	<parent>
