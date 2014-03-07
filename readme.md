@@ -1,3 +1,8 @@
+# Introduction to Volley Extensions
+
+This library provides assistance in developing Android applications using [Volley](https://android.googlesource.com/platform/frameworks/volley/).
+
+It provides useful classes such as various requests, disk caches, and memory caches.
 # Features and usage
 ## Request classes supporting JSON type of the response
 ### [JacksonRequest](code#/VolleyExtensions/src/main/java/com/nhncorp/volleyextensions/request/JacksonRequest.java)
