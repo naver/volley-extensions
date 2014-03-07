@@ -4,7 +4,7 @@
 	<groupId>com.navercorp.volleyextensions</groupId>
 	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.8-snapshot</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>Volley Extensions Parent</name>
 	<description>This library helps you to develop apps easier when using Volley. It provides useful classes such as various requests, disc caches, and memory caches.</description>
 	<url>https://github.com/nhnopensource/volley-extensions</url>
