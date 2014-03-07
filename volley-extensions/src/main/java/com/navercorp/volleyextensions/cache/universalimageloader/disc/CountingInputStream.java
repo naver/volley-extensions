@@ -23,6 +23,13 @@ import java.io.InputStream;
 /**
  * This class is copied from com.android.volley.toolbox.DiskBasedCache.CouningInputStream
  * because the original class is private.
+ * <pre>
+ * <b>NOTE</b>
+ * Codes may need to be updated when {@code DiskBasedCache} on "master" branch of aosp volley is modified.
+ * Currently, the last commit I have seen is 
+ * "Port CacheHeader away from ObjectOutputStream. by Ficus Kirkpatrick - 9 months ago" 
+ * (https://android.googlesource.com/platform/frameworks/volley/+/b33d0d6651b0b31e965839211d410136db2dcb5b)
+ * </pre>
  * @author wonjun.kim 
  * @author sanghyuk.jung
  */

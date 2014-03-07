@@ -31,6 +31,17 @@ import java.util.Map;
  * 
  * <b>NOTE</b>
  * The methods are extracted from {@code CacheHeader} and {@code UniversalDiscCache}.
+ * 
+ * Codes may need to be updated when {@code DiskBasedCache} on "master" branch of aosp volley is modified.
+ * Currently, the last commit I have seen is 
+ * "Port CacheHeader away from ObjectOutputStream. by Ficus Kirkpatrick - 9 months ago" 
+ * (https://android.googlesource.com/platform/frameworks/volley/+/b33d0d6651b0b31e965839211d410136db2dcb5b)
+ * 
+ * Methods from {@code CacheHeader} : {@link #read(InputStream)}, {@link #writeInt(OutputStream, int)}, {@link #readInt(InputStream)}, {@link #writeLong(OutputStream, long)}, 
+ * {@link #readLong(InputStream)},{@link #writeString(OutputStream, String)}, {@link #readString(InputStream)}, {@link #writeStringStringMap(Map, OutputStream)},
+ * {@link #readStringStringMap(InputStream)}
+ * 
+ * Methods from {@code UniversalDiscCache} : {@link #streamToBytes(InputStream, int)}
  * </pre>
  * @author Wonjun Kim
  *
