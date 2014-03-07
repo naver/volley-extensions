@@ -72,7 +72,11 @@ public class UniversalTotalSizeLimitedDiscCacheTest {
     @Test
     public void cacheShouldBeHitWithFileLimit() throws IOException, InterruptedException {
     	// Given
-    	Cache cache = new UniversalTotalSizeLimitedDiscCache(cacheDir, 56*2);
+    	int entryFileSize = 65;
+    	int numberOfAvailableFiles = 2;
+    	int cacheSize = entryFileSize * numberOfAvailableFiles;
+
+    	Cache cache = new UniversalTotalSizeLimitedDiscCache(cacheDir, cacheSize);
 		// When
 		cache.put(key + "1", entry);
 		TimeUnit.MICROSECONDS.sleep(10);
