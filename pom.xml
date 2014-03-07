@@ -37,8 +37,8 @@
 			</developer>
 	</developers>
 	<modules>
-		<module>VolleyExtensions</module>
-		<module>SampleApps</module>
+		<module>volley-extensions</module>
+		<module>samples</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

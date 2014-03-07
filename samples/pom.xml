@@ -11,6 +11,6 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<modules>
-		<module>VolleyExtensionsTest</module>
+		<module>demos</module>
 	</modules>
 </project>
