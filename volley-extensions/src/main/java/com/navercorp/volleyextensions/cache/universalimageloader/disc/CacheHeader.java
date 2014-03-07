@@ -18,11 +18,7 @@ package com.navercorp.volleyextensions.cache.universalimageloader.disc;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.android.volley.Cache.Entry;
@@ -61,8 +57,8 @@ class CacheHeader {
 	/** Headers from the response resulting in this cache entry. */
 	public Map<String, String> responseHeaders;
 
-	/** Current cache version */
-	private static final int CACHE_VERSION = 2;
+	/** Magic number for current version of cache file format. */
+	private static final int CACHE_MAGIC = 0x20120504;
 
 	CacheHeader() {
 	}
@@ -94,21 +90,20 @@ class CacheHeader {
 	 */
 	public static CacheHeader readHeader(InputStream is) throws IOException {
 		CacheHeader entry = new CacheHeader();
-		ObjectInputStream ois = new ObjectInputStream(is);
-		int version = ois.readByte();
-		if (version != CACHE_VERSION) {
+		int magic = StreamUtils.readInt(is);
+		if (magic != CACHE_MAGIC) {
 			// don't bother deleting, it'll get pruned eventually
 			throw new IOException();
 		}
-		entry.key = ois.readUTF().intern();
-		entry.etag = ois.readUTF().intern();
+		entry.key = StreamUtils.readString(is);
+		entry.etag = StreamUtils.readString(is);
 		if (entry.etag.equals("")) {
 			entry.etag = null;
 		}
-		entry.serverDate = ois.readLong();
-		entry.ttl = ois.readLong();
-		entry.softTtl = ois.readLong();
-		entry.responseHeaders = readStringStringMap(ois);
+		entry.serverDate = StreamUtils.readLong(is);
+		entry.ttl = StreamUtils.readLong(is);
+		entry.softTtl = StreamUtils.readLong(is);
+		entry.responseHeaders = StreamUtils.readStringStringMap(is);
 		return entry;
 	}
 
@@ -131,15 +126,14 @@ class CacheHeader {
 	 */
 	public boolean writeHeader(OutputStream os) {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(os);
-			oos.writeByte(CACHE_VERSION);
-			oos.writeUTF(key);
-			oos.writeUTF(etag == null ? "" : etag);
-			oos.writeLong(serverDate);
-			oos.writeLong(ttl);
-			oos.writeLong(softTtl);
-			writeStringStringMap(responseHeaders, oos);
-			oos.flush();
+			StreamUtils.writeInt(os, CACHE_MAGIC);
+			StreamUtils.writeString(os, key);
+			StreamUtils.writeString(os, etag == null ? "" : etag);
+			StreamUtils.writeLong(os, serverDate);
+			StreamUtils.writeLong(os, ttl);
+			StreamUtils.writeLong(os, softTtl);
+			StreamUtils.writeStringStringMap(responseHeaders, os);
+			os.flush();
 			return true;
 		} catch (IOException e) {
 			VolleyLog.d("%s", e.toString());
@@ -147,37 +141,5 @@ class CacheHeader {
 		}
 	}
 
-	/**
-	 * Writes all entries of {@code map} into {@code oos}.
-	 */
-	private static void writeStringStringMap(Map<String, String> map,
-			ObjectOutputStream oos) throws IOException {
-		if (map != null) {
-			oos.writeInt(map.size());
-			for (Map.Entry<String, String> entry : map.entrySet()) {
-				oos.writeUTF(entry.getKey());
-				oos.writeUTF(entry.getValue());
-			}
-		} else {
-			oos.writeInt(0);
-		}
-	}
 
-	/**
-	 * @return a string to string map which contains the entries read from
-	 *         {@code ois} previously written by {@link #writeStringStringMap}
-	 */
-	private static Map<String, String> readStringStringMap(ObjectInputStream ois)
-			throws IOException {
-		int size = ois.readInt();
-		Map<String, String> result = (size == 0) ? Collections
-				.<String, String> emptyMap()
-				: new HashMap<String, String>(size);
-		for (int i = 0; i < size; i++) {
-			String key = ois.readUTF().intern();
-			String value = ois.readUTF().intern();
-			result.put(key, value);
-		}
-		return result;
-	}
 }
