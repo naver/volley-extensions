@@ -107,7 +107,20 @@ public class UniversalDiscCache implements Cache {
 			IoUtils.closeQuietly(fos);
 		}
 	}
-
+	/* (non-Javadoc)
+	 * 
+	 * Don't anything on an initialization process in contrast with DiskBasedCache.
+	 * 
+	 * There are two reasons why it doesn't.
+	 * 
+	 * (1) UniversalDiscCache class is a adapter of disc caches of Android Universal Image Loader(UIL).
+	 *     This class just delegate responsibilities to the disc caches. And that's it. 
+	 * 
+	 * (2) To implement initialization stuff like DiskBasedCache does, some data structure should be made for which cache entries are maintained. 
+	 *     But the UIL disc caches already maintain those entries. Unavoidably, duplicate maintenance will happen between the disc cahces and this class after implementing.
+	 * 
+	 * @see com.android.volley.Cache#initialize()
+	 */
 	@Override
 	public void initialize() {
 		// do nothing
