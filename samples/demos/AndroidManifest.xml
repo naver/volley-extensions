@@ -31,7 +31,7 @@
         </activity>
         <activity android:name="com.navercorp.volleyextensions.sample.demos.Me2dayActivity" >
         </activity>
-        <activity android:name="com.navercorp.volleyextensions.sample.demos.NaverShopActivity" >
+        <activity android:name="com.navercorp.volleyextensions.sample.demos.AmazonActivity" >
         </activity>
     </application>
 </manifest>

@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Button gotoMe2dayButton = (Button) findViewById(R.id.gotoMe2dayButton);
-		Button gotoNaverShopButton = (Button) findViewById(R.id.gotoNavershopButton);
+		Button amazonActivityButton = (Button) findViewById(R.id.amazon_activity_button);
 		gotoMe2dayButton.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -44,10 +44,10 @@ public class MainActivity extends Activity {
 				MainActivity.this.startActivity(intent);		
 			}});
 		
-		gotoNaverShopButton.setOnClickListener(new OnClickListener(){
+		amazonActivityButton.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, NaverShopActivity.class);
+				Intent intent = new Intent(MainActivity.this, AmazonActivity.class);
 				MainActivity.this.startActivity(intent);
 			}});
 	}

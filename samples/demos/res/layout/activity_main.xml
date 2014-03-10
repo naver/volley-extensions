@@ -16,10 +16,10 @@
         android:layout_marginTop="87dp"
         android:text="me2day activity" />
     <Button
-        android:id="@+id/gotoNavershopButton"
+        android:id="@+id/amazon_activity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="navershop activity" />
+        android:text="@string/amazon_activity_text" />
 </RelativeLayout>

@@ -24,10 +24,8 @@ import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.ImageLoader;
 import com.navercorp.volleyextensions.request.SimpleXmlRequest;
 
-public class NaverShopActivity extends Activity {
-	private static final String ITEMS_PER_PAGE = "50";
-	private static final String GET_ITEMS_URL = "http://openapi.naver.com/search?key=5f7c1042d0a71a565da51fbca37395b8&query=door&start=1&display="
-			+ ITEMS_PER_PAGE + "&target=shop&sort=sim";
+public class AmazonActivity extends Activity {
+	private static final String GET_ITEMS_URL = "http://www.amazon.com/rss/tag/running/recent/ref=tag_rsh_hl_ersr";
 
 	private RequestQueue requestQueue;
 	private ImageLoader loader;
@@ -36,7 +34,7 @@ public class NaverShopActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_navershop);
+		setContentView(R.layout.activity_amazon);
 
 		listView = (ListView) findViewById(R.id.listView);
 
@@ -54,8 +52,8 @@ public class NaverShopActivity extends Activity {
 					@Override
 					public void onResponse(final ShoppingRssFeed feed) {
 
-						listView.setAdapter(new NaverShopListAdapter(
-								NaverShopActivity.this, feed.getChannel()
+						listView.setAdapter(new AmazonListAdapter(
+								AmazonActivity.this, feed.getChannel()
 										.getShoppingItems()));
 					}
 				});

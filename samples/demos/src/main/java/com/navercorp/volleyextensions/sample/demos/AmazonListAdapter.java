@@ -27,14 +27,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class NaverShopListAdapter extends BaseAdapter {
+public class AmazonListAdapter extends BaseAdapter {
 	List<ShoppingItem> items;
 	private ImageLoader loader;
 	private LayoutInflater inflater;
 
 	private int LAYOUT_LISTVIEW_ITEM_SHOPPING = R.layout.list_item;
 
-	public NaverShopListAdapter(Context context, List<ShoppingItem> items) {
+	public AmazonListAdapter(Context context, List<ShoppingItem> items) {
 		super();
 		this.inflater = LayoutInflater.from(context);
 		this.items = items;
@@ -54,7 +54,7 @@ public class NaverShopListAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		return getItem(position).getProductId();
+		return position;
 	}
 
 	@Override

@@ -29,14 +29,18 @@ public class ShoppingRssChannel {
 	private String link;
 	@Element(required = false)
 	private String description;
+	@Element(required = false)
+	private String pubDate;
 	@Element
 	private String lastBuildDate;
-	@Element
-	private long total;
-	@Element
-	private int start;
-	@Element
-	private int display;
+	@Element(required = false)
+	private String ttl;
+	@Element(required = false)
+	private String generator;
+	@Element(required = false)
+	private String language;
+	@Element(required = false)
+	private String copyright;
 
 	@ElementList(inline=true)
 	private List<ShoppingItem> items;

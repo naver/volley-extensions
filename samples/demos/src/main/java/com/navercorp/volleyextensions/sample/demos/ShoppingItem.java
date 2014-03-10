@@ -23,73 +23,38 @@ import android.os.Parcelable;
 
 @Root(name = "item")
 public class ShoppingItem implements Parcelable {
-
-	private static final String TAG_STRING_REGEX = "<[A-Za-z /=\"\']+>";
-
-	public static final long ITEM_NOT_ASSIGNED_IN_BASKET = -1;
-
-	@Element(name = "title")
+	@Element
 	private String title;
-	@Element(name = "link")
-	private String linkUrl;
-	@Element(name = "image")
+	@Element
+	private String link;
 	private String imageUrl;
-	@Element(name = "lprice")
-	private int lowPrice;
-	@Element(name = "hprice")
-	private int highPrice;
-	@Element(name = "mallName")
-	private String mallName;
 	@Element
-	private long productId;
+	private String guid;
 	@Element
-	private int productType;
-
-	private String formatedLowPrice;
-	private String formatedHighPrice;
-
-	private boolean isPlainTitle = false;
-
-	private long basketId = ITEM_NOT_ASSIGNED_IN_BASKET;
-
-	private boolean hasFormatedLowPrice;
-
-	private boolean hasFormatedHighPrice;
-
-	public long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(long productId) {
-		this.productId = productId;
-	}
+	private String pubDate;
+	@Element
+	private String description;
 
 	public String getTitle() {
-		updateIfTitleNotPlain();
-
 		return title;
-	}
-
-	private synchronized void updateIfTitleNotPlain() {
-		if (isPlainTitle == false) {
-			setTitle(getPlainString(title));
-			isPlainTitle = true;
-		}
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public String getLinkUrl() {
-		return linkUrl;
+	public String getLink() {
+		return link;
 	}
 
-	public void setLinkUrl(String linkUrl) {
-		this.linkUrl = linkUrl;
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public String getImageUrl() {
+		if ( imageUrl == null ) {
+			imageUrl = AmazonFeedUtils.extractImageFrom(description);
+		}
 		return imageUrl;
 	}
 
@@ -97,123 +62,54 @@ public class ShoppingItem implements Parcelable {
 		this.imageUrl = imageUrl;
 	}
 
-	public int getLowPrice() {
-		updateIfLowPriceNotFormated();
-		return lowPrice;
+	public String getGuid() {
+		return guid;
 	}
 
-	private synchronized void updateIfLowPriceNotFormated() {
-		if (hasFormatedLowPrice == false) {
-			setFormatedLowPrice(lowPrice);
-			hasFormatedLowPrice = true;
-		}
+	public void setGuid(String guid) {
+		this.guid = guid;
 	}
 
-	private synchronized void updateIfHighPriceNotFormated() {
-		if (hasFormatedHighPrice == false) {
-			setFormatedHighPrice(highPrice);
-			hasFormatedHighPrice = true;
-		}
+	public String getPubDate() {
+		return pubDate;
 	}
 
-	public void setLowPrice(int lowPrice) {
-		this.lowPrice = lowPrice;
-
+	public void setPubDate(String pubDate) {
+		this.pubDate = pubDate;
 	}
 
-	public int getHighPrice() {
-		updateIfHighPriceNotFormated();
-		return highPrice;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setHighPrice(int highPrice) {
-		this.highPrice = highPrice;
-	}
-
-	public String getMallName() {
-		return mallName;
-	}
-
-	public void setMallName(String mallName) {
-		this.mallName = mallName;
-	}
-
-	public int getProductType() {
-		return productType;
-	}
-
-	public void setProductType(int productType) {
-		this.productType = productType;
-	}
-
-	public long getBasketId() {
-		return basketId;
-	}
-
-	public void setBasketId(long basketId) {
-		this.basketId = basketId;
-	}
-
-	public boolean isSavedInBasket() {
-		return (ITEM_NOT_ASSIGNED_IN_BASKET != getBasketId());
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void writeToParcel(Parcel destParcel, int flags) {
 		destParcel.writeString(title);
-		destParcel.writeString(linkUrl);
+		destParcel.writeString(link);
 		destParcel.writeString(imageUrl);
-		destParcel.writeInt(lowPrice);
-		destParcel.writeInt(highPrice);
-		destParcel.writeString(mallName);
-		destParcel.writeLong(productId);
-		destParcel.writeInt(productType);
-
+		destParcel.writeString(guid);
+		destParcel.writeString(pubDate);
+		destParcel.writeString(description);
 	}
 
 	private static ShoppingItem createInstanceFromParcel(Parcel sourceParcel) {
 		ShoppingItem item = new ShoppingItem();
 		item.setTitle(sourceParcel.readString());
-		item.setLinkUrl(sourceParcel.readString());
+		item.setLink(sourceParcel.readString());
 		item.setImageUrl(sourceParcel.readString());
-		item.setLowPrice(sourceParcel.readInt());
-		item.setHighPrice(sourceParcel.readInt());
-		item.setMallName(sourceParcel.readString());
-		item.setProductId(sourceParcel.readLong());
-		item.setProductType(sourceParcel.readInt());
+		item.setGuid(sourceParcel.readString());
+		item.setPubDate(sourceParcel.readString());
+		item.setDescription(sourceParcel.readString());
 		return item;
-	}
-
-	public String getFormatedLowPrice() {
-		updateIfLowPriceNotFormated();
-		return formatedLowPrice;
-	}
-
-	private void setFormatedLowPrice(int lowPrice) {
-		setFormatedLowPrice(String.format("%,3d", lowPrice));
-	}
-
-	private void setFormatedLowPrice(String formatedLowPrice) {
-		this.formatedLowPrice = formatedLowPrice;
-	}
-
-	public String getFormatedHighPrice() {
-		updateIfHighPriceNotFormated();
-		return formatedHighPrice;
-	}
-
-	private void setFormatedHighPrice(int highPrice) {
-		setFormatedHighPrice(String.format("%,3d", highPrice));
-	}
-
-	private void setFormatedHighPrice(String formatedHighPrice) {
-		this.formatedHighPrice = formatedHighPrice;
 	}
 
 	public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -225,9 +121,4 @@ public class ShoppingItem implements Parcelable {
 			return new ShoppingItem[size];
 		}
 	};
-
-	private static String getPlainString(String dirtyString) {
-		return dirtyString.replaceAll(TAG_STRING_REGEX, "");
-
-	}
 }
