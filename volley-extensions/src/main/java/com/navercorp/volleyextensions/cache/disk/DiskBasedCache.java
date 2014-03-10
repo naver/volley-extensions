@@ -47,6 +47,17 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Cache implementation that caches files directly onto the hard disk in the specified
  * directory. The default disk usage size is 5MB, but is configurable.
+ * <pre>
+ * <b>NOTE</b>
+ * This is a new version of {@code DiskBasedCache} which is fixed the performance issue where initialize() works too slow if there is a much of cache entries. 
+ * See below if you want to know the issue in detail.
+ * http://stackoverflow.com/questions/20916478/performance-issue-with-volleys-diskbasedcache
+ * 
+ * This class came from the commit, https://android.googlesource.com/platform/frameworks/volley/+/11089542825c9575f90341670ef08762579bc2b0 .
+ * And the author was Anders Aagaard.
+ * 
+ * After the issue is resolved in master branch of aosp volley, this class will be deprecated.  
+ * </pre>
  */
 public class DiskBasedCache implements Cache {
 
