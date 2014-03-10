@@ -99,7 +99,7 @@ public class SimpleXmlRequest<T> extends AbstractConverterRequest<T> {
 	}
 	/**
 	 * Make a request with {@code errorListener}
-	 * @param method HTTP method. See here : {@link Request.Method} 
+	 * @param method HTTP method. See here : {@link com.android.volley.Request.Method} 
 	 * @param url URL of the request to make
 	 * @param clazz
 	 * @param listener listener for response
@@ -111,7 +111,7 @@ public class SimpleXmlRequest<T> extends AbstractConverterRequest<T> {
 	}
 	/**
 	 * Make a request with custom {@code persister} and {@code errorListener}
-	 * @param method HTTP method. See here : {@link Request.Method} 
+	 * @param method HTTP method. See here : {@link com.android.volley.Request.Method} 
 	 * @param url URL of the request to make
 	 * @param clazz Specific type object of an converted object from response data
 	 * @param persister {@link Persister} to convert

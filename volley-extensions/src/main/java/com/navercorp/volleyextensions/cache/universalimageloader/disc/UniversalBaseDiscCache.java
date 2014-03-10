@@ -24,7 +24,7 @@ import com.nostra13.universalimageloader.cache.disc.DiscCacheAware;
 /**
  * <pre>
  * A sub class of UniversalDiscCache. 
- * This class makes a cache directory automatically( by being called {@link #initialize}() from {@link CacheDispatcher}).
+ * This class makes a cache directory automatically( by being called {@link #initialize}() from {@link com.android.volley.CacheDispatcher}).
  * 
  * NOTE: This class is abstract. If you want to use this class, 
  * you must override and let {@code cacheDir} be the same with {@link DiscCacheAware}'s {@code cacheDir}.
@@ -61,9 +61,9 @@ public abstract class UniversalBaseDiscCache extends UniversalDiscCache {
 	/**
 	 * <pre>
 	 * Make a cache directory if it doesn't exist. 
-	 * This method is basically being called from {@link CacheDispatcher}.
+	 * This method is basically being called from {@link com.android.volley.CacheDispatcher}.
 	 * </pre>
-	 * @see DiskBasedCache#initialize
+	 * @see com.android.volley.toolbox.DiskBasedCache#initialize
 	 */
 	@Override
 	public synchronized void initialize() {

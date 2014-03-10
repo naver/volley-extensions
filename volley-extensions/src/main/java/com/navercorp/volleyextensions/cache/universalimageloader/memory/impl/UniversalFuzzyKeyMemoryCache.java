@@ -32,7 +32,6 @@ public class UniversalFuzzyKeyMemoryCache extends UniversalImageCache {
 	/**
 	 * @param delegate Wrapped memory cache
 	 * @param keyComparator 
-	 * @see MemoryCacheUtil#createFuzzyKeyComparator
 	 */
 	public UniversalFuzzyKeyMemoryCache(MemoryCacheAware<String, Bitmap> delegate,
 			Comparator<String> keyComparator) {

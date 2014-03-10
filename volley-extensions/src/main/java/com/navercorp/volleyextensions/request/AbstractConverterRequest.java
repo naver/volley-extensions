@@ -45,7 +45,7 @@ public abstract class AbstractConverterRequest<T> extends Request<T> {
 
 	/**
 	 * 
-	 * @param method HTTP method. See here : {@link Request.Method}
+	 * @param method HTTP method. See here : {@link com.android.volley.Request.Method}
 	 * @param url URL of the request to make
 	 * @param clazz Specific type object of an converted object from response data
 	 * @param listener listener for response

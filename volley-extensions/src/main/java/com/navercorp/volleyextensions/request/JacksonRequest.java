@@ -97,7 +97,6 @@ public class JacksonRequest<T> extends AbstractConverterRequest<T> {
 	}
 	/**
 	 * Make a request with custom {@code objectMapper} and {@code errorListener}
-	 * @param method HTTP method. See here : {@link Request.Method} 
 	 * @param url URL of the request to make
 	 * @param clazz Specific type object of an converted object from response data
 	 * @param objectMapper {@link ObjectMapper} to convert
@@ -111,7 +110,7 @@ public class JacksonRequest<T> extends AbstractConverterRequest<T> {
 	}
 	/**
 	 * Make a request with {@code errorListener}
-	 * @param method HTTP method. See here : {@link Request.Method} 
+	 * @param method HTTP method. See here : {@link com.android.volley.Request.Method} 
 	 * @param url URL of the request to make
 	 * @param clazz Specific type object of an converted object from response data
 	 * @param listener listener for response
@@ -122,7 +121,7 @@ public class JacksonRequest<T> extends AbstractConverterRequest<T> {
 	}	
 	/**
 	 * Make a request with custom {@code objectMapper} and {@code errorListener}
-	 * @param method HTTP method. See here : {@link Request.Method} 
+	 * @param method HTTP method. See here : {@link com.android.volley.Request.Method} 
 	 * @param url URL of the request to make
 	 * @param clazz Specific type object of an converted object from response data
 	 * @param objectMapper {@link ObjectMapper} to convert
