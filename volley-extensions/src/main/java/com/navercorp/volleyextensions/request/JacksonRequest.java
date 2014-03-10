@@ -131,7 +131,7 @@ public class JacksonRequest<T> extends AbstractConverterRequest<T> {
 	public JacksonRequest(int method, String url, Class<T> clazz, ObjectMapper objectMapper, Listener<T> listener, ErrorListener errorListener) {
 		super(method, url, clazz, listener, errorListener);
 		assertObjectMapper(objectMapper);
-		this.objectMapper = objectMapper;;
+		this.objectMapper = objectMapper;
 	}	
 
 	private final void assertObjectMapper(ObjectMapper objectMapper) {

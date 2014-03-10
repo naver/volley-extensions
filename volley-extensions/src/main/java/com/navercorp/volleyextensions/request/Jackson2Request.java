@@ -67,7 +67,6 @@ public class Jackson2Request<T> extends AbstractConverterRequest<T> {
 	/** {@code objectMapper} is immutable(but not severely). */
 	private final ObjectMapper objectMapper;
 	
-	
 	/**
 	 * Make a request with custom {@code objectMapper} and {@code errorListener}
 	 * @param method HTTP method. See here : {@link com.android.volley.Request.Method} 
@@ -128,7 +127,6 @@ public class Jackson2Request<T> extends AbstractConverterRequest<T> {
 			ErrorListener errorListener) {
 		this(method, url, clazz, ObjectMapperHolder.getObjectMapper(), listener, errorListener);
 	}	
-
 	
 	/**
 	 * Make a GET request with custom {@code errorListener}
