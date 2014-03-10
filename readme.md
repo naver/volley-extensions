@@ -82,94 +82,109 @@ It provides useful classes such as various requests, disk caches, and memory cac
 _(NOTE : All of these descriptions of caches are extracted from README.md of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader))_
 
 # Install
-### How to setup for maven or gradle users
-1. Add the dependency below,
-#### Maven
-		<dependency>
-			<groupId>com.navercorp.volleyextensions</groupId>
-			<artifactId>volley-extensions</artifactId>
-			<version>${volley-ext.version}</version>
-		</dependency>
-		
-#### Gradle
-		dependencies {
-			compile 'com.nhncorp.volleyextensions:volley-extensions:0.8.+'
-		}
 
-2. Add the appropriate dependency as per the classes you are using. For example, if you are using `JacksonRequest`, you need to add the dependency of [Jackson 1.x](http://jackson.codehaus.org/) library . If you are also using memory cache, add the dependency of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader) library as well. See the following settings below.
+### How to setup for maven or gradle users
+#### 1. Add the dependency below,
+##### Maven
+``` xml
+<dependency>
+	<groupId>com.navercorp.volleyextensions</groupId>
+	<artifactId>volley-extensions</artifactId>
+	<version>${volley-ext.version}</version>
+</dependency>
+```
+
+##### Gradle
+```
+dependencies {
+	compile 'com.nhncorp.volleyextensions:volley-extensions:0.8.+'
+}
+```
+
+#### 2. Add the appropriate dependency as per the classes you are using. 
+For example, if you are using `JacksonRequest`, you need to add the dependency of [Jackson 1.x](http://jackson.codehaus.org/) library . If you are also using memory cache, add the dependency of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader) library as well. See the following settings below.
 
 _(NOTE : The dependencies below were set to be `optional` as default in pom.xml of the library. Because I assumed that each developer will use different parts of it.)_
-#### Maven
-	- Jackson 1.x (when using JacksonRequest)
+
+##### Maven
+
+- Jackson 1.x (when using JacksonRequest)
 	
-			<dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-mapper-asl</artifactId>
-				<version>1.9.12</version>
-			</dependency>
-	- Jackson 2.x (when using Jackson2Request)
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.12</version>
+		</dependency>
+
+- Jackson 2.x (when using Jackson2Request)
 	
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>2.2.1</version>
-			</dependency>
-	- Simple XML (when using SimpleXmlRequest)
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+
+- Simple XML (when using SimpleXmlRequest)
 	
-			<dependency>
-					<groupId>org.simpleframework</groupId>
-					<artifactId>simple-xml</artifactId>
-					<version>2.7</version>
-					<exclusions>
-						<!-- StAX is not available on Android -->
-						<exclusion>
-							<artifactId>stax</artifactId>
-							<groupId>stax</groupId>
-						</exclusion>
-						<exclusion>
-							<artifactId>stax-api</artifactId>
-							<groupId>stax</groupId>
-						</exclusion>
-						<!-- Provided by Android -->
-						<exclusion>
-							<artifactId>xpp3</artifactId>
-							<groupId>xpp3</groupId>
-						</exclusion>
-					</exclusions>
-			</dependency>
-	- Android Universal Image Loader (when using disk caches or memory caches)
+		<dependency>
+			<groupId>org.simpleframework</groupId>
+			<artifactId>simple-xml</artifactId>
+			<version>2.7</version>
+			<exclusions>
+				<!-- StAX is not available on Android -->
+				<exclusion>
+					<artifactId>stax</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>stax-api</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+				<!-- Provided by Android -->
+				<exclusion>
+					<artifactId>xpp3</artifactId>
+					<groupId>xpp3</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+- Android Universal Image Loader (when using disk caches or memory caches)
 	
-			<dependency>
-					<groupId>com.nostra13.universalimageloader</groupId>
-					<artifactId>universal-image-loader</artifactId>
-					<version>1.8.5</version>
-			</dependency>
+		<dependency>
+			<groupId>com.nostra13.universalimageloader</groupId>
+			<artifactId>universal-image-loader</artifactId>
+			<version>1.8.5</version>
+		</dependency>
 
-#### Gradle
-	- Jackson 1.x (when using JacksonRequest)
+##### Gradle
 
-			dependencies {
-				compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.+'
+- Jackson 1.x (when using JacksonRequest)
+
+		dependencies {
+			compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.+'
 			}
-	- Jackson 2.x (when using Jackson2Request)
 
-			dependencies {
-				compile 'com.fasterxml.jackson.core:jackson-databind:2.2.+'
-			}
-	- Simple XML (when using SimpleXmlRequest)
+- Jackson 2.x (when using Jackson2Request)
 
-			dependencies {
-				compile('org.simpleframework:simple-xml:2.7.+') {
-					exclude module: 'stax'
-					exclude module: 'stax-api'
-					exclude module: 'xpp3'
-				}
-			}
-	- Android Universal Image Loader (when using disk caches or memory caches)
+		dependencies {
+			compile 'com.fasterxml.jackson.core:jackson-databind:2.2.+'
+		}
 
-			dependencies {
-				compile 'com.nostra13.universalimageloader:universal-image-loader:1.8.+'
+- Simple XML (when using SimpleXmlRequest)
+
+		dependencies {
+			compile('org.simpleframework:simple-xml:2.7.+') {
+				exclude module: 'stax'
+				exclude module: 'stax-api'
+				exclude module: 'xpp3'
 			}
+		}
+
+- Android Universal Image Loader (when using disk caches or memory caches)
+
+		dependencies {
+			compile 'com.nostra13.universalimageloader:universal-image-loader:1.8.+'
+		}
 
 ### How to add jar directly
 1. Download the jar package of volley-extensions.
