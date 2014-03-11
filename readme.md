@@ -51,7 +51,7 @@ This version is originally located in a [AOSP review](https://android-review.goo
 
 ## Memory caches
 
-### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) memory caches
+### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) image caches
 #### [UniversalFifoLimitedMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalFifoLimitedMemoryCache.java)
 - Size of all stored bitmaps will not to exceed size limit. When cache reaches limit size then cache clearing is processed by FIFO principle.
 - An adapter class of [FIFOLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FIFOLimitedMemoryCache.java)
@@ -108,7 +108,7 @@ dependencies {
 ```
 
 #### 2. Add the appropriate dependency as per the classes you are using. 
-For example, if you are using `JacksonRequest`, you need to add the dependency of [Jackson 1.x](http://jackson.codehaus.org/) library . If you are also using memory cache, add the dependency of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader) library as well. See the following settings below.
+For example, if you are using `JacksonRequest`, you need to add the dependency of [Jackson 1.x](http://jackson.codehaus.org/) library . If you are also using image cache, add the dependency of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader) library as well. See the following settings below.
 
 _(NOTE : The dependencies below were set to be `optional` as default in pom.xml of the library. Because I assumed that each developer will use different parts of it.)_
 
@@ -154,7 +154,7 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 			</exclusions>
 		</dependency>
 
-- Android Universal Image Loader (when using disk caches or memory caches)
+- Android Universal Image Loader (when using AUIL disk caches or image caches)
 	
 		<dependency>
 			<groupId>com.nostra13.universalimageloader</groupId>
@@ -186,7 +186,7 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 			}
 		}
 
-- Android Universal Image Loader (when using disk caches or memory caches)
+- Android Universal Image Loader (when using AUIL disk caches or image caches)
 
 		dependencies {
 			compile 'com.nostra13.universalimageloader:universal-image-loader:1.8.+'
