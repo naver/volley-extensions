@@ -109,14 +109,14 @@ _(NOTE : All of these descriptions of caches are extracted from README.md of [An
 <dependency>
 	<groupId>com.navercorp.volleyextensions</groupId>
 	<artifactId>volley-extensions</artifactId>
-	<version>${volley-ext.version}</version>
+	<version>1.0.0</version>
 </dependency>
 ```
 
 ##### Gradle
 ```
 dependencies {
-	compile 'com.nhncorp.volleyextensions:volley-extensions:0.8.+'
+	compile 'com.nhncorp.volleyextensions:volley-extensions:1.0.+'
 }
 ```
 
@@ -172,7 +172,7 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 		<dependency>
 			<groupId>com.nostra13.universalimageloader</groupId>
 			<artifactId>universal-image-loader</artifactId>
-			<version>1.8.5</version>
+			<version>1.8.6</version>
 		</dependency>
 
 ##### Gradle
@@ -207,7 +207,7 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 
 ### How to add jar directly
 1. Download the jar package of volley-extensions.
-	- volley-extensions-0.7.13.jar
+	- volley-extensions-1.0.0.jar
 2. Import the jar package into your project.
 3. Download and import Jackson, Simple XML, or Universal Image Loader as needed.
 
