@@ -27,9 +27,9 @@ import android.util.Log;
 import android.widget.TextView;
 import com.android.volley.Response.ErrorListener;
 
-public class Me2dayActivity extends Activity {
-
-	private static final String GET_PERSON_URL = "http://me2day.net/api/get_person/codian.json";
+public class GithubActivity extends Activity {
+	private static final String GITHUB_SAMPLE_USER = "ncoolz";
+	private static final String GET_PERSON_URL = "https://api.github.com/users/" + GITHUB_SAMPLE_USER;
 	private RequestQueue requestQueue;
 	private TextView personInfoTextForJackson2;
 	private TextView personInfoTextForJackson;
@@ -38,7 +38,7 @@ public class Me2dayActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestQueue = MyVolley.getRequestQueue();
-		setContentView(R.layout.activity_me2day);
+		setContentView(R.layout.activity_github);
 		personInfoTextForJackson = (TextView) findViewById(R.id.personInfoTextForJackson);
 		personInfoTextForJackson2 = (TextView) findViewById(R.id.personInfoTextForJackson2);
 		loadPersonInfo();
@@ -56,7 +56,7 @@ public class Me2dayActivity extends Activity {
 
 					@Override
 					public void onErrorResponse(VolleyError volleyError) {
-						Log.d(Me2dayActivity.class.getSimpleName(), ""
+						Log.d(GithubActivity.class.getSimpleName(), ""
 								+ volleyError.getMessage());
 					}
 				});
@@ -72,7 +72,7 @@ public class Me2dayActivity extends Activity {
 
 					@Override
 					public void onErrorResponse(VolleyError volleyError) {
-						Log.d(Me2dayActivity.class.getSimpleName(), ""
+						Log.d(GithubActivity.class.getSimpleName(), ""
 								+ volleyError.getMessage());
 					}
 				});

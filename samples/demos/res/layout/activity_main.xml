@@ -8,13 +8,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"  >
     <Button
-        android:id="@+id/gotoMe2dayButton"
+        android:id="@+id/github_activity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="87dp"
-        android:text="me2day activity" />
+        android:text="@string/github_activity_text" />
     <Button
         android:id="@+id/amazon_activity_button"
         android:layout_width="wrap_content"

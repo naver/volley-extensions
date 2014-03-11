@@ -3,5 +3,9 @@
 
     <string name="app_name">Volley Extensions Sample</string>
     <string name="action_settings">Settings</string>
+	<string name="jackson1_text">--- Jackson 1.x ---</string>
+	<string name="jackson2_text">--- Jackson 2.x ---</string>
+	<string name="waiting_for_response">Waiting for a response . . .</string>
 	<string name="amazon_activity_text">Amazon XML-format RSS Feed</string>
+	<string name="github_activity_text">Github JSON-format User API</string>
 </resources>

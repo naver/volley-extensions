@@ -20,61 +20,118 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Person {
-	@JsonProperty("openid")
-	private String openid;
-	@JsonProperty("nickname")
-	private String nickname;
-	@JsonProperty("description")
-	private String description;
-
-	@JsonProperty("location")
-	private Location location;
+	@JsonProperty("login")
+	private String login;
+	@JsonProperty("id")
+	private String id;
+	@JsonProperty("avatar_url")
+	private String avatarUrl;
+	@JsonProperty("url")
+	private String url;
+	@JsonProperty("type")
+	private String type;
+	@JsonProperty("name")
+	private String name;
+	@JsonProperty("email")
+	private String email;
+	@JsonProperty("company")
+	private String company;
+	@JsonProperty("created_at")
+	private String createdDate;
+	@JsonProperty("updated_at")
+	private String updatedDate;
 
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();
-		b.append("openid : " + openid + "\n");
-		b.append("nickname : " + getNickname() + "\n");
-		b.append("descrpition" + getDescription() + "\n");
-		
-		if (getLocation() != null) {
-			b.append("location.name : " + getLocation().name + "\n");
-			b.append("location.timezone" + getLocation().timezone + "\n");
-		}
-		
+		b.append("ID : " + id + "\n");
+		b.append("Name : " + getName() + "\n");
+		b.append("Login : " + getLogin() + "\n");
+		b.append("Email : " + getEmail() + "\n");
+		b.append("Company : " + getCompany() + "\n");
+		b.append("Created date : " + getCreatedDate() + "\n");
+		b.append("Updated date : " + getUpdatedDate() + "\n");
 		return b.toString();
 	}
 
-	public String getOpenid() {
-		return openid;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setOpenid(String openid) {
-		this.openid = openid;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getAvatarUrl() {
+		return avatarUrl;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
 	}
 
-	public Location getLocation() {
-		return location;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public String getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(String updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 }

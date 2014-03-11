@@ -35,12 +35,12 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Button gotoMe2dayButton = (Button) findViewById(R.id.gotoMe2dayButton);
+		Button githubActivityButton = (Button) findViewById(R.id.github_activity_button);
 		Button amazonActivityButton = (Button) findViewById(R.id.amazon_activity_button);
-		gotoMe2dayButton.setOnClickListener(new OnClickListener(){
+		githubActivityButton.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, Me2dayActivity.class);
+				Intent intent = new Intent(MainActivity.this, GithubActivity.class);
 				MainActivity.this.startActivity(intent);		
 			}});
 		
