@@ -34,7 +34,7 @@ The issue has not been resolved in official Volley yet. so you need to use this 
 
 This version is originally located in a [AOSP review](https://android-review.googlesource.com/#/c/63630/) and the author of it is Anders Aagaard.
 
-### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) disk caches
+### Android Universal Image Loader disk caches
 AUIL disk caches wrap `disc caches` of [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) library, and are adapted for `Cache` that `RequestQueue` uses.
 
 You can use the cache as below,
@@ -60,7 +60,7 @@ You can use the cache as below,
 
 ## Memory caches
 
-### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) image caches
+### Android Universal Image Loader image caches
 AUIL image caches wrap `memory caches` of [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) library which store bitmaps, and are adapted for `ImageCache` that `ImageLoader` uses.
 
 You can use the cache as below,
@@ -100,7 +100,7 @@ You can use the cache as below,
 - Cache using _only weak_ references
 - An adapter class of [WeakMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/WeakMemoryCache.java)
 
-_(NOTE : All of these descriptions of caches are extracted from README.md of [Android Universal ImageLoader](https://github.com/nostra13/Android-Universal-Image-Loader))_
+_(NOTE : All of these descriptions of caches are extracted from README.md of Android Universal ImageLoader.))_
 
 # Install
 
