@@ -3,6 +3,7 @@
 This library provides assistance in developing Android applications using [Volley](https://android.googlesource.com/platform/frameworks/volley/).
 
 It provides useful classes such as various requests, disk caches, and memory caches.
+
 # Features and usage
 ## Request classes supporting JSON type of the response
 ### [JacksonRequest](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/request/JacksonRequest.java)
@@ -32,6 +33,7 @@ Improved `DiskBasedCache` is a version of which has been fixed the performance i
 The issue has not been resolved in official Volley yet. so you need to use this version instead of original `DiskBasedCache`.
 
 This version is originally located in a [AOSP review](https://android-review.googlesource.com/#/c/63630/) and the author of it is Anders Aagaard.
+
 ### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) disk caches
 AUIL disk caches wrap `disc caches` of [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) library, and are adapted for `Cache` that `RequestQueue` uses.
 
@@ -213,10 +215,12 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 
 # Sample Application
  * [Download APK Here](http://github.com/nhnopensource/volley-extensions/wiki/downloads/1.0.0/sample-demos-1.0.0.apk).
+
 # Volley mirror dependency
 This library depends on [Volley mirror project](https://github.com/mcxiaoke/android-volley). The mirror project keeps an up-to-date version of [Volley](https://android.googlesource.com/platform/frameworks/volley/) and automatically uploads to Maven Central. 
 
 The library will continue to keep this dependency until Volley provides an official package in Maven Central.
+
 # License
 
 	Copyright (C) 2014 Naver Business Platform Corp.
