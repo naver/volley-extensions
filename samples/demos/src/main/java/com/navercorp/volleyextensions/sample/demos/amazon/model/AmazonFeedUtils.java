@@ -1,4 +1,4 @@
-package com.navercorp.volleyextensions.sample.demos;
+package com.navercorp.volleyextensions.sample.demos.amazon.model;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

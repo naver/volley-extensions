@@ -13,21 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.navercorp.volleyextensions.sample.demos;
+package com.navercorp.volleyextensions.sample.demos.amazon.listview;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-@Root(name = "rss")
-public class ShoppingRssFeed {
-	@Element(name = "channel")
-	private ShoppingRssChannel channel;
-
-	@Attribute
-	private String version;
-	
-	public ShoppingRssChannel getChannel() {
-		return channel;
-	}
+public class ViewHolder {
+	protected ImageView itemImage;
+	protected TextView title;
 }

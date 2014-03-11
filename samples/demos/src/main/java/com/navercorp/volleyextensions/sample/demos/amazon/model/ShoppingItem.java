@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.navercorp.volleyextensions.sample.demos;
+package com.navercorp.volleyextensions.sample.demos.amazon.model;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;

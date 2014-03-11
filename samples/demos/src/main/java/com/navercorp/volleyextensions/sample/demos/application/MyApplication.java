@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.navercorp.volleyextensions.sample.demos;
+package com.navercorp.volleyextensions.sample.demos.application;
 
-import android.widget.ImageView;
-import android.widget.TextView;
+import com.navercorp.volleyextensions.sample.demos.application.volley.MyVolley;
 
-public class ViewHolder {
-	protected ImageView itemImage;
-	protected TextView title;
+import android.app.Application;
+
+public class MyApplication extends Application {
+
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		MyVolley.init(this);
+	}
+
 }

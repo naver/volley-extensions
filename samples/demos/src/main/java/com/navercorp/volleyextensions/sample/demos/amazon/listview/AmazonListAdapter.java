@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.navercorp.volleyextensions.sample.demos;
+package com.navercorp.volleyextensions.sample.demos.amazon.listview;
 
 import java.util.List;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.navercorp.volleyextensions.sample.demos.R;
+import com.navercorp.volleyextensions.sample.demos.R.id;
+import com.navercorp.volleyextensions.sample.demos.R.layout;
+import com.navercorp.volleyextensions.sample.demos.amazon.model.ShoppingItem;
+import com.navercorp.volleyextensions.sample.demos.application.volley.MyVolley;
 
 import android.content.Context;
 import android.view.LayoutInflater;

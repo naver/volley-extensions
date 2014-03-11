@@ -13,13 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.navercorp.volleyextensions.sample.demos;
+package com.navercorp.volleyextensions.sample.demos.github.activity;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.navercorp.volleyextensions.request.Jackson2Request;
 import com.navercorp.volleyextensions.request.JacksonRequest;
+import com.navercorp.volleyextensions.sample.demos.R;
+import com.navercorp.volleyextensions.sample.demos.R.id;
+import com.navercorp.volleyextensions.sample.demos.R.layout;
+import com.navercorp.volleyextensions.sample.demos.application.volley.MyVolley;
+import com.navercorp.volleyextensions.sample.demos.github.model.Person;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.navercorp.volleyextensions.sample.demos;
+package com.navercorp.volleyextensions.sample.demos.amazon.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -25,6 +25,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.ImageLoader;
 import com.navercorp.volleyextensions.request.SimpleXmlRequest;
+import com.navercorp.volleyextensions.sample.demos.R;
+import com.navercorp.volleyextensions.sample.demos.R.id;
+import com.navercorp.volleyextensions.sample.demos.R.layout;
+import com.navercorp.volleyextensions.sample.demos.amazon.listview.AmazonListAdapter;
+import com.navercorp.volleyextensions.sample.demos.amazon.model.ShoppingRssFeed;
+import com.navercorp.volleyextensions.sample.demos.application.volley.MyVolley;
 
 public class AmazonActivity extends Activity {
 	private static final String GET_ITEMS_URL = "http://www.amazon.com/rss/tag/running/recent/ref=tag_rsh_hl_ersr";

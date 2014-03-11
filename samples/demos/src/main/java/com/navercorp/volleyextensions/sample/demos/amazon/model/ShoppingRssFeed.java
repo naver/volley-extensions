@@ -13,17 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.navercorp.volleyextensions.sample.demos;
+package com.navercorp.volleyextensions.sample.demos.amazon.model;
 
-import android.app.Application;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
-public class MyApplication extends Application {
+@Root(name = "rss")
+public class ShoppingRssFeed {
+	@Element(name = "channel")
+	private ShoppingRssChannel channel;
 
-
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		MyVolley.init(this);
+	@Attribute
+	private String version;
+	
+	public ShoppingRssChannel getChannel() {
+		return channel;
 	}
-
 }

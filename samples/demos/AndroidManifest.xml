@@ -16,22 +16,22 @@
     <!-- log 를 남기기 위한 권한 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
-        android:name="com.navercorp.volleyextensions.sample.demos.MyApplication"
+        android:name="com.navercorp.volleyextensions.sample.demos.application.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.navercorp.volleyextensions.sample.demos.MainActivity"
+            android:name="com.navercorp.volleyextensions.sample.demos.main.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.navercorp.volleyextensions.sample.demos.GithubActivity" >
+        <activity android:name="com.navercorp.volleyextensions.sample.demos.github.activity.GithubActivity" >
         </activity>
-        <activity android:name="com.navercorp.volleyextensions.sample.demos.AmazonActivity" >
+        <activity android:name="com.navercorp.volleyextensions.sample.demos.amazon.activity.AmazonActivity" >
         </activity>
     </application>
 </manifest>
