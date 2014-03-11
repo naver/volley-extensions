@@ -26,8 +26,6 @@ import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.ImageLoader;
 import com.navercorp.volleyextensions.request.SimpleXmlRequest;
 import com.navercorp.volleyextensions.sample.demos.R;
-import com.navercorp.volleyextensions.sample.demos.R.id;
-import com.navercorp.volleyextensions.sample.demos.R.layout;
 import com.navercorp.volleyextensions.sample.demos.amazon.listview.AmazonListAdapter;
 import com.navercorp.volleyextensions.sample.demos.amazon.model.ShoppingRssFeed;
 import com.navercorp.volleyextensions.sample.demos.application.volley.MyVolley;

@@ -18,9 +18,6 @@ package com.navercorp.volleyextensions.sample.demos.main.activity;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.navercorp.volleyextensions.sample.demos.R;
-import com.navercorp.volleyextensions.sample.demos.R.id;
-import com.navercorp.volleyextensions.sample.demos.R.layout;
-import com.navercorp.volleyextensions.sample.demos.R.menu;
 import com.navercorp.volleyextensions.sample.demos.amazon.activity.AmazonActivity;
 import com.navercorp.volleyextensions.sample.demos.github.activity.GithubActivity;
 
@@ -63,7 +60,6 @@ public class MainActivity extends Activity {
 		super.onResume();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);

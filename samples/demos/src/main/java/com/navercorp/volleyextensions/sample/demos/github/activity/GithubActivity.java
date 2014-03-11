@@ -21,8 +21,6 @@ import com.android.volley.VolleyError;
 import com.navercorp.volleyextensions.request.Jackson2Request;
 import com.navercorp.volleyextensions.request.JacksonRequest;
 import com.navercorp.volleyextensions.sample.demos.R;
-import com.navercorp.volleyextensions.sample.demos.R.id;
-import com.navercorp.volleyextensions.sample.demos.R.layout;
 import com.navercorp.volleyextensions.sample.demos.application.volley.MyVolley;
 import com.navercorp.volleyextensions.sample.demos.github.model.Person;
 
