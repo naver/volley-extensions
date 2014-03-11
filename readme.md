@@ -33,6 +33,13 @@ The issue has not been resolved in official Volley yet. so you need to use this 
 
 This version is originally located in a [AOSP review](https://android-review.googlesource.com/#/c/63630/) and the author of it is Anders Aagaard.
 ### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) disk caches
+AUIL disk caches wrap `disc caches` of [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) library, and are adapted for `Cache` that `RequestQueue` uses.
+
+You can use the cache as below,
+
+		requestQueue = new RequestQueue(new UniversalUnlimitedDiscCache(cacheDir) /* Disc cache's instance here */, 
+										new BasicNetwork(new HurlStack()) /* Network instance here */);
+
 #### [UniversalFileCountLimitedDiscCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalFileCountLimitedDiscCache.java)
 - Disc cache limited by file count. If file count in cache directory exceeds specified limit then file with the most oldest last usage date will be deleted.
 - An adapter class of [FileCountLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/FileCountLimitedDiscCache.java)
@@ -52,6 +59,12 @@ This version is originally located in a [AOSP review](https://android-review.goo
 ## Memory caches
 
 ### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) image caches
+AUIL image caches wrap `memory caches` of [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) library which store bitmaps, and are adapted for `ImageCache` that `ImageLoader` uses.
+
+You can use the cache as below,
+
+		imageLoader = new ImageLoader(requestQueue, new UniversalLruMemoryCache(cacheSize) /* ImageCache's instance here */);
+
 #### [UniversalFifoLimitedMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalFifoLimitedMemoryCache.java)
 - Size of all stored bitmaps will not to exceed size limit. When cache reaches limit size then cache clearing is processed by FIFO principle.
 - An adapter class of [FIFOLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FIFOLimitedMemoryCache.java)
