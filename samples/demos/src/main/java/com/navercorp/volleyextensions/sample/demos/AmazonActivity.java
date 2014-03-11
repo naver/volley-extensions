@@ -17,7 +17,9 @@ package com.navercorp.volleyextensions.sample.demos;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.Listener;
@@ -30,6 +32,7 @@ public class AmazonActivity extends Activity {
 	private RequestQueue requestQueue;
 	private ImageLoader loader;
 	private ListView listView;
+	private ProgressBar loadingProgress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class AmazonActivity extends Activity {
 		setContentView(R.layout.activity_amazon);
 
 		listView = (ListView) findViewById(R.id.listView);
+		loadingProgress = (ProgressBar) findViewById(R.id.loadingProgress);
 
 		loader = MyVolley.getImageLoader();
 		requestQueue = MyVolley.getRequestQueue();
@@ -51,6 +55,9 @@ public class AmazonActivity extends Activity {
 
 					@Override
 					public void onResponse(final ShoppingRssFeed feed) {
+						// Hide a loading bar, and show a list view
+						loadingProgress.setVisibility(View.INVISIBLE);
+						listView.setVisibility(View.VISIBLE);
 
 						listView.setAdapter(new AmazonListAdapter(
 								AmazonActivity.this, feed.getChannel()
