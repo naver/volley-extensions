@@ -26,6 +26,12 @@ It provides useful classes such as various requests, disk caches, and memory cac
 		
 ## Disk caches
 
+### [Improved DiskBasedCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/disk/DiskBasedCache.java)
+Improved `DiskBasedCache` is a version of which has been fixed the performance issue on `initialize()` method. Click [here](http://stackoverflow.com/questions/20916478/performance-issue-with-volleys-diskbasedcache) if you want to know the issue in detail.
+
+The issue has not been resolved in official Volley yet. so you need to use this version instead of original `DiskBasedCache`.
+
+This version is originally located in a [AOSP review](https://android-review.googlesource.com/#/c/63630/) and the author of it is Anders Aagaard.
 ### [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader) disk caches
 #### UniversalFileCountLimitedDiscCache
 - Disc cache limited by file count. If file count in cache directory exceeds specified limit then file with the most oldest last usage date will be deleted.
