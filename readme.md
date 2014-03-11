@@ -39,8 +39,9 @@ AUIL disk caches wrap `disc caches` of [Android Universal Image Loader](https://
 
 You can use the cache as below,
 
-		requestQueue = new RequestQueue(new UniversalUnlimitedDiscCache(cacheDir) /* Disc cache's instance here */, 
-										new BasicNetwork(new HurlStack()) /* Network instance here */);
+		requestQueue = new RequestQueue(new UniversalUnlimitedDiscCache(cacheDir)
+										/* Disc cache's instance here */, 
+										new BasicNetwork(new HurlStack()));
 
 #### [UniversalFileCountLimitedDiscCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalFileCountLimitedDiscCache.java)
 - Disc cache limited by file count. If file count in cache directory exceeds specified limit then file with the most oldest last usage date will be deleted.
@@ -65,7 +66,8 @@ AUIL image caches wrap `memory caches` of [Android Universal Image Loader](https
 
 You can use the cache as below,
 
-		imageLoader = new ImageLoader(requestQueue, new UniversalLruMemoryCache(cacheSize) /* ImageCache's instance here */);
+		imageLoader = new ImageLoader(requestQueue, new UniversalLruMemoryCache(cacheSize)
+													/* ImageCache's instance here */);
 
 #### [UniversalFifoLimitedMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalFifoLimitedMemoryCache.java)
 - Size of all stored bitmaps will not to exceed size limit. When cache reaches limit size then cache clearing is processed by FIFO principle.
