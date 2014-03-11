@@ -207,7 +207,7 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 
 ### How to add jar directly
 1. Download the jar package of volley-extensions.
-	- volley-extensions-1.0.0.jar
+	- [volley-extensions-1.0.0.jar](http://github.com/nhnopensource/volley-extensions/wiki/downloads/1.0.0/volley-extensions-1.0.0.jar)
 2. Import the jar package into your project.
 3. Download and import Jackson, Simple XML, or Universal Image Loader as needed.
 
