@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 
 import com.android.volley.toolbox.NetworkImageView;
 
-public class ZoomableNetworkImageView extends NetworkImageView implements Zoomable {
+public class ZoomableNetworkImageView extends NetworkImageView implements ZoomableComponent {
 	public static final int NONE_DEF_STYLE = 0;
 	private final ImageViewZoomExtender zoomExtender;
 
@@ -67,5 +67,20 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	@Override
 	public void panTo(float dx, float dy) {
 		zoomExtender.panTo(dx, dy);
+	}
+
+	@Override
+	public void restore(ZoomInfo zoomInfo) {
+		zoomExtender.restore(zoomInfo);
+	}
+
+	@Override
+	public ZoomInfo save() {
+		return zoomExtender.save();
+	}
+
+	@Override
+	public float getZoomLevel() {
+		return zoomExtender.getZoomLevel();
 	}
 }
