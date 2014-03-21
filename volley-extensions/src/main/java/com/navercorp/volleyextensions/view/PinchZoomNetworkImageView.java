@@ -59,7 +59,7 @@ public class PinchZoomNetworkImageView extends ZoomableNetworkImageView {
 
 	@Override
 	protected void onInitialized() {
-		getZoomExtender().updateMaximumZoomLevel(MAXIMUM_LEVEL);
+		setMaximumZoomLevel(MAXIMUM_LEVEL);
 	}
 
 	@Override

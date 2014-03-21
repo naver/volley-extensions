@@ -13,7 +13,6 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	public static final int NONE_DEF_STYLE = 0;
 	public static final float ORIGINAL_LEVEL = 1.0f;
 	private static final PointF topLeftPoint = new PointF(0.0f, 0.0f);
-	private static final float INFINITE_LEVEL = Float.MAX_VALUE;
 
 	private float zoomLevel = ORIGINAL_LEVEL;
 	private ImageView imageView;
@@ -24,8 +23,6 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	private int viewHeight;
 	private int imageWidth;
 	private int imageHeight;
-	private float maximumZoomLevel;
-	private float minimumZoomLevel;
 
 	public ImageViewZoomExtender(ImageView imageView) {
 		Assert.notNull(imageView, "ImageView must not be null.");
@@ -52,43 +49,6 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	@Override
 	public ZoomInfo save() {
 		return null;
-	}
-
-	private void setMaximumZoomLevel(float maximumLevel) {
-		if(maximumLevel < ORIGINAL_LEVEL) {
-			maximumLevel = ORIGINAL_LEVEL;
-		}
-		if (minimumZoomLevel > maximumLevel) {
-			this.minimumZoomLevel = maximumLevel;
-		}
-
-		this.maximumZoomLevel = maximumLevel;
-	}
-
-	private void setMinimumZoomLevel(float minimumLevel) {
-		if (minimumLevel < ORIGINAL_LEVEL) {
-			minimumLevel = ORIGINAL_LEVEL;
-		}
-		if (minimumLevel > maximumZoomLevel) {
-			this.maximumZoomLevel = minimumLevel;
-		}
-
-		this.minimumZoomLevel = minimumLevel;
-		
-	}
-
-	public void updateMaximumZoomLevel(float maximumLevel) {
-		setMaximumZoomLevel(maximumLevel);
-		if(getZoomLevel() > this.maximumZoomLevel) {
-			zoomTo(this.maximumZoomLevel);
-		}
-	}
-
-	public void updateMinimumZoomLevel(float minimumLevel) {
-		setMinimumZoomLevel(minimumLevel);
-		if(getZoomLevel() < this.minimumZoomLevel) {
-			zoomTo(this.minimumZoomLevel);
-		}
 	}
 
 	private void initializeScaleSize() {
@@ -141,8 +101,6 @@ class ImageViewZoomExtender implements ZoomableComponent {
 			return;
 		}
 
-		targetLevel = limitLevelSizeRange(targetLevel);
-
 		scaleSize(currentMatrix, targetLevel, zoomX, zoomY);
 		boundArea(currentMatrix);
 		centerImage(currentMatrix);
@@ -152,16 +110,6 @@ class ImageViewZoomExtender implements ZoomableComponent {
 
 	private void updateZoomLevel(float targetLevel) {
 		zoomLevel = targetLevel;
-	}
-
-	protected final float limitLevelSizeRange(float targetLevel) {
-		if (targetLevel < minimumZoomLevel) {
-			targetLevel = minimumZoomLevel;
-		}
-		if (targetLevel > maximumZoomLevel) {
-			targetLevel = maximumZoomLevel;
-		}
-		return targetLevel;
 	}
 
 	private void scaleSize(Matrix matrix, float targetLevel, float zoomX, float zoomY) {

@@ -108,7 +108,7 @@ public class MultiLevelZoomNetworkImageView extends ZoomableNetworkImageView {
 
 	@Override
 	protected void onInitialized() {
-		getZoomExtender().updateMaximumZoomLevel(MAXIMUM_LEVEL);
+		setMaximumZoomLevel(MAXIMUM_LEVEL);
 	}
 
 	protected void zoomOut(float zoomX, float zoomY) {
