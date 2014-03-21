@@ -112,12 +112,12 @@ public class MultiLevelZoomNetworkImageView extends ZoomableNetworkImageView {
 	}
 
 	protected void zoomOut(float zoomX, float zoomY) {
-		float newLevel = Math.round(getZoomExtender().getZoomLevel()) - 1f;
+		float newLevel = Math.round(getZoomLevel()) - 1f;
 		zoomTo(newLevel, zoomX, zoomY);
 	}
 
 	protected void zoomIn(float zoomX, float zoomY) {
-		float newLevel = Math.round(getZoomExtender().getZoomLevel()) + 1f;
+		float newLevel = Math.round(getZoomLevel()) + 1f;
 		zoomTo(newLevel, zoomX, zoomY);
 	}
 

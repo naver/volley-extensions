@@ -51,10 +51,6 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	protected void onInitialized() {
 	}
 
-	protected final ImageViewZoomExtender getZoomExtender() {
-		return zoomExtender;
-	}
-
 	@Override
 	public void setImageBitmap(Bitmap bm) {
 		super.setImageBitmap(bm);
