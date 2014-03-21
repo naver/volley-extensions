@@ -61,7 +61,9 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	}
 
 	public void scaleTo(float dScale, float zoomX, float zoomY) {
-		zoomExtender.scaleTo(dScale, zoomX, zoomY);
+		// Convert the change in scale to a target level
+		float targetLevel = dScale * getZoomLevel();
+		zoomTo(targetLevel, zoomX, zoomY);
 	}
 
 	@Override

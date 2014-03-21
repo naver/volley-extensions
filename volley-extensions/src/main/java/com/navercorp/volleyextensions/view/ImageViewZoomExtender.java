@@ -182,11 +182,6 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		updateZoomLevel(targetLevel);
 	}
 
-	public void scaleTo(float dScale, float zoomX, float zoomY) {
-		float targetLevel = dScale * zoomLevel;
-		zoomTo(targetLevel, zoomX, zoomY);
-	}
-
 	private void updateZoomLevel(float targetLevel) {
 		zoomLevel = targetLevel;
 	}
