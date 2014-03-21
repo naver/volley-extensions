@@ -10,7 +10,7 @@ import com.android.volley.toolbox.NetworkImageView;
 public class ZoomableNetworkImageView extends NetworkImageView implements ZoomableComponent, Scalable {
 	public static final int NONE_DEF_STYLE = 0;
 	public static final float INFINITE_LEVEL = Float.MAX_VALUE;
-	private final ImageViewZoomExtender zoomExtender;
+	private final ZoomableComponent zoomExtender;
 	private float maximumZoomLevel;
 	private float minimumZoomLevel;
 
