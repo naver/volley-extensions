@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 
 import com.android.volley.toolbox.NetworkImageView;
 
-public class ZoomableNetworkImageView extends NetworkImageView implements ZoomableComponent {
+public class ZoomableNetworkImageView extends NetworkImageView implements ZoomableComponent, Scalable {
 	public static final int NONE_DEF_STYLE = 0;
 	private final ImageViewZoomExtender zoomExtender;
 
@@ -60,6 +60,7 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 		zoomExtender.zoomTo(targetLevel, zoomX, zoomY);
 	}
 
+	@Override
 	public void scaleTo(float dScale, float zoomX, float zoomY) {
 		// Convert the change in scale to a target level
 		float targetLevel = dScale * getZoomLevel();
