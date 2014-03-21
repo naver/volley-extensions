@@ -19,7 +19,6 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	private ImageView imageView;
 	private final Matrix currentMatrix = new Matrix();
 	private float initialScaleSize;
-	private boolean isInitialized = false;
 
 	private int viewWidth;
 	private int viewHeight;
@@ -53,37 +52,6 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	@Override
 	public ZoomInfo save() {
 		return null;
-	}
-
-	protected void reset() {
-		isInitialized = false;
-	}
-	
-	public void initializeIfNeeded() {
-		if (!isInitalized()) {
-			initialize();
-		}
-	}
-
-	public boolean isInitalized() {
-		return isInitialized;
-	}
-
-	public void initialize() {
-		if (isImageEmpty()) {
-			return;
-		}
-
-		currentMatrix.reset();
-		saveCurrentSizes();
-
-		setMinimumZoomLevel(ORIGINAL_LEVEL);
-		setMaximumZoomLevel(INFINITE_LEVEL);
-
-		initializeScaleSize();
-
-		zoomTo(ORIGINAL_LEVEL);
-		isInitialized = true;
 	}
 
 	private void setMaximumZoomLevel(float maximumLevel) {

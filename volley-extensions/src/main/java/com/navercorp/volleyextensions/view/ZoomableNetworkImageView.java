@@ -2,6 +2,7 @@ package com.navercorp.volleyextensions.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -21,18 +22,23 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	public ZoomableNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		zoomExtender = new ImageViewZoomExtender(this);
+		onInitialized();
 	}
 
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		super.onLayout(changed, left, top, right, bottom);
-		initialize();
+		// NOTE: restore() and store() methods are not implemented yet, but it will be implemented.
+		//       Calling restore() method with null parameter is too dangerous. So this code must be modified when implemented.
+		restore(null);
 	}
 
-	private void initialize() {
-		zoomExtender.initializeIfNeeded();
-		onInitialized();
+	@Override
+	protected Parcelable onSaveInstanceState () {
+		save();
+		return super.onSaveInstanceState();
 	}
+
 	/**
 	 * Please override this method when you want to set any other options
 	 */
@@ -45,13 +51,11 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 
 	@Override
 	public void setImageBitmap(Bitmap bm) {
-		zoomExtender.reset();
 		super.setImageBitmap(bm);
 	}
 
 	@Override
 	public void setImageResource(int resId) {
-		zoomExtender.reset();
 		super.setImageResource(resId);
 	}
 
