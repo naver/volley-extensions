@@ -2,7 +2,6 @@ package com.navercorp.volleyextensions.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.PointF;
 import android.util.AttributeSet;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -56,14 +55,6 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 		super.setImageResource(resId);
 	}
 
-	public void zoomTo(float targetLevel) {
-		zoomExtender.zoomTo(targetLevel);
-	}
-
-	public void zoomTo(float targetLevel, PointF zoomPoint) {
-		zoomExtender.zoomTo(targetLevel, zoomPoint);
-	}
-
 	@Override
 	public void zoomTo(float targetLevel, float zoomX, float zoomY) {
 		zoomExtender.zoomTo(targetLevel, zoomX, zoomY);
@@ -71,10 +62,6 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 
 	public void scaleTo(float dScale, float zoomX, float zoomY) {
 		zoomExtender.scaleTo(dScale, zoomX, zoomY);
-	}
-
-	public void panTo(PointF difference) {
-		zoomExtender.panTo(difference);
 	}
 
 	@Override
