@@ -44,11 +44,41 @@ class ImageViewZoomExtender implements ZoomableComponent {
 
 	@Override
 	public void restore(ZoomInfo zoomInfo) {
+		if (isImageEmpty()) {
+			return;
+		}
+
+		zoomInfo = createZoomInfoIfNull(zoomInfo);
+
+		currentMatrix.reset();
+		saveCurrentSizes();
+
+		initializeScaleSize();
+
+		float oldZoomLevel = zoomInfo.getZoomLevel();
+		float oldTranslateX = zoomInfo.getTranslateX();
+		float oldTranslateY = zoomInfo.getTranslateY();
+
+		float targetLevel = oldZoomLevel;
+		zoomTo(targetLevel);
+		panTo(oldTranslateX * initialScaleSize, oldTranslateY * initialScaleSize);	
+	}
+
+	private static ZoomInfo createZoomInfoIfNull(ZoomInfo zoomInfo) {
+		if (zoomInfo == null) {
+			zoomInfo = new ZoomInfo();
+		}
+		return zoomInfo;
 	}
 
 	@Override
 	public ZoomInfo save() {
-		return null;
+		return createCurrentZoomInfo();
+	}
+
+	private ZoomInfo createCurrentZoomInfo() {
+		float[] values = getValuesOfMatrix(currentMatrix);
+		return new ZoomInfo(zoomLevel, new PointF(values[Matrix.MTRANS_X] / initialScaleSize, values[Matrix.MTRANS_Y] / initialScaleSize));
 	}
 
 	private void initializeScaleSize() {

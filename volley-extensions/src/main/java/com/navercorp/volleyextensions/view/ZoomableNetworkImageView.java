@@ -2,6 +2,7 @@ package com.navercorp.volleyextensions.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 
@@ -13,6 +14,21 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	private final ZoomableComponent zoomExtender;
 	private float maximumZoomLevel;
 	private float minimumZoomLevel;
+	private final ZoomInfo savedZoomInfo = new ZoomInfo();
+
+	static class ZoomInfoState extends BaseSavedState {
+		public static final String STATE_KEY = ZoomInfoState.class.getSimpleName();
+	    private final ZoomInfo zoomInfo;
+
+	    public ZoomInfoState(Parcelable superState, ZoomInfo zoomInfo) {
+	        super(superState);
+	        this.zoomInfo = zoomInfo;
+	    }
+
+	    public ZoomInfo getZoomInfo(){
+	        return zoomInfo;
+	    }
+	}
 
 	public ZoomableNetworkImageView(Context context) {
 		this(context, null);
@@ -34,15 +50,41 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		super.onLayout(changed, left, top, right, bottom);
-		// NOTE: restore() and store() methods are not implemented yet, but it will be implemented.
-		//       Calling restore() method with null parameter is too dangerous. So this code must be modified when implemented.
-		restore(null);
+		if (changed) {
+			restore(savedZoomInfo);			
+		}
 	}
 
 	@Override
 	protected Parcelable onSaveInstanceState () {
-		save();
-		return super.onSaveInstanceState();
+		ZoomInfo savedZoomInfo = save();
+		Parcelable savedZoomInfoState = new ZoomInfoState(super.onSaveInstanceState(), savedZoomInfo);
+		Bundle bundle = new Bundle();
+		bundle.putParcelable(ZoomInfoState.STATE_KEY, savedZoomInfoState);
+		return bundle;
+	}
+
+	@Override
+	public void onRestoreInstanceState(Parcelable parcelable) {
+		if (!isParceableBundle(parcelable)) {
+			super.onRestoreInstanceState(BaseSavedState.EMPTY_STATE);
+			return;
+		}
+
+		Bundle bundle = (Bundle) parcelable;
+		ZoomInfoState savedZoomInfoState = (ZoomInfoState) bundle.getParcelable(ZoomInfoState.STATE_KEY);
+		ZoomInfo savedZoomInfo = savedZoomInfoState.getZoomInfo();
+		// It saves the zoom info, and do not restore immediately when onRestoreInstanceState() is called. Restoring will be called later.
+		setSavedZoomInfo(savedZoomInfo);
+		super.onRestoreInstanceState(savedZoomInfoState.getSuperState());
+	}
+
+	private static boolean isParceableBundle(Parcelable state) {
+		return state instanceof Bundle;
+	}
+
+	private void setSavedZoomInfo(ZoomInfo savedZoomInfo) {
+		this.savedZoomInfo.setZoomInfo(savedZoomInfo);
 	}
 
 	/**
@@ -82,8 +124,12 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	@Override
 	public void restore(ZoomInfo zoomInfo) {
 		zoomExtender.restore(zoomInfo);
+		resetZoomInfo();
 	}
 
+	private void resetZoomInfo() {
+		savedZoomInfo.reset();
+	}
 	@Override
 	public ZoomInfo save() {
 		return zoomExtender.save();
