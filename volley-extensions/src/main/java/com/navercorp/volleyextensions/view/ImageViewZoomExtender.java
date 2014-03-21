@@ -8,7 +8,7 @@ import android.widget.ImageView.ScaleType;
 
 import com.navercorp.volleyextensions.util.Assert;
 
-class ImageViewZoomExtender implements Zoomable {
+class ImageViewZoomExtender implements ZoomableComponent {
 	public static final int DEFAULT_MATRIX_SIZE = 3 * 3;
 	public static final int NONE_DEF_STYLE = 0;
 	public static final float ORIGINAL_LEVEL = 1.0f;
@@ -41,9 +41,18 @@ class ImageViewZoomExtender implements Zoomable {
 	private void setScaleTypeMatrix() {
 		imageView.setScaleType(ScaleType.MATRIX);
 	}
-
+	@Override
 	public float getZoomLevel() {
 		return zoomLevel;
+	}
+
+	@Override
+	public void restore(ZoomInfo zoomInfo) {
+	}
+
+	@Override
+	public ZoomInfo save() {
+		return null;
 	}
 
 	protected void reset() {
