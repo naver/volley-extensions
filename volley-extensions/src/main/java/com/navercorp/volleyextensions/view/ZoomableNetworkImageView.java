@@ -2,6 +2,8 @@ package com.navercorp.volleyextensions.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -15,6 +17,7 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	private float maximumZoomLevel;
 	private float minimumZoomLevel;
 	private final ZoomInfo savedZoomInfo = new ZoomInfo();
+	private boolean imageChanged = false;  
 
 	static class ZoomInfoState extends BaseSavedState {
 		public static final String STATE_KEY = ZoomInfoState.class.getSimpleName();
@@ -50,9 +53,40 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		super.onLayout(changed, left, top, right, bottom);
-		if (changed) {
-			restore(savedZoomInfo);			
+		if (isNewImageLoaded()) {
+			restore(savedZoomInfo);
 		}
+	}
+
+	/**
+	 * <pre>
+	 * Check whether an image is actually changed and loaded
+	 * </pre>
+	 * @return true if an image is actually changed and loaded.
+	 */
+	private boolean isNewImageLoaded() {
+		boolean isChanged = imageChanged && !isImageEmpty();
+		imageChanged = false;
+		return isChanged;
+	}
+
+	private boolean isImageEmpty() {
+		Drawable drawable = getDrawable();
+		boolean imageEmpty = true;
+
+		if (drawable == null) {
+			return imageEmpty;
+		}
+		if (drawable instanceof BitmapDrawable == false) {
+			return imageEmpty;
+		}
+
+		Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+		if (bitmap == null) {
+			return imageEmpty;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -94,8 +128,29 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	}
 
 	@Override
-	public void setImageBitmap(Bitmap bm) {
-		super.setImageBitmap(bm);
+	public void setImageBitmap(Bitmap bitmap) {
+		updateImageChanged(bitmap);
+		super.setImageBitmap(bitmap);
+	}
+
+	private void updateImageChanged(Bitmap bitmap) {
+		imageChanged = checkImageChanged(bitmap);
+	}
+
+	private boolean checkImageChanged(Bitmap bitmap) {
+		Drawable drawable = getDrawable();
+		boolean imageChanged = true;
+		// Assume that an image is changed if current drawable is not a instance of BitmapDrawable.
+		if (drawable instanceof BitmapDrawable == false) {
+			return imageChanged;
+		}
+
+		Bitmap oldBitmap = ((BitmapDrawable)drawable).getBitmap();
+		// Check whether the bitmaps are same instance. if true, we know that an image is not changed.
+		if (oldBitmap != null && oldBitmap.equals(bitmap)) {
+			imageChanged = false;
+		}
+		return imageChanged;
 	}
 
 	@Override
