@@ -108,7 +108,6 @@ public class MultiLevelSingleTapZoomNetworkImageView extends ZoomableNetworkImag
 
 	@Override
 	protected void onInitialized() {
-		setMaximumZoomLevel(MAXIMUM_LEVEL);
 	}
 
 	protected void zoomOut(float zoomX, float zoomY) {

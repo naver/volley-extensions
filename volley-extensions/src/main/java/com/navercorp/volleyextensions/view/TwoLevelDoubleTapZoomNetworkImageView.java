@@ -59,7 +59,6 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends ZoomableNetworkImageV
 
 	@Override
 	protected void onInitialized() {
-		setMaximumZoomLevel(MAXIMUM_LEVEL);
 	}
 
 	@Override
