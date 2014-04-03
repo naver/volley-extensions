@@ -12,7 +12,7 @@ import com.android.volley.toolbox.NetworkImageView;
 
 public class ZoomableNetworkImageView extends NetworkImageView implements ZoomableComponent, Scalable {
 	public static final int NONE_DEF_STYLE = 0;
-	private final ZoomableComponent zoomExtender;
+	private ZoomableComponent zoomExtender;
 	private final ZoomInfo savedZoomInfo = new ZoomInfo();
 	private boolean imageChanged = false;  
 
@@ -40,8 +40,12 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 
 	public ZoomableNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		zoomExtender = new ImageViewZoomExtender(this);
+		setZoomExtender(new ImageViewZoomExtender(this));
 		onInitialized();
+	}
+
+	protected void setZoomExtender(ZoomableComponent zoomableComponent) {
+		zoomExtender = zoomableComponent;
 	}
 
 	@Override
