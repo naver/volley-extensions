@@ -7,22 +7,22 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 
-public class MultiLevelZoomNetworkImageView extends ZoomableNetworkImageView {
+public class MultiLevelSingleTapZoomNetworkImageView extends ZoomableNetworkImageView {
 
 	private static final float MAXIMUM_LEVEL = 6.0f;
 	private static final boolean EVENT_DONE = true;
 	private GestureDetector gestureDetector;
 	private ScaleGestureDetector scaleGestureDetector;
 
-	public MultiLevelZoomNetworkImageView(Context context) {
+	public MultiLevelSingleTapZoomNetworkImageView(Context context) {
 		this(context, null);
 	}
 
-	public MultiLevelZoomNetworkImageView(Context context, AttributeSet attrs) {
+	public MultiLevelSingleTapZoomNetworkImageView(Context context, AttributeSet attrs) {
 		this(context, attrs, ZoomableNetworkImageView.NONE_DEF_STYLE);
 	}
 
-	public MultiLevelZoomNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
+	public MultiLevelSingleTapZoomNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
 		scaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureDetector.OnScaleGestureListener() {
@@ -41,7 +41,7 @@ public class MultiLevelZoomNetworkImageView extends ZoomableNetworkImageView {
 			public boolean onScale(ScaleGestureDetector detector) {
 				float zoomX = detector.getFocusX(), zoomY = detector.getFocusY();
 				float dScale = detector.getScaleFactor();
-				MultiLevelZoomNetworkImageView.this.scaleTo(dScale, zoomX, zoomY);
+				MultiLevelSingleTapZoomNetworkImageView.this.scaleTo(dScale, zoomX, zoomY);
 				return EVENT_DONE;
 			}
 		});
@@ -87,7 +87,7 @@ public class MultiLevelZoomNetworkImageView extends ZoomableNetworkImageView {
 			public boolean onSingleTapConfirmed(MotionEvent event) {
 				float zoomX = event.getX();
 				float zoomY = event.getY();
-				MultiLevelZoomNetworkImageView.this.zoomIn(zoomX, zoomY);
+				MultiLevelSingleTapZoomNetworkImageView.this.zoomIn(zoomX, zoomY);
 				return EVENT_DONE;
 			}
 			
@@ -100,7 +100,7 @@ public class MultiLevelZoomNetworkImageView extends ZoomableNetworkImageView {
 			public boolean onDoubleTap(MotionEvent event) {
 				float zoomX = event.getX();
 				float zoomY = event.getY();
-				MultiLevelZoomNetworkImageView.this.zoomOut(zoomX, zoomY);
+				MultiLevelSingleTapZoomNetworkImageView.this.zoomOut(zoomX, zoomY);
 				return EVENT_DONE;
 			}
 		});

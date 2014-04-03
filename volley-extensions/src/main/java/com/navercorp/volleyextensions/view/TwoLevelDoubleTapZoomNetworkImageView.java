@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.view.MotionEvent;
 
-public class PinchZoomNetworkImageView extends ZoomableNetworkImageView {
+public class TwoLevelDoubleTapZoomNetworkImageView extends ZoomableNetworkImageView {
 	private static final int DOUBLE_TAP_INTERVAL = 300;
 	private static final int DEFAULT_ZOOM_IN_LEVEL = 2;
 	private static final float DEFAULT_ZOOM_OUT_LEVEL = 1.0f;
@@ -45,15 +45,15 @@ public class PinchZoomNetworkImageView extends ZoomableNetworkImageView {
 	private long timeStamp;
 	private boolean alreadyZoomedIn = false;
 
-	public PinchZoomNetworkImageView(Context context) {
+	public TwoLevelDoubleTapZoomNetworkImageView(Context context) {
 		this(context, null);
 	}
 
-	public PinchZoomNetworkImageView(Context context, AttributeSet attrs) {
+	public TwoLevelDoubleTapZoomNetworkImageView(Context context, AttributeSet attrs) {
 		this(context, attrs, ZoomableNetworkImageView.NONE_DEF_STYLE);
 	}
 
-	public PinchZoomNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
+	public TwoLevelDoubleTapZoomNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
