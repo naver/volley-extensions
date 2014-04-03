@@ -7,7 +7,7 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 
-public class MultiLevelSingleTapZoomNetworkImageView extends ZoomableNetworkImageView {
+public class MultiLevelSingleTapZoomNetworkImageView extends LimitedLevelZoomNetworkImageView {
 
 	private static final float MAXIMUM_LEVEL = 6.0f;
 	private static final boolean EVENT_DONE = true;
@@ -125,5 +125,10 @@ public class MultiLevelSingleTapZoomNetworkImageView extends ZoomableNetworkImag
 		boolean isEventDone = scaleGestureDetector.onTouchEvent(event);
 	    isEventDone = gestureDetector.onTouchEvent(event) || isEventDone;
 	    return isEventDone || super.onTouchEvent(event);
-	} 
+	}
+
+	@Override
+	protected float determineMaximumZoomLevel() {
+		return MAXIMUM_LEVEL;
+	}
 }

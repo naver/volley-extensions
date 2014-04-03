@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.view.MotionEvent;
 
-public class TwoLevelDoubleTapZoomNetworkImageView extends ZoomableNetworkImageView {
+public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetworkImageView {
 	private static final int DOUBLE_TAP_INTERVAL = 300;
 	private static final int DEFAULT_ZOOM_IN_LEVEL = 2;
 	private static final float DEFAULT_ZOOM_OUT_LEVEL = 1.0f;
@@ -216,5 +216,10 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends ZoomableNetworkImageV
 
 	private void setAlreadyZoomedIn(boolean alreadyZoomedIn) {
 		this.alreadyZoomedIn = alreadyZoomedIn;
+	}
+
+	@Override
+	protected float determineMaximumZoomLevel() {
+		return MAXIMUM_LEVEL;
 	}
 }
