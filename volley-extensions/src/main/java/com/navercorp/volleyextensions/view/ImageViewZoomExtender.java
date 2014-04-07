@@ -25,7 +25,7 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	private int imageHeight;
 
 	public ImageViewZoomExtender(ImageView imageView) {
-		Assert.notNull(imageView, "ImageView must not be null.");
+		Assert.notNull(imageView, "ImageView");
 		setImageView(imageView);
 		setScaleTypeMatrix();
 	}
@@ -37,6 +37,7 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	private void setScaleTypeMatrix() {
 		imageView.setScaleType(ScaleType.MATRIX);
 	}
+
 	@Override
 	public float getZoomLevel() {
 		return zoomLevel;
@@ -50,18 +51,12 @@ class ImageViewZoomExtender implements ZoomableComponent {
 
 		zoomInfo = createZoomInfoIfNull(zoomInfo);
 
-		currentMatrix.reset();
+		resetImageMatrix();
 		saveCurrentSizes();
 
 		initializeScaleSize();
 
-		float oldZoomLevel = zoomInfo.getZoomLevel();
-		float oldTranslateX = zoomInfo.getTranslateX();
-		float oldTranslateY = zoomInfo.getTranslateY();
-
-		float targetLevel = oldZoomLevel;
-		zoomTo(targetLevel);
-		panTo(oldTranslateX * initialScaleSize, oldTranslateY * initialScaleSize);	
+		restoreActualZoomPosition(zoomInfo);
 	}
 
 	private static ZoomInfo createZoomInfoIfNull(ZoomInfo zoomInfo) {
@@ -71,14 +66,20 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		return zoomInfo;
 	}
 
-	@Override
-	public ZoomInfo save() {
-		return createCurrentZoomInfo();
+	private void resetImageMatrix() {
+		currentMatrix.reset();
 	}
 
-	private ZoomInfo createCurrentZoomInfo() {
-		float[] values = getValuesOfMatrix(currentMatrix);
-		return new ZoomInfo(zoomLevel, new PointF(values[Matrix.MTRANS_X] / initialScaleSize, values[Matrix.MTRANS_Y] / initialScaleSize));
+	private void saveCurrentSizes() {
+		if(isImageEmpty()) {
+			return;
+		}
+
+		Drawable drawable = imageView.getDrawable();
+		viewWidth = imageView.getMeasuredWidth();
+		viewHeight = imageView.getMeasuredHeight();
+		imageWidth = drawable.getIntrinsicWidth();
+		imageHeight = drawable.getIntrinsicHeight();
 	}
 
 	private void initializeScaleSize() {
@@ -95,18 +96,6 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		return (viewWidth < imageWidth || viewHeight < imageHeight);
 	}
 
-	private void saveCurrentSizes() {
-		if(isImageEmpty()) {
-			return;
-		}
-
-		Drawable drawable = imageView.getDrawable();
-		viewWidth = imageView.getMeasuredWidth();
-		viewHeight = imageView.getMeasuredHeight();
-		imageWidth = drawable.getIntrinsicWidth();
-		imageHeight = drawable.getIntrinsicHeight();
-	}
-
 	private float computeFitScaleOfImage() {
 		float xRatio = (float)viewWidth / (float)imageWidth;
 		float yRatio = (float)viewHeight / (float)imageHeight;
@@ -116,12 +105,37 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		return Math.min(xRatio, yRatio);
 	}
 
+	private void restoreActualZoomPosition(ZoomInfo zoomInfo) {
+		float oldZoomLevel = zoomInfo.getZoomLevel();
+		float oldTranslateX = zoomInfo.getTranslateX();
+		float oldTranslateY = zoomInfo.getTranslateY();
+
+		float targetLevel = oldZoomLevel;
+		float targetTranslateX = oldTranslateX * initialScaleSize;
+		float targetTranslateY = oldTranslateY * initialScaleSize;
+
+		zoomTo(targetLevel);
+		panTo(targetTranslateX, targetTranslateY);
+	}
+
+	@Override
+	public ZoomInfo save() {
+		return createCurrentZoomInfo();
+	}
+
+	private ZoomInfo createCurrentZoomInfo() {
+		float[] values = getValuesOfMatrix(currentMatrix);
+		return new ZoomInfo(zoomLevel,
+							new PointF(values[Matrix.MTRANS_X] / initialScaleSize,
+									   values[Matrix.MTRANS_Y] / initialScaleSize));
+	}
+
 	public void zoomTo(float targetLevel) {
 		zoomTo(targetLevel, topLeftPoint);
 	}
 
 	public void zoomTo(float targetLevel, PointF zoomPoint) {
-		Assert.notNull(zoomPoint, "The zoom point must not be null.");
+		Assert.notNull(zoomPoint, "The zoom point");
 		zoomTo(targetLevel, zoomPoint.x, zoomPoint.y);
 	}
 
@@ -149,8 +163,10 @@ class ImageViewZoomExtender implements ZoomableComponent {
 
 	private void centerImage(Matrix matrix) {
 		float[] values = getValuesOfMatrix(matrix);
-		float scaledImageWidth = imageWidth * values[Matrix.MSCALE_X], scaledImageHeight = imageHeight * values[Matrix.MSCALE_Y];
+		float scaledImageWidth = imageWidth * values[Matrix.MSCALE_X];
+		float scaledImageHeight = imageHeight * values[Matrix.MSCALE_Y];
 		float translateX = values[Matrix.MTRANS_X], translateY = values[Matrix.MTRANS_Y];
+
 		if (scaledImageWidth < viewWidth) {
 			translateX = (float)viewWidth / 2 - (float)scaledImageWidth / 2;
 		}
@@ -161,7 +177,8 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		values[Matrix.MTRANS_X] = translateX;
 		values[Matrix.MTRANS_Y] = translateY;
 
-		// Use setValues instead of setTranslate() because when setTranslate() is called, rest of values in a matrix is reset too.  
+		// Use setValues instead of setTranslate() because when setTranslate() is called, 
+		// rest of values in a matrix is reset too.
 		matrix.setValues(values);
 	}
 
@@ -170,7 +187,7 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	}
 
 	public void panTo(PointF difference) {
-		Assert.notNull(difference, "The target point must not be null.");
+		Assert.notNull(difference, "The target point");
 		panTo(difference.x, difference.y);
 	}
 
@@ -200,7 +217,8 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	protected void boundArea(Matrix matrix) {
 		float[] values = getValuesOfMatrix(matrix);
 
-		float scaledImageWidth = imageWidth * values[Matrix.MSCALE_X], scaledImageHeight = imageHeight * values[Matrix.MSCALE_Y];
+		float scaledImageWidth = imageWidth * values[Matrix.MSCALE_X];
+		float scaledImageHeight = imageHeight * values[Matrix.MSCALE_Y];
 		float translateX = values[Matrix.MTRANS_X], translateY = values[Matrix.MTRANS_Y];
 
 		// don't let the image go outside
@@ -219,7 +237,8 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		
 		values[Matrix.MTRANS_X] = translateX;
 		values[Matrix.MTRANS_Y] = translateY;
-		// Use setValues instead of setTranslate() because when setTranslate() is called, rest of values in a matrix is reset too.  
+		// Use setValues instead of setTranslate() because when setTranslate() is called, 
+		// rest of values in a matrix is reset too.
 		matrix.setValues(values);
 	}
 
