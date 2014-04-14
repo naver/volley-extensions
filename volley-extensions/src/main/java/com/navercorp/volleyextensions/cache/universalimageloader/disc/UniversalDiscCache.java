@@ -39,6 +39,14 @@ import com.nostra13.universalimageloader.cache.disc.DiscCacheAware;
  * But, don't care about it, because built-in caches in AUIL are all safe to be
  * shared.
  * 
+ * <b>WARNING</b>
+ * Don't use this class, instead you need to use implementations such as 
+ * {@code UniversalUnlimitedDiscCache}, {@code UniversalTotalSizeLimitedDiscCache}, or etc.
+ * Because in the case you use {@code delegate} for UIL, it causes some error while getting a cache file. 
+ * This class wraps a cache in {@code Entry} before putting into a cache file, but UIL just put a cache as a bitmap. 
+ * if UIL loads some url where Volley has already visited, then UIL gets a cache volley put. 
+ * But the cache is not a bitmap, so parsing error occurs finally.
+ * 
  * <b>NOTE</b>
  * Codes may need to be updated when {@code DiskBasedCache} on "master" branch of aosp volley is modified.
  * Currently, the last commit I have seen is 
