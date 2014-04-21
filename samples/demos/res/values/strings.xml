@@ -8,4 +8,6 @@
 	<string name="waiting_for_response">Waiting for a response . . .</string>
 	<string name="amazon_activity_text">Amazon XML-format RSS Feed</string>
 	<string name="github_activity_text">Github JSON-format User API</string>
+    <string name="single_tap_zoom_network_image_view_activity_text">Single Tap Zoom NetworkImageView</string>
+    <string name="double_tap_zoom_network_image_view_activity_text">Double Tap Zoom NetworkImageView</string>	
 </resources>

@@ -20,6 +20,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.navercorp.volleyextensions.sample.demos.R;
 import com.navercorp.volleyextensions.sample.demos.amazon.activity.AmazonActivity;
 import com.navercorp.volleyextensions.sample.demos.github.activity.GithubActivity;
+import com.navercorp.volleyextensions.sample.demos.view.activity.DoubleTapZoomNetworkImageViewActivity;
+import com.navercorp.volleyextensions.sample.demos.view.activity.SingleTapZoomNetworkImageViewActivity;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -40,6 +42,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		Button githubActivityButton = (Button) findViewById(R.id.github_activity_button);
 		Button amazonActivityButton = (Button) findViewById(R.id.amazon_activity_button);
+		Button singleTapZoomNetworkImageViewActivityButton = (Button) findViewById(R.id.single_tap_zoom_network_image_view_activity_button);
+		Button doubleTapZoomNetworkImageViewActivityButton = (Button) findViewById(R.id.double_tap_zoom_network_image_view_activity_button);
 		githubActivityButton.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -51,6 +55,20 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this, AmazonActivity.class);
+				MainActivity.this.startActivity(intent);
+			}});
+		
+		singleTapZoomNetworkImageViewActivityButton.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, SingleTapZoomNetworkImageViewActivity.class);
+				MainActivity.this.startActivity(intent);
+			}});
+		
+		doubleTapZoomNetworkImageViewActivityButton.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, DoubleTapZoomNetworkImageViewActivity.class);
 				MainActivity.this.startActivity(intent);
 			}});
 	}

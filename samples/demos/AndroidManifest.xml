@@ -33,5 +33,9 @@
         </activity>
         <activity android:name="com.navercorp.volleyextensions.sample.demos.amazon.activity.AmazonActivity" >
         </activity>
+        <activity android:name="com.navercorp.volleyextensions.sample.demos.view.activity.SingleTapZoomNetworkImageViewActivity" >
+        </activity>        
+        <activity android:name="com.navercorp.volleyextensions.sample.demos.view.activity.DoubleTapZoomNetworkImageViewActivity" >
+        </activity>
     </application>
 </manifest>
