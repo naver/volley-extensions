@@ -6,15 +6,34 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.GestureDetector.OnGestureListener;
-
+/**
+ * <pre>
+ * A ZoomableNIV which can zoom in/out by double-tapping.
+ *  
+ * The maximum zoom level is 2 on this view. Also it supports pinch zooms.
+ * 
+ * </pre>
+ * @author Wonjun Kim
+ * @author Kangsoo Kim
+ *
+ */
 public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetworkImageView {
+
 	private static final int DEFAULT_ZOOM_IN_LEVEL = 2;
 	private static final float DEFAULT_ZOOM_OUT_LEVEL = 1.0f;
 	private static final float MAXIMUM_LEVEL = 2.0f;
 	private static final boolean EVENT_DONE = true;
+	/**
+	 * The gesture detector for double taps
+	 */
 	private GestureDetector gestureDetector;
+	/**
+	 * The gesture detector for pinch zooms
+	 */
 	private ScaleGestureDetector scaleGestureDetector;
-
+	/**
+	 * The flag is true if the zoom level is {@code DEFAULT_ZOOM_IN_LEVEL}. 
+	 */
 	private boolean alreadyZoomedIn = false;
 
 	public TwoLevelDoubleTapZoomNetworkImageView(Context context) {
@@ -27,6 +46,7 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 
 	public TwoLevelDoubleTapZoomNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		// Assign a scale gesture detector for pinch zooms 
 		scaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureDetector.OnScaleGestureListener() {
 			
 			@Override
@@ -36,9 +56,13 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 			
 			@Override
 			public boolean onScaleBegin(ScaleGestureDetector detector) {
+				// Do nothing
 				return EVENT_DONE;
 			}
-			
+
+			/**
+			 * Scale(zoom by distance of pinch) when a pinch occurs 
+			 */
 			@Override
 			public boolean onScale(ScaleGestureDetector detector) {
 				float zoomX = detector.getFocusX(), zoomY = detector.getFocusY();
@@ -47,16 +71,19 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 				return EVENT_DONE;
 			}
 		});
+		// Assign a gesture detector for double taps
 		gestureDetector = new GestureDetector(context, new OnGestureListener() {
 
 			@Override
 			public boolean onDown(MotionEvent e) {
+				// Do nothing
 				return EVENT_DONE;
 			}
 
 			@Override
 			public boolean onFling(MotionEvent e1, MotionEvent e2,
 					float velocityX, float velocityY) {
+				// Do nothing
 				return EVENT_DONE;
 			}
 
@@ -65,6 +92,9 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 				// Do nothing
 			}
 
+			/**
+			 * Pan when scrolling
+			 */
 			@Override
 			public boolean onScroll(MotionEvent e1, MotionEvent e2,
 					float distanceX, float distanceY) {
@@ -79,22 +109,28 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 
 			@Override
 			public boolean onSingleTapUp(MotionEvent e) {
+				// Do nothing
 				return EVENT_DONE;
 			}
 		});
-
+		// Create a setting for double taps
 		gestureDetector.setOnDoubleTapListener(new GestureDetector.OnDoubleTapListener() {
 			
 			@Override
 			public boolean onSingleTapConfirmed(MotionEvent event) {
+				// Do nothing
 				return EVENT_DONE;
 			}
 			
 			@Override
 			public boolean onDoubleTapEvent(MotionEvent event) {
+				// Do nothing
 				return EVENT_DONE;
 			}
-			
+
+			/**
+			 * Zoom when double-tapping
+			 */
 			@Override
 			public boolean onDoubleTap(MotionEvent event) {
 				float zoomX = event.getX();
@@ -108,7 +144,10 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 
 		});
 	}
-
+	/**
+	 * Switch a zoom level between {@code DEFAULT_ZOOM_IN_LEVEL} and {@code DEFAULT_ZOOM_OUT_LEVEL}.
+	 * @return Target zoom level
+	 */
 	private float computeTargetZoomLevel() {
 		float targetLevel;
 		if (isAlreadyZoomedIn()) {
@@ -126,6 +165,9 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 	protected void onInitialized() {
 	}
 
+	/**
+	 * Binds gesture detectors and route touch events to it
+	 */
 	@Override 
 	public boolean dispatchTouchEvent(MotionEvent event) { 
 		boolean isEventDone = scaleGestureDetector.onTouchEvent(event);
@@ -136,7 +178,9 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 	private boolean isAlreadyZoomedIn() {
 		return alreadyZoomedIn == true;
 	}
-
+	/**
+	 * Switch {@code alreadyZoomedIn} between false and true.
+	 */
 	private void toggleAlreadyZoomedIn() {
 		this.alreadyZoomedIn = !alreadyZoomedIn;
 	}

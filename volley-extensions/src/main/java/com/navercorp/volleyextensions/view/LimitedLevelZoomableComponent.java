@@ -1,7 +1,13 @@
 package com.navercorp.volleyextensions.view;
 
 import com.navercorp.volleyextensions.util.Assert;
-
+/**
+ * <pre>
+ * A Decorator class for limiting zoom levels from ZoomableComponent.
+ * 
+ * You can set a minimum level and maximum level only at the constructor.
+ * </pre>
+ */
 class LimitedLevelZoomableComponent implements ZoomableComponent {
 
 	public static final float ORIGINAL_LEVEL = 1.0f;
@@ -10,7 +16,12 @@ class LimitedLevelZoomableComponent implements ZoomableComponent {
 	private final ZoomableComponent delegate;
 	private float maximumZoomLevel;
 	private float minimumZoomLevel;
-
+	/**
+	 * Create a decorator for {@code delegate}
+	 * @param delegate Delegated ZoomableComponent
+	 * @param minimumZoomLevel Minimum zoom level (must be over {@code ORIGINAL_LEVEL} and under {@code maximumZoomLevel})
+	 * @param maximumZoomLevel Maximum zoom level (must be under {@code INFINITE_LEVEL} and over {@code minimumZoomLevel})
+	 */
 	public LimitedLevelZoomableComponent(ZoomableComponent delegate, float minimumZoomLevel, float maximumZoomLevel) {
 		Assert.notNull(delegate, "The delegated ZoomableComponent");
 		setMinimumZoomLevel(minimumZoomLevel);

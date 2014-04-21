@@ -9,19 +9,48 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 
 import com.android.volley.toolbox.NetworkImageView;
-
+/**
+ * <pre>
+ * A NetworkImageView which can zoom in/out the image.
+ * 
+ * ZoomableNetworkImageView just supports zoom APIs only as methods.
+ * So you have to override this class and bind events to APIs if you want that ZoomableNIV interacts with UI. 
+ * </pre>
+ * 
+ * @author Wonjun Kim
+ *
+ */
 public class ZoomableNetworkImageView extends NetworkImageView implements ZoomableComponent, Scalable {
 	public static final int NONE_DEF_STYLE = 0;
+	/**
+	 * ZoomableComponent enabling ImageView to zoom in/out.
+	 */
 	private ZoomableComponent zoomExtender;
+	/**
+	 * ZoomInfo to be restored or saved.
+	 */
 	private final ZoomInfo savedZoomInfo = new ZoomInfo();
+	/**
+	 * The flag for checking whether an image in this view actually has been changed.
+	 */
 	private boolean imageChanged = false;  
-
+	/**
+	 * <pre>
+	 * {@code SavedState} for restoring or saving a zoom information.
+	 * 
+	 * (I don't like that this heavy class has to be used only for that case.)
+	 * </pre> 
+	 */
 	static class ZoomInfoState extends BaseSavedState {
 		public static final String STATE_KEY = ZoomInfoState.class.getSimpleName();
+		/**
+		 * Embedded ZoomInfo
+		 */
 	    private final ZoomInfo zoomInfo;
 
 	    public ZoomInfoState(Parcelable superState, ZoomInfo zoomInfo) {
 	        super(superState);
+	        // Save a ZoomInfo
 	        this.zoomInfo = zoomInfo;
 	    }
 
@@ -29,7 +58,9 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	        return zoomInfo;
 	    }
 	}
-
+	/**
+	 * Default Constructors
+	 */
 	public ZoomableNetworkImageView(Context context) {
 		this(context, null);
 	}
@@ -40,10 +71,19 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 
 	public ZoomableNetworkImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		// Initialize ZoomExtender
 		setZoomExtender(new ImageViewZoomExtender(this));
 		onInitialized();
 	}
 
+	/**
+	 * <pre>
+	 * Set {@code zoomExtender} which is enabling ImageView to zoom.
+	 * 
+	 * You can override this method and decorate or alter the ZoomableComponent.
+	 * </pre>
+	 * @param zoomableComponent
+	 */
 	protected void setZoomExtender(ZoomableComponent zoomableComponent) {
 		zoomExtender = zoomableComponent;
 	}
@@ -51,6 +91,7 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		super.onLayout(changed, left, top, right, bottom);
+		// Restore a zoom info when an image has been changed.
 		if (isNewImageLoaded()) {
 			restore(savedZoomInfo);
 		}
@@ -58,16 +99,22 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 
 	/**
 	 * <pre>
-	 * Check whether an image is actually changed and loaded
+	 * Check whether an image is actually changed and loaded.
+	 * 
+	 * NOTE : this method causes a side effect because it consumes {@code imageChanged} by setting the flag to false. 
 	 * </pre>
 	 * @return true if an image is actually changed and loaded.
 	 */
 	private boolean isNewImageLoaded() {
 		boolean isChanged = imageChanged && !isImageEmpty();
+		// Set imageChanged to false.
 		imageChanged = false;
 		return isChanged;
 	}
-
+	/**
+	 * Check (very detailedly) whether an image in this view is empty.
+	 * @return true if it is empty
+	 */
 	private boolean isImageEmpty() {
 		Drawable drawable = getDrawable();
 		boolean imageEmpty = true;
@@ -86,7 +133,9 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 
 		return false;
 	}
-
+	/**
+	 * Save a zoom information
+	 */
 	@Override
 	protected Parcelable onSaveInstanceState () {
 		ZoomInfo savedZoomInfo = save();
@@ -95,16 +144,20 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 		bundle.putParcelable(ZoomInfoState.STATE_KEY, savedZoomInfoState);
 		return bundle;
 	}
-
+	/**
+	 * Restore a zoom information
+	 */
 	@Override
 	public void onRestoreInstanceState(Parcelable parcelable) {
+		// If the parcelable is invalid, then it doesn't restore a zoom info.
 		if (!isParceableBundle(parcelable)) {
 			super.onRestoreInstanceState(BaseSavedState.EMPTY_STATE);
 			return;
 		}
-
+		// Restore from the parcelable
 		Bundle bundle = (Bundle) parcelable;
 		ZoomInfoState savedZoomInfoState = (ZoomInfoState) bundle.getParcelable(ZoomInfoState.STATE_KEY);
+		// Get saved ZoomInfo from the SavedState 
 		ZoomInfo savedZoomInfo = savedZoomInfoState.getZoomInfo();
 		// It saves the zoom info, and do not restore immediately when onRestoreInstanceState() is called. Restoring will be called later.
 		setSavedZoomInfo(savedZoomInfo);
@@ -130,11 +183,18 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 		updateImageChanged(bitmap);
 		super.setImageBitmap(bitmap);
 	}
-
+	/**
+	 * Turn on imageChanged flag if an image is changed to new.
+	 * @param bitmap
+	 */
 	private void updateImageChanged(Bitmap bitmap) {
 		imageChanged = checkImageChanged(bitmap);
 	}
-
+	/**
+	 * Check whether {@code bitmap} is new and different from currently contained bitmap.
+	 * @param bitmap
+	 * @return true if {@code bitmap} is new.
+	 */
 	private boolean checkImageChanged(Bitmap bitmap) {
 		Drawable drawable = getDrawable();
 		boolean imageChanged = true;

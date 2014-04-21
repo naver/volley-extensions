@@ -7,7 +7,26 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
 import com.navercorp.volleyextensions.util.Assert;
-
+/**
+ * <pre>
+ * A decorator(extender) for enabling {@code ImageView} to zoom in/out. 
+ * 
+ * This class is a basic {@code ZoomableComponent} as a decorator for ImageView. 
+ * 
+ * If you want to extend features of zoom on this class, 
+ * I recommend you to create an another extender for {@code ZoomableComponent} instead of overriding it.
+ * 
+ * NOTE : Some codes about matrix calculations are extracted from pieces on internet.
+ * I don't know where the origin of the codes is. Please someone let me know the origin.   
+ * </pre>
+ * 
+ * @author Wonjun Kim
+ * @author Kangsoo Kim
+ *
+ * @see ZoomableComponent
+ * @see ZoomableNetworkImageView
+ * 
+ */
 class ImageViewZoomExtender implements ZoomableComponent {
 	public static final int DEFAULT_MATRIX_SIZE = 3 * 3;
 	public static final int NONE_DEF_STYLE = 0;
@@ -37,12 +56,16 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	private void setScaleTypeMatrix() {
 		imageView.setScaleType(ScaleType.MATRIX);
 	}
-
+	/**
+	 * Return a current zoom level
+	 */
 	@Override
 	public float getZoomLevel() {
 		return zoomLevel;
 	}
-
+	/**
+	 * Restore a zoom info from the {@code zoomInfo} parameter
+	 */
 	@Override
 	public void restore(ZoomInfo zoomInfo) {
 		if (isImageEmpty()) {
@@ -69,7 +92,9 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	private void resetImageMatrix() {
 		currentMatrix.reset();
 	}
-
+	/**
+	 * Get sizes of an image and {@code ImageView} 
+	 */
 	private void saveCurrentSizes() {
 		if(isImageEmpty()) {
 			return;
@@ -81,7 +106,9 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		imageWidth = drawable.getIntrinsicWidth();
 		imageHeight = drawable.getIntrinsicHeight();
 	}
-
+	/**
+	 * Set a scale size of when zoom level is {@code ORIGINAL_SIZE} 
+	 */
 	private void initializeScaleSize() {
 		if (isImageSizeLargerThanView()) {
 			initialScaleSize = computeFitScaleOfImage();
@@ -104,7 +131,10 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		// Math.max fits the image to the longer axis. (with the other axis cropped)
 		return Math.min(xRatio, yRatio);
 	}
-
+	/**
+	 * Update a zoom level and a translate point from the {@code zoomInfo} parameter 
+	 * @param zoomInfo
+	 */
 	private void restoreActualZoomPosition(ZoomInfo zoomInfo) {
 		float oldZoomLevel = zoomInfo.getZoomLevel();
 		float oldTranslateX = zoomInfo.getTranslateX();
@@ -160,7 +190,10 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		float newScale = targetLevel / zoomLevel;
 		matrix.postScale(newScale, newScale, zoomX, zoomY);
 	}
-
+	/**
+	 * Let an image always be on center of view
+	 * @param matrix
+	 */
 	private void centerImage(Matrix matrix) {
 		float[] values = getValuesOfMatrix(matrix);
 		float scaledImageWidth = imageWidth * values[Matrix.MSCALE_X];
@@ -206,14 +239,22 @@ class ImageViewZoomExtender implements ZoomableComponent {
 	private void setImageMatrix(Matrix matrix) {
 		imageView.setImageMatrix(matrix);
 	}
-
+	/**
+	 * Move a position by difference of {@code dx} and {@code dy}
+	 * @param matrix
+	 * @param dx
+	 * @param dy
+	 */
 	private void translatePosition(Matrix matrix, float dx, float dy) {
 		float[] values = getValuesOfMatrix(matrix);
 		values[Matrix.MTRANS_X] += dx;
 		values[Matrix.MTRANS_Y] += dy;
 		matrix.setValues(values);
 	}
-
+	/**
+	 * Don't let an image go outside
+	 * @param matrix
+	 */
 	protected void boundArea(Matrix matrix) {
 		float[] values = getValuesOfMatrix(matrix);
 
