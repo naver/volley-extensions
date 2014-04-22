@@ -35,6 +35,10 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	 */
 	private boolean imageChanged = false;  
 	/**
+	 * A listener for receiving that an image is changed.
+	 */
+	private OnImageChangedListener onImageChangedListener = null;
+	/**
 	 * <pre>
 	 * {@code SavedState} for restoring or saving a zoom information.
 	 * 
@@ -182,7 +186,21 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	public void setImageBitmap(Bitmap bitmap) {
 		updateImageChanged(bitmap);
 		super.setImageBitmap(bitmap);
+		callListenerIfImageChanged();
 	}
+
+	private void callListenerIfImageChanged() {
+		// Call a listener only when image is actually changed and listener exists 
+		if (imageChanged == true && onImageChangedListener != null) {
+			// Don't call a listener immediately, because needed ui processes may remains before listener is called.
+			post(new Runnable(){
+				@Override
+				public void run() {
+					onImageChangedListener.onImageChanged(ZoomableNetworkImageView.this);
+				}});
+		}
+	}
+
 	/**
 	 * Turn on imageChanged flag if an image is changed to new.
 	 * @param bitmap
@@ -209,6 +227,17 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 			imageChanged = false;
 		}
 		return imageChanged;
+	}
+
+	/**
+	 * Assign OnImageChangedListener to receive an event of which an image is changed.
+	 */
+	public void setOnImageChangedListener(OnImageChangedListener listener) {
+		this.onImageChangedListener = listener;
+	}
+
+	public void removeOnImageChangedListener() {
+		this.onImageChangedListener = null;
 	}
 
 	@Override
@@ -250,5 +279,11 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	@Override
 	public float getZoomLevel() {
 		return zoomExtender.getZoomLevel();
+	}
+	/**
+	 * Interface that is called when an image in {@code ZoomableImageView} is changed.
+	 */
+	public interface OnImageChangedListener {
+		public void onImageChanged(ZoomableNetworkImageView zoomableImageView);
 	}
 }
