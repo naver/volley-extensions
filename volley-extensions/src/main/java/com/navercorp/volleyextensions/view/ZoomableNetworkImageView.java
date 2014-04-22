@@ -181,7 +181,14 @@ public class ZoomableNetworkImageView extends NetworkImageView implements Zoomab
 	 */
 	protected void onInitialized() {
 	}
-
+	/**
+	 * <pre>
+	 * <b>WARNING!</b>
+	 * Don't call this method directly. 
+	 * This method doesn't work normally because {@link NetworkImageView} was made with some bugs. 
+	 * Instead you better call {@link #setImageUrl(String, com.android.volley.toolbox.ImageLoader)}.
+	 * </pre>
+	 */
 	@Override
 	public void setImageBitmap(Bitmap bitmap) {
 		updateImageChanged(bitmap);
