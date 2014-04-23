@@ -2,7 +2,7 @@
 
 This library provides assistance in developing Android applications using [Volley](https://android.googlesource.com/platform/frameworks/volley/).
 
-It provides useful classes such as various requests, disk caches, and memory caches.
+It provides useful classes such as various requests, disk caches, memory caches, and custom views.
 
 # Features and usage
 ## Request classes supporting JSON type of the response
@@ -103,6 +103,8 @@ You can use the cache as below,
 - An adapter class of [WeakMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/WeakMemoryCache.java)
 
 _(NOTE : All of these descriptions of caches are extracted from README.md of Android Universal ImageLoader.))_
+
+## Custom Views
 
 # Install
 
