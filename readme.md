@@ -106,6 +106,40 @@ _(NOTE : All of these descriptions of caches are extracted from README.md of And
 
 ## Custom Views
 
+### Zoomable NetworkImageViews
+Zoomable NetworkImageView is a sub type of NetworkImageView and is available to zoom-in/out an image.
+
+You can use the view as below, 
+
+1. Choose one of types of ZoomableNetworkImageView and add it into layout xml.
+``` xml
+<com.navercorp.volleyextensions.view.TwoLevelDoubleTapZoomNetworkImageView
+	    android:id="@+id/zoom_networkimageview"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    />
+```
+
+2. (In Activity,) Call setImageUrl of NetworkImageView.
+``` java
+zoomableImageView = (ZoomableNetworkImageView) findViewById(R.id.zoom_networkimageview);
+zoomableImageView.setImageUrl(imageUrl, 
+							  imageLoader /* Volley's image loader in here */);
+```
+
+There are two sub types of ZoomableNetworkImageView as you can see below. 
+
+These types have each own UI interactions.
+
+#### [TwoLevelDoubleTapZoomNetworkImageView](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/view/TwoLevelDoubleTapZoomNetworkImageView.java)
+- Zoom-in/out by double tapping or pinch gesture.
+- The maximum level that users can zoom to is 2.
+
+#### [MultiLevelSingleTapZoomNetworkImageView](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/view/MultiLevelSingleTapZoomNetworkImageView.java)
+- Zoom-in by single tapping or pinch-out gesture.
+- Zoom-out by double tapping or pinch-in gesture.
+- The maximum level that users can zoom to is 6.
+
 # Install
 
 ### How to setup for maven or gradle users
