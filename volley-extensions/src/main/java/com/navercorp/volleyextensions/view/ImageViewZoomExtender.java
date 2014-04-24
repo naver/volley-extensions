@@ -74,6 +74,7 @@ class ImageViewZoomExtender implements ZoomableComponent {
 
 		zoomInfo = createZoomInfoIfNull(zoomInfo);
 
+		resetZoomLevel();
 		resetImageMatrix();
 		saveCurrentSizes();
 
@@ -89,8 +90,14 @@ class ImageViewZoomExtender implements ZoomableComponent {
 		return zoomInfo;
 	}
 
+	private void resetZoomLevel() {
+		updateZoomLevel(ORIGINAL_LEVEL);
+	}
+
 	private void resetImageMatrix() {
 		currentMatrix.reset();
+		// Reset imageView's matrix too
+		imageView.setImageMatrix(currentMatrix);
 	}
 	/**
 	 * Get sizes of an image and {@code ImageView} 
