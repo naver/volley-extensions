@@ -19,8 +19,6 @@ import android.view.GestureDetector.OnGestureListener;
  */
 public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetworkImageView {
 
-	private static final int DEFAULT_ZOOM_IN_LEVEL = 2;
-	private static final float DEFAULT_ZOOM_OUT_LEVEL = 1.0f;
 	private static final float MAXIMUM_LEVEL = 2.0f;
 	private static final boolean EVENT_DONE = true;
 	/**
@@ -31,10 +29,6 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 	 * The gesture detector for pinch zooms
 	 */
 	private ScaleGestureDetector scaleGestureDetector;
-	/**
-	 * The flag is true if the zoom level is {@code DEFAULT_ZOOM_IN_LEVEL}. 
-	 */
-	private boolean alreadyZoomedIn = false;
 
 	public TwoLevelDoubleTapZoomNetworkImageView(Context context) {
 		this(context, null);
@@ -145,19 +139,12 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 		});
 	}
 	/**
-	 * Switch a zoom level between {@code DEFAULT_ZOOM_IN_LEVEL} and {@code DEFAULT_ZOOM_OUT_LEVEL}.
+	 * Switch a zoom level between 1 and 2.
 	 * @return Target zoom level
 	 */
 	private float computeTargetZoomLevel() {
-		float targetLevel;
-		if (isAlreadyZoomedIn()) {
-			targetLevel = DEFAULT_ZOOM_OUT_LEVEL;
-			
-		} else {
-			targetLevel = DEFAULT_ZOOM_IN_LEVEL;
-		}
-
-		toggleAlreadyZoomedIn();
+		// Toggle the zoom level between 1 and 2.
+		float targetLevel = Math.round(getZoomLevel()) % 2 + 1;
 		return targetLevel;
 	}
 
@@ -173,16 +160,6 @@ public class TwoLevelDoubleTapZoomNetworkImageView extends LimitedLevelZoomNetwo
 		boolean isEventDone = scaleGestureDetector.onTouchEvent(event);
 	    isEventDone = gestureDetector.onTouchEvent(event) || isEventDone;
 	    return isEventDone || super.onTouchEvent(event);
-	}
-
-	private boolean isAlreadyZoomedIn() {
-		return alreadyZoomedIn == true;
-	}
-	/**
-	 * Switch {@code alreadyZoomedIn} between false and true.
-	 */
-	private void toggleAlreadyZoomedIn() {
-		this.alreadyZoomedIn = !alreadyZoomedIn;
 	}
 
 	@Override
