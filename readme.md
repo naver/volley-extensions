@@ -253,7 +253,7 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 
 # Sample Application
 Sample application is being provided as APK file (the source is in the repository):
- * [Download Here!](http://github.com/nhnopensource/volley-extensions/wiki/downloads/1.0.0/sample-demos-1.0.0.apk)
+ * [Download Here!](http://github.com/nhnopensource/volley-extensions/wiki/downloads/1.1.0/sample-demos-1.1.0.apk)
 
 # Volley mirror dependency
 This library depends on [Volley mirror project](https://github.com/mcxiaoke/android-volley). The mirror project keeps an up-to-date version of [Volley](https://android.googlesource.com/platform/frameworks/volley/) and automatically uploads to Maven Central. 
