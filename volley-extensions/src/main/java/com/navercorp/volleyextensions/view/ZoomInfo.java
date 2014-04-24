@@ -44,9 +44,27 @@ class ZoomInfo {
 	 */
 	private void setInfo(float zoomLevel, PointF translatePoint) {
 		this.zoomLevel = zoomLevel;
+		setTranslatePoint(translatePoint);
+	}
+
+	private void setTranslatePoint(PointF translatePoint) {
+		if (isPointInvalid(translatePoint)) {
+			// set to default point
+			translatePoint = createDefaultTranslatePoint();
+		}
 		this.translateX = translatePoint.x;
 		this.translateY = translatePoint.y;
 	}
+
+	/**
+	 * Check whether translate point contains NaN
+	 * @param translatePoint
+	 * @return true if the point contains NaN
+	 */
+	private boolean isPointInvalid(PointF translatePoint) {
+		return Float.isNaN(translatePoint.x) || Float.isNaN(translatePoint.y);
+	}
+
 	/**
 	 * Copy all of ZoomInfo into this object.
 	 *  
