@@ -38,6 +38,7 @@
 	</developers>
 	<modules>
 		<module>volley-extensions</module>
+		<module>volleyer</module>
 		<module>samples</module>
 	</modules>
 	<properties>
