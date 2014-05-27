@@ -1,5 +1,6 @@
 package com.navercorp.volleyextensions.volleyer.http;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +37,10 @@ public class HttpContent {
 
 	public String getHeader(String key) {
 		return headers.get(key);
+	}
+
+	public Map<String, String> getHeaders() {
+		return Collections.unmodifiableMap(headers);
 	}
 
 	public void setBody(byte[] body) {

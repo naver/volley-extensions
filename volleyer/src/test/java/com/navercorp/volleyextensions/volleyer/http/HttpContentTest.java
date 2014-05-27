@@ -2,6 +2,8 @@ package com.navercorp.volleyextensions.volleyer.http;
 
 import static org.junit.Assert.*;
 
+import java.util.Map;
+
 import org.junit.Test;
 
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
@@ -111,4 +113,18 @@ public class HttpContentTest {
 		// Then
 		assertTrue(url.equals(newUrl));
 	}	
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void getHeadersMethodReturnUnModifiableMap() {
+		// Given
+		String url = "test";
+		HttpMethod method = HttpMethod.GET;
+		HttpContent httpContent = new HttpContent(url, method);
+
+		// When
+		httpContent.addHeader("name", "John Doe");
+		Map<String, String> headers = httpContent.getHeaders();
+		// Then
+		headers.put("hello", "world");
+	}
 }
