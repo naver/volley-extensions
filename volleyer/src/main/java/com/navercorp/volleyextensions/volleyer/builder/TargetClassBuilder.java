@@ -22,13 +22,17 @@ class TargetClassBuilder {
 	public <T> ResponseBuilder<T> setTargetClass(Class<T> clazz) {
 		Assert.notNull(clazz, "Target Class token");
 
-		if (isDoneToBuild == true) {
-			throw new IllegalStateException("RequestBuilder should not be used any more. Because setTargetClass() has been called.");
-		}
+		assertFinishState();
 
 		ResponseBuilder<T> builder = new ResponseBuilder<T>(volleyerContext, httpContent, clazz);
 		isDoneToBuild = true;
 		return builder;
+	}
+
+	private void assertFinishState() {
+		if (isDoneToBuild == true) {
+			throw new IllegalStateException("RequestBuilder should not be used any more. Because setTargetClass() has been called.");
+		}
 	}
 
 }

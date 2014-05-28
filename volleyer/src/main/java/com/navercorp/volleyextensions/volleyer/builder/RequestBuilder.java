@@ -19,12 +19,16 @@ public class RequestBuilder {
 	}
 
 	public RequestBuilder addHeader(String key, String value) {
-		if (isDoneToBuild == true) {
-			throw new IllegalStateException("RequestBuilder should not be used any more. Because afterRequest() has been called.");
-		}
+		assertFinishState();
 
 		httpContent.addHeader(key, value);
 		return this;
+	}
+
+	private void assertFinishState() {
+		if (isDoneToBuild == true) {
+			throw new IllegalStateException("RequestBuilder should not be used any more. Because afterRequest() has been called.");
+		}
 	}
 
 	public TargetClassBuilder afterRequest() {

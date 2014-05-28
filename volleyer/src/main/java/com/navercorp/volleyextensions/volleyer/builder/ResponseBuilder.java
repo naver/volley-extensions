@@ -35,26 +35,26 @@ class ResponseBuilder<T> {
 	}
 	
 	public ResponseBuilder<T> setListener(Listener<T> listener) {
-		if (isDoneToBuild == true) {
-			throw new IllegalStateException("ResponseBuilder should not be used any more. Because afterRequest() has been called.");
-		}
+		assertFinishState();
 		this.listener = listener;
 		return this;
 	}
 
 	public ResponseBuilder<T> setErrorListener(ErrorListener errorListener) {
-		if (isDoneToBuild == true) {
-			throw new IllegalStateException("ResponseBuilder should not be used any more. Because execute() has been called.");
-		}
+		assertFinishState();
 		this.errorListener = errorListener;
 		return this;
 	}
 
-	public ResponseBuilder<T> setResponseParser(NetworkResponseParser responseParser) {
-		Assert.notNull(responseParser, "Response Parser");
+	private void assertFinishState() {
 		if (isDoneToBuild == true) {
 			throw new IllegalStateException("ResponseBuilder should not be used any more. Because execute() has been called.");
 		}
+	}
+
+	public ResponseBuilder<T> setResponseParser(NetworkResponseParser responseParser) {
+		Assert.notNull(responseParser, "Response Parser");
+		assertFinishState();
 		this.responseParser = responseParser;
 		return this;
 	}
