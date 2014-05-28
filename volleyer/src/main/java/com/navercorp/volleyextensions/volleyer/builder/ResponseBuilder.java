@@ -8,6 +8,7 @@ import com.navercorp.volleyextensions.volleyer.VolleyerContext;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.request.creator.DefaultRequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.creator.RequestCreator;
+import com.navercorp.volleyextensions.volleyer.request.executor.RequestExecutor;
 import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.response.parser.StringNetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
@@ -60,11 +61,17 @@ class ResponseBuilder<T> {
 
 	public Request<T> execute() {
 		Request<T> request = buildRequest();
+		executeRequest(request);
 		return request;
 	}
 
 	private Request<T> buildRequest() {
 		RequestCreator requestCreator = volleyerContext.getRequestCreator();
 		return requestCreator.createRequest(httpContent, clazz, responseParser, listener, errorListener);
+	}
+
+	private void executeRequest(Request<T> request) {
+		RequestExecutor executor = volleyerContext.getRequestExecutor();
+		executor.executeRequest(request);
 	}
 }
