@@ -64,6 +64,7 @@ class ResponseBuilder<T> {
 		setDefaultErrorListenerIfNull();
 		setDefaultResponseParserIfNull();
 
+		isDoneToBuild = true;
 		Request<T> request = buildRequest();
 		executeRequest(request);
 		return request;
