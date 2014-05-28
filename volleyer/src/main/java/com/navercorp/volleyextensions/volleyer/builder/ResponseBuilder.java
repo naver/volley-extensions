@@ -1,13 +1,15 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.navercorp.volleyextensions.volleyer.ResponseParser;
+import com.android.volley.VolleyError;
 import com.navercorp.volleyextensions.volleyer.VolleyerContext;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
+import com.navercorp.volleyextensions.volleyer.request.creator.DefaultRequestCreator;
+import com.navercorp.volleyextensions.volleyer.request.creator.RequestCreator;
+import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
+import com.navercorp.volleyextensions.volleyer.response.parser.StringNetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
 class ResponseBuilder<T> {
@@ -17,7 +19,7 @@ class ResponseBuilder<T> {
 	private Class<T> clazz;
 	private Listener<T> listener;
 	private ErrorListener errorListener;
-	private ResponseParser responseParser;
+	private NetworkResponseParser responseParser;
 
 	private boolean isDoneToBuild = false;
 
@@ -47,7 +49,7 @@ class ResponseBuilder<T> {
 		return this;
 	}
 
-	public ResponseBuilder<T> setResponseParser(ResponseParser responseParser) {
+	public ResponseBuilder<T> setResponseParser(NetworkResponseParser responseParser) {
 		Assert.notNull(responseParser, "Response Parser");
 		if (isDoneToBuild == true) {
 			throw new IllegalStateException("ResponseBuilder should not be used any more. Because execute() has been called.");
@@ -57,26 +59,12 @@ class ResponseBuilder<T> {
 	}
 
 	public Request<T> execute() {
-		if (isDoneToBuild == true) {
-			throw new IllegalStateException("ResponseBuilder should not be used any more. Because execute() has been called.");
-		}
-		isDoneToBuild = true;
-		// TODO : This dummy method should be removed and an actual request should be returned. 
-		return createDummyRequest();
+		Request<T> request = buildRequest();
+		return request;
 	}
 
-	private Request<T> createDummyRequest() {
-		return new Request<T>(0, null, errorListener){
-
-			@Override
-			protected Response<T> parseNetworkResponse(NetworkResponse response) {
-				return null;
-			}
-
-			@Override
-			protected void deliverResponse(T response) {
-				// TODO Auto-generated method stub
-				
-			}};
+	private Request<T> buildRequest() {
+		RequestCreator requestCreator = volleyerContext.getRequestCreator();
+		return requestCreator.createRequest(httpContent, clazz, responseParser, listener, errorListener);
 	}
 }
