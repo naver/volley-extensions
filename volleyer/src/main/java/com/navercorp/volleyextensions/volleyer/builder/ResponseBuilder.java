@@ -60,9 +60,52 @@ class ResponseBuilder<T> {
 	}
 
 	public Request<T> execute() {
+		setDefaultListenerIfNull();
+		setDefaultErrorListenerIfNull();
+		setDefaultResponseParserIfNull();
+
 		Request<T> request = buildRequest();
 		executeRequest(request);
 		return request;
+	}
+
+	private void setDefaultListenerIfNull() {
+		if (listener != null) {
+			return;
+		}
+		listener = createEmptyListener();
+	}
+
+	private Listener<T> createEmptyListener() {
+		return new Listener<T>() {
+
+			@Override
+			public void onResponse(Object response) {
+			}
+		};
+	}
+
+	private void setDefaultErrorListenerIfNull() {
+		if (errorListener != null) {
+			return;
+		}
+		errorListener = createEmptyErrorListener();
+	}
+
+	private ErrorListener createEmptyErrorListener() {
+		return new ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+			}
+		};
+	}
+
+	private void setDefaultResponseParserIfNull() {
+		if (responseParser != null) {
+			return;
+		}
+		// TODO : This code is temporarily written. This should be changed.
+		responseParser = new StringNetworkResponseParser();
 	}
 
 	private Request<T> buildRequest() {
