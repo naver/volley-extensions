@@ -13,9 +13,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.navercorp.volleyextensions.volleyer.http.ContentType;
+import com.navercorp.volleyextensions.volleyer.http.ContentTypes;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
-public class Jackson2NetworkResponseParser implements NetworkResponseParser {
+public class Jackson2NetworkResponseParser implements TypedNetworkResponseParser {
 	/** Default {@link ObjectMapper} is singleton. */
 	private static class ObjectMapperHolder {
 		private final static ObjectMapper objectMapper;
@@ -69,6 +71,10 @@ public class Jackson2NetworkResponseParser implements NetworkResponseParser {
 		} catch (Exception e) {
 			return Response.error(new VolleyError(e));
 		} 
+	}
+	@Override
+	public ContentTypes getContentTypes() {
+		return new ContentTypes(ContentType.CONTENT_TYPE_APPLICATION_JSON, ContentType.CONTENT_TYPE_TEXT_JSON);
 	}
 
 }

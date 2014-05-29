@@ -14,9 +14,11 @@ import com.android.volley.ParseError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.navercorp.volleyextensions.volleyer.http.ContentType;
+import com.navercorp.volleyextensions.volleyer.http.ContentTypes;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
-public class JacksonNetworkResponseParser implements NetworkResponseParser {
+public class JacksonNetworkResponseParser implements TypedNetworkResponseParser {
 	/** Default {@link ObjectMapper} is singleton. */
 	private static class ObjectMapperHolder {
 		private static final ObjectMapper objectMapper;
@@ -67,5 +69,10 @@ public class JacksonNetworkResponseParser implements NetworkResponseParser {
 		} catch (Exception e) {
 			return Response.error(new VolleyError(e));
 		}
+	}
+
+	@Override
+	public ContentTypes getContentTypes() {
+		return new ContentTypes(ContentType.CONTENT_TYPE_APPLICATION_JSON, ContentType.CONTENT_TYPE_TEXT_JSON);
 	}
 }

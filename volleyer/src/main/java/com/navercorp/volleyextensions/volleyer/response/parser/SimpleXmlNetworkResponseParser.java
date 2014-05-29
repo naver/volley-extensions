@@ -14,10 +14,12 @@ import com.android.volley.ParseError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.navercorp.volleyextensions.volleyer.http.ContentType;
+import com.navercorp.volleyextensions.volleyer.http.ContentTypes;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 import com.navercorp.volleyextensions.volleyer.util.IoUtils;
 
-public class SimpleXmlNetworkResponseParser implements NetworkResponseParser {
+public class SimpleXmlNetworkResponseParser implements TypedNetworkResponseParser {
 	/** Default {@link Persister} is singleton */
 	private static class PersisterHolder {
 		private static final Persister persister = new Persister();
@@ -59,5 +61,10 @@ public class SimpleXmlNetworkResponseParser implements NetworkResponseParser {
 		} finally {
 			IoUtils.closeQuietly(reader);
 		}		
+	}
+
+	@Override
+	public ContentTypes getContentTypes() {
+		return new ContentTypes(ContentType.CONTENT_TYPE_APPLICATION_XML, ContentType.CONTENT_TYPE_TEXT_XML);
 	}
 }
