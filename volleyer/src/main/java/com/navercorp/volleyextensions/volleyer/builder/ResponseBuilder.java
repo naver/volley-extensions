@@ -104,8 +104,8 @@ class ResponseBuilder<T> {
 		if (responseParser != null) {
 			return;
 		}
-		// TODO : This code is temporarily written. This should be changed.
-		responseParser = new StringNetworkResponseParser();
+
+		responseParser = volleyerContext.getDefaultNetworkResponseParser();
 	}
 
 	private Request<T> buildRequest() {
