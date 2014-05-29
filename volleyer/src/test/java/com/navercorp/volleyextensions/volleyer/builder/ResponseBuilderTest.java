@@ -20,7 +20,7 @@ public class ResponseBuilderTest {
 	@Test(expected=NullPointerException.class)
 	public void responseBuilderConstructorShouldThrowNpeWhenVolleyerContextIsNull() {
 		// Given
-		String url = "test";
+		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerContext nullVolleyerContext = null;
@@ -42,7 +42,7 @@ public class ResponseBuilderTest {
 	@Test(expected=NullPointerException.class)
 	public void responseBuilderConstructorShouldThrowNpeWhenTargetClasstIsNull() {
 		// Given
-		String url = "test";
+		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerContext volleyerContext = new VolleyerContext();
@@ -54,7 +54,7 @@ public class ResponseBuilderTest {
 	@Test
 	public void setListenerMethodShouldReturnSameInstanceOfBuilder() {
 		// Given
-		String url = "test";
+		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerContext volleyerContext = new VolleyerContext();
@@ -73,7 +73,7 @@ public class ResponseBuilderTest {
 	@Test
 	public void setErrorListenerMethodShouldReturnSameInstanceOfBuilder() {
 		// Given
-		String url = "test";
+		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerContext volleyerContext = new VolleyerContext();
@@ -92,7 +92,7 @@ public class ResponseBuilderTest {
 	@Test(expected = IllegalStateException.class)
 	public void setListenerMethodShouldThrowIllegalStateExceptionWhenExecuteMethodIsAlreadyCalled() {
 		// Given
-		String url = "test";
+		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerContext volleyerContext = new VolleyerContext();
@@ -111,7 +111,7 @@ public class ResponseBuilderTest {
 	@Test(expected = IllegalStateException.class)
 	public void setErrorListenerMethodShouldThrowIllegalStateExceptionWhenExecuteMethodIsAlreadyCalled() {
 		// Given
-		String url = "test";
+		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerContext volleyerContext = new VolleyerContext();
@@ -130,7 +130,7 @@ public class ResponseBuilderTest {
 	@Test(expected = IllegalStateException.class)
 	public void executeMethodShouldThrowIllegalStateExceptionWhenExecuteMethodIsAlreadyCalled() {
 		// Given
-		String url = "test";
+		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerContext volleyerContext = new VolleyerContext();

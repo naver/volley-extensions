@@ -23,7 +23,7 @@ public class BuilderIntegrationTest {
 	public void builderChainShouldMakeRequestInstanceFinally() {
 		// Given
 		VolleyerContext volleyerContext = new VolleyerContext();
-		String url = "test";
+		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url,
 				method);
