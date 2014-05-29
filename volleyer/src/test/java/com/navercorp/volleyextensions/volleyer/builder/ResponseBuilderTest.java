@@ -127,18 +127,4 @@ public class ResponseBuilderTest {
 		builder.setErrorListener(errorListener);
 	}
 
-	@Test(expected = IllegalStateException.class)
-	public void executeMethodShouldThrowIllegalStateExceptionWhenExecuteMethodIsAlreadyCalled() {
-		// Given
-		String url = "http://test";
-		HttpMethod method = HttpMethod.GET;
-		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = new VolleyerContext();
-		Class<String> clazz = String.class;
-		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
-		// When
-		builder.execute();
-		// Then
-		builder.execute();
-	}
 }
