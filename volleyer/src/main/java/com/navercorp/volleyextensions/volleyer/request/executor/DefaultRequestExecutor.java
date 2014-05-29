@@ -12,6 +12,10 @@ public class DefaultRequestExecutor implements RequestExecutor {
 			return;
 		}
 		RequestQueue requestQueue = Volleyer.getRequestQueue();
+		if (requestQueue == null) {
+			// TODO: Warn that the execution is failed.
+			return;
+		}
 		requestQueue.add(request);
 	}
 
