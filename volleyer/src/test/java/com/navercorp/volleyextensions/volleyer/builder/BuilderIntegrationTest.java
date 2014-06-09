@@ -1,6 +1,7 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
 import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,20 +10,23 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowLog;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.navercorp.volleyextensions.volleyer.DefaultVolleyerContextFactory;
 import com.navercorp.volleyextensions.volleyer.VolleyerContext;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
 public class BuilderIntegrationTest {
+	RequestQueue requestQueue = mock(RequestQueue.class);
 
 	@Test
 	public void builderChainShouldMakeRequestInstanceFinally() {
 		// Given
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url,

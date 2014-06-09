@@ -1,6 +1,7 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +10,9 @@ import org.robolectric.annotation.Config;
 
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
+import com.navercorp.volleyextensions.volleyer.DefaultVolleyerContextFactory;
 import com.navercorp.volleyextensions.volleyer.VolleyerContext;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
@@ -17,6 +20,8 @@ import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
 public class ResponseBuilderTest {
+	RequestQueue requestQueue = mock(RequestQueue.class);
+
 	@Test(expected=NullPointerException.class)
 	public void responseBuilderConstructorShouldThrowNpeWhenVolleyerContextIsNull() {
 		// Given
@@ -33,7 +38,7 @@ public class ResponseBuilderTest {
 	public void responseBuilderConstructorShouldThrowNpeWhenHttpContentIsNull() {
 		// Given
 		HttpContent nullHttpContent = null;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		Class<String> clazz = String.class;
 		// When & Then
 		new ResponseBuilder<String>(volleyerContext, nullHttpContent, clazz);
@@ -45,7 +50,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		Class<String> nullClazz = null;
 		// When & Then
 		new ResponseBuilder<String>(volleyerContext, httpContent, nullClazz);
@@ -57,7 +62,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		Class<String> clazz = String.class;
 		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
 		Listener<String> listener = new Listener<String>(){
@@ -76,7 +81,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		Class<String> clazz = String.class;
 		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
 		ErrorListener errorListener = new ErrorListener (){
@@ -95,7 +100,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		Class<String> clazz = String.class;
 		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
 		Listener<String> listener = new Listener<String>(){
@@ -114,7 +119,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		Class<String> clazz = String.class;
 		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
 		ErrorListener errorListener = new ErrorListener (){

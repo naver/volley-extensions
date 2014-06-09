@@ -1,13 +1,17 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
 
+import com.android.volley.RequestQueue;
+import com.navercorp.volleyextensions.volleyer.DefaultVolleyerContextFactory;
 import com.navercorp.volleyextensions.volleyer.VolleyerContext;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
 public class RequestBuilderTest {
+	RequestQueue requestQueue = mock(RequestQueue.class);
 
 	@Test(expected=NullPointerException.class)
 	public void requestBuilderConstructorShouldThrowNpeWhenVolleyerContextIsNull() {
@@ -25,7 +29,7 @@ public class RequestBuilderTest {
 		// Given
 		String nullUrl = null;
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		
 		// When & Then
 		new RequestBuilder(volleyerContext, nullUrl, method);
@@ -36,7 +40,7 @@ public class RequestBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod nullMethod = null;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		
 		// When & Then
 		new RequestBuilder(volleyerContext, url, nullMethod);
@@ -50,7 +54,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
 		
 		// When & Then
@@ -65,7 +69,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
 		
 		// When & Then
@@ -80,7 +84,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
 		
 		// When
@@ -94,7 +98,7 @@ public class RequestBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
 		
 		// When
@@ -111,7 +115,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
 		
 		// When & Then

@@ -1,14 +1,18 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
 
+import com.android.volley.RequestQueue;
+import com.navercorp.volleyextensions.volleyer.DefaultVolleyerContextFactory;
 import com.navercorp.volleyextensions.volleyer.VolleyerContext;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
 public class TargetClassBuilderTest {
+	RequestQueue requestQueue = mock(RequestQueue.class);
 
 	@Test(expected = NullPointerException.class)
 	public void targetClassBuilderConstructorShouldThrowNpeWhenVolleyerContextIsNull() {
@@ -35,7 +39,7 @@ public class TargetClassBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		HttpContent httpContent = new HttpContent(url, method);
 		TargetClassBuilder builder = new TargetClassBuilder(volleyerContext, httpContent);
 		Class<?> clazz = null;
@@ -48,7 +52,7 @@ public class TargetClassBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		HttpContent httpContent = new HttpContent(url, method);
 		TargetClassBuilder builder = new TargetClassBuilder(volleyerContext, httpContent);
 		Class<String> clazz = String.class;
@@ -63,7 +67,7 @@ public class TargetClassBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = new VolleyerContext();
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		HttpContent httpContent = new HttpContent(url, method);
 		TargetClassBuilder builder = new TargetClassBuilder(volleyerContext, httpContent);
 		Class<String> clazz = String.class;
