@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
+import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 /**
  * Volleyer helps you to create a request and execute it.
  * <pre>
@@ -68,12 +69,7 @@ public class Volleyer {
 	 */
 	public static void init(RequestQueue requestQueue, VolleyerContext volleyerContext) {
 		if(isInitialized == true) {
-			// Log if "Volleyer" tag is on WARN level.
-			// TODO : this code needs to be moved to VolleyerLog!
-			if(Log.isLoggable("Volleyer", Log.WARN)) {
-				Log.w("Volleyer", "Volleyer is already initialized. So it ignores this call.");
-			}
-
+			VolleyerLog.warn("Volleyer is already initialized. So it ignores this call.");
 			return;
 		}
 

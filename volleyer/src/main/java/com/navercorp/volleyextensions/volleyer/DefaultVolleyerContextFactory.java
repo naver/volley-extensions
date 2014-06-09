@@ -15,6 +15,7 @@ import com.navercorp.volleyextensions.volleyer.response.parser.Jackson2NetworkRe
 import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.response.parser.SimpleXmlNetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
+import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
 public class DefaultVolleyerContextFactory {
 
@@ -23,22 +24,14 @@ public class DefaultVolleyerContextFactory {
 
 		@Override
 		public void onResponse(Object response) {
-			// Log if "Volleyer" tag is on DEBUG level.
-			// TODO : this code needs to be moved to VolleyerLog!
-			if(Log.isLoggable("Volleyer", Log.DEBUG)) {
-				Log.d("Volleyer", "RESPONSE : " + response);
-			}
+			VolleyerLog.debug("RESPONSE : " + response);
 		}};
 
 	private static ErrorListener defaultErrorListener = new ErrorListener() {
 
 		@Override
 		public void onErrorResponse(VolleyError error) {
-			// Log if "Volleyer" tag is on DEBUG level.
-			// TODO : this code needs to be moved to VolleyerLog!
-			if(Log.isLoggable("Volleyer", Log.DEBUG)) {
-				Log.d("Volleyer", "ERROR : " + error);
-			}
+			VolleyerLog.debug("ERROR : ", error);
 		}};
 
 	public static NetworkResponseParser createNetworkResponseParser() {
