@@ -2,6 +2,7 @@ package com.navercorp.volleyextensions.volleyer.builder;
 
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowLog;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
@@ -24,7 +26,7 @@ public class BuilderIntegrationTest {
 	RequestQueue requestQueue = mock(RequestQueue.class);
 
 	@Test
-	public void builderChainShouldMakeRequestInstanceFinally() {
+	public void builderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
 		// Given
 		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		String url = "http://test";
@@ -32,6 +34,7 @@ public class BuilderIntegrationTest {
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url,
 				method);
 		Class<String> clazz = String.class;
+		String body = "Test body";
 		Listener<String> listener = new Listener<String>() {
 
 			@Override
@@ -51,6 +54,7 @@ public class BuilderIntegrationTest {
 				.addHeader("name", "JohnDoe")
 				.addHeader("age", "23")
 				.addHeader("job", "student")
+				.setBody(body)
 				.afterRequest()
 					.setTargetClass(String.class)
 					.setListener(listener)
@@ -59,5 +63,11 @@ public class BuilderIntegrationTest {
 
 		// Then
 		assertTrue(request != null);
+		assertThat(request.getUrl(), is(url));
+		assertThat(request.getMethod(), is(method.getMethodCode()));
+		assertThat(request.getHeaders().get("name"), is("JohnDoe"));
+		assertThat(request.getHeaders().get("age"), is("23"));
+		assertThat(request.getHeaders().get("job"), is("student"));
+		assertThat(request.getBody(), is(body.getBytes()));
 	}
 }
