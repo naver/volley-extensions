@@ -1,18 +1,33 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.navercorp.volleyextensions.volleyer.DefaultVolleyerContextFactory;
 import com.navercorp.volleyextensions.volleyer.VolleyerContext;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
+@RunWith(RobolectricTestRunner.class)
+@Config(manifest = Config.NONE)
 public class RequestBuilderTest {
-	RequestQueue requestQueue = mock(RequestQueue.class);
+	RequestQueue requestQueue;
+
+	@Before
+	public void setUp() {
+		requestQueue = mock(RequestQueue.class);
+	}
 
 	@Test(expected=NullPointerException.class)
 	public void requestBuilderConstructorShouldThrowNpeWhenVolleyerContextIsNull() {
@@ -158,9 +173,6 @@ public class RequestBuilderTest {
 	@Test(expected = IllegalStateException.class)
 	public void setTargetClassMethodShouldThrowIllegalStateExceptionWhenSetTargetClassMethodIsCalledAgain() {
 		// Given
-		String key = "testKey";
-		String value = "testValue";
-		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
@@ -171,4 +183,66 @@ public class RequestBuilderTest {
 		// Then
 		builder.setTargetClass(clazz);
 	}	
+
+	@Test()
+	public void requestQueueShouldBeExecutedWhenExecuteMethodIsCalled() {
+		// Given
+		String url = "http://test";
+		HttpMethod method = HttpMethod.GET;
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
+		// When
+		Request<String> request = builder.execute();
+		// Then
+		verify(requestQueue).add(request);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void requestBuilderShouldThrowIllegalStateExceptionWhenExecuteMethodIsCalledAgain() {
+		// Given
+		String url = "http://test";
+		HttpMethod method = HttpMethod.GET;
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
+		// When
+		builder.execute();
+		// Then
+		builder.execute();
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void requestBuilderShouldThrowIllegalStateExceptionWhensetListenerMethodIsCalledAgain() {
+		// Given
+		String url = "http://test";
+		HttpMethod method = HttpMethod.GET;
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
+		Listener<String> listener = new Listener<String>(){
+
+			@Override
+			public void onResponse(String response) {
+			}};
+		// When
+		builder.setListener(listener);
+		// Then
+		builder.setListener(listener);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void requestBuilderShouldThrowIllegalStateExceptionWhensetErrorListenerMethodIsCalledAgain() {
+		// Given
+		String url = "http://test";
+		HttpMethod method = HttpMethod.GET;
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
+		ErrorListener errorListener = new ErrorListener(){
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+			}};
+		// When
+		builder.setErrorListener(errorListener);
+		// Then
+		builder.setErrorListener(errorListener);
+	}
 }
