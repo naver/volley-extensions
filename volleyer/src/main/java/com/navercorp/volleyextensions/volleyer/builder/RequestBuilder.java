@@ -31,9 +31,13 @@ public class RequestBuilder {
 		}
 	}
 
-	public TargetClassBuilder afterRequest() {
-		TargetClassBuilder targetClassBuilder = new TargetClassBuilder(volleyerContext, httpContent);
+	public <T> ResponseBuilder<T> setTargetClass(Class<T> clazz) {
+		Assert.notNull(clazz, "Target Class token");
+
+		assertFinishState();
+
+		ResponseBuilder<T> builder = new ResponseBuilder<T>(volleyerContext, httpContent, clazz);
 		isDoneToBuild = true;
-		return targetClassBuilder;
+		return builder;
 	}
 }

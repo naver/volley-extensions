@@ -55,8 +55,7 @@ public class BuilderIntegrationTest {
 				.addHeader("age", "23")
 				.addHeader("job", "student")
 				.setBody(body)
-				.afterRequest()
-					.setTargetClass(String.class)
+				.setTargetClass(String.class)
 					.setListener(listener)
 					.setErrorListener(errorListener)
 					.execute();

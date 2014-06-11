@@ -8,6 +8,7 @@ import org.junit.Test;
 import com.android.volley.RequestQueue;
 import com.navercorp.volleyextensions.volleyer.DefaultVolleyerContextFactory;
 import com.navercorp.volleyextensions.volleyer.VolleyerContext;
+import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
 public class RequestBuilderTest {
@@ -102,9 +103,9 @@ public class RequestBuilderTest {
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
 		
 		// When
-		TargetClassBuilder targetClassBuilder = builder.afterRequest();
+		ResponseBuilder<String> responseBuilder = builder.setTargetClass(String.class);
 		// Then
-		assertNotNull(targetClassBuilder);
+		assertNotNull(responseBuilder);
 	}
 
 	@Test(expected=IllegalStateException.class)
@@ -119,7 +120,55 @@ public class RequestBuilderTest {
 		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
 		
 		// When & Then
-		builder.afterRequest();
+		builder.setTargetClass(String.class);
 		builder.addHeader(key, value);
 	}
+	@Test(expected = NullPointerException.class)
+	public void setTargetClassMethodShouldThrowNpeWhenTargetClassIsNull() {
+		// Given
+		String key = "testKey";
+		String value = "testValue";
+		
+		String url = "test";
+		HttpMethod method = HttpMethod.GET;
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
+		Class<?> clazz = null;
+		// When & Then
+		builder.setTargetClass(clazz);
+	}
+
+	@Test
+	public void setTargetClassMethodShouldReturnAnActualInstanceWhenTargetClassIsNotNull() {
+		// Given
+		String key = "testKey";
+		String value = "testValue";
+		
+		String url = "test";
+		HttpMethod method = HttpMethod.GET;
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
+		Class<String> clazz = String.class;
+		// When
+		ResponseBuilder<String> responseBuilder = builder.setTargetClass(clazz);
+		// Then
+		assertNotNull(responseBuilder);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void setTargetClassMethodShouldThrowIllegalStateExceptionWhenSetTargetClassMethodIsCalledAgain() {
+		// Given
+		String key = "testKey";
+		String value = "testValue";
+		
+		String url = "test";
+		HttpMethod method = HttpMethod.GET;
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		RequestBuilder builder = new RequestBuilder(volleyerContext, url, method);
+		Class<String> clazz = String.class;
+		// When
+		builder.setTargetClass(clazz);
+		// Then
+		builder.setTargetClass(clazz);
+	}	
 }
