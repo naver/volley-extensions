@@ -28,7 +28,7 @@ public class BuilderIntegrationTest {
 	@Test
 	public void builderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
 		// Given
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url,

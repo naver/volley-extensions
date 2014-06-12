@@ -2,32 +2,27 @@ package com.navercorp.volleyextensions.volleyer.request.executor;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.navercorp.volleyextensions.volleyer.Volleyer;
-import com.navercorp.volleyextensions.volleyer.util.Assert;
+import com.android.volley.VolleyError;
 
 public class DefaultRequestExecutor implements RequestExecutor {
 
-	private RequestQueue requestQueue;
-
-	/**
-	 * Default Constructor
-	 * <pre>
-	 * NOTE:
-	 * It assume that {@code RequestQueue} already started when {@code DefaultRequestExecutor} executes a request.
-	 * </pre>
-	 * @param requestQueue RequestQueue must not be null.
-	 */
-	public DefaultRequestExecutor(RequestQueue requestQueue) {
-		Assert.notNull(requestQueue, "RequestQueue");
-		this.requestQueue = requestQueue;
-	}
-
 	@Override
-	public <T> void executeRequest(Request<T> request) {
+	public <T> void executeRequest(RequestQueue requestQueue, Request<T> request) {
 		if (request == null) {
 			return;
 		}
+
+		if (requestQueue == null) {
+			deliverError(request, "RequestQueue is null. It cannot execute the request of " + request.toString() + ".");
+			return;
+		}
+
 		requestQueue.add(request);
+	}
+
+	private <T> void deliverError(Request<T> request, String message) {
+		VolleyError error = new VolleyError(message);
+		request.deliverError(error);
 	}
 
 }

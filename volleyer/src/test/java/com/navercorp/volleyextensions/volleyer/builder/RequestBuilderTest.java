@@ -44,7 +44,7 @@ public class RequestBuilderTest {
 		// Given
 		String nullUrl = null;
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		
 		// When & Then
 		new TestPurposeRequestBuilder(volleyerContext, nullUrl, method);
@@ -55,7 +55,7 @@ public class RequestBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod nullMethod = null;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		
 		// When & Then
 		new TestPurposeRequestBuilder(volleyerContext, url, nullMethod);
@@ -69,7 +69,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		
 		// When & Then
@@ -84,7 +84,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		
 		// When & Then
@@ -99,7 +99,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		
 		// When
@@ -113,7 +113,7 @@ public class RequestBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		
 		// When
@@ -130,7 +130,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		
 		// When & Then
@@ -145,7 +145,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		Class<?> clazz = null;
 		// When & Then
@@ -160,7 +160,7 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		Class<String> clazz = String.class;
 		// When
@@ -174,7 +174,7 @@ public class RequestBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		Class<String> clazz = String.class;
 		// When
@@ -188,12 +188,13 @@ public class RequestBuilderTest {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		// When
 		Request<String> request = builder.execute();
 		// Then
-		verify(requestQueue).add(request);
+		// TODO : RequestQueue is not used at all. some volleyer api that take a requestQueue will be added soon.
+		// verify(requestQueue).add(request);
 	}
 
 	@Test(expected = IllegalStateException.class)
@@ -201,7 +202,7 @@ public class RequestBuilderTest {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		// When
 		builder.execute();
@@ -214,7 +215,7 @@ public class RequestBuilderTest {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		Listener<String> listener = new Listener<String>(){
 
@@ -232,7 +233,7 @@ public class RequestBuilderTest {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
 		ErrorListener errorListener = new ErrorListener(){
 

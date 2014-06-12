@@ -45,9 +45,8 @@ public class DefaultVolleyerContextFactory {
 		return new DefaultRequestCreator();
 	}
 
-	public static RequestExecutor createRequestExecutor(RequestQueue requestQueue) {
-		Assert.notNull(requestQueue, "RequestQueue");
-		return new DefaultRequestExecutor(requestQueue);
+	public static RequestExecutor createRequestExecutor() {
+		return new DefaultRequestExecutor();
 	}
 
 	/**
@@ -71,13 +70,12 @@ public class DefaultVolleyerContextFactory {
 
 	/**
 	 * Create a VolleyerContext instance which includes default implementations.
-	 * @param requestQueue must not be null.
 	 * @return VolleyerContext instance
 	 */
 	@SuppressWarnings("rawtypes")
-	public static VolleyerContext create(RequestQueue requestQueue) {
+	public static VolleyerContext create() {
 		RequestCreator requestCreator = createRequestCreator();
-		RequestExecutor requestExecutor = createRequestExecutor(requestQueue);
+		RequestExecutor requestExecutor = createRequestExecutor();
 		NetworkResponseParser networkResponseParser = createNetworkResponseParser();
 		Listener listener = createListener();
 		ErrorListener errorListener = createErrorListener();

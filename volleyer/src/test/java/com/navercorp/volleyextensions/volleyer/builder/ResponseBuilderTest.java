@@ -38,7 +38,7 @@ public class ResponseBuilderTest {
 	public void responseBuilderConstructorShouldThrowNpeWhenHttpContentIsNull() {
 		// Given
 		HttpContent nullHttpContent = null;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		Class<String> clazz = String.class;
 		// When & Then
 		new ResponseBuilder<String>(volleyerContext, nullHttpContent, clazz);
@@ -50,7 +50,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		Class<String> nullClazz = null;
 		// When & Then
 		new ResponseBuilder<String>(volleyerContext, httpContent, nullClazz);
@@ -62,7 +62,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		Class<String> clazz = String.class;
 		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
 		Listener<String> listener = new Listener<String>(){
@@ -81,7 +81,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		Class<String> clazz = String.class;
 		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
 		ErrorListener errorListener = new ErrorListener (){
@@ -100,7 +100,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		Class<String> clazz = String.class;
 		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
 		Listener<String> listener = new Listener<String>(){
@@ -119,7 +119,7 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
+		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
 		Class<String> clazz = String.class;
 		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
 		ErrorListener errorListener = new ErrorListener (){

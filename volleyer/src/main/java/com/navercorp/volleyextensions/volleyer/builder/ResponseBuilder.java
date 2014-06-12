@@ -1,6 +1,7 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
@@ -115,6 +116,8 @@ class ResponseBuilder<T> {
 
 	private void executeRequest(Request<T> request) {
 		RequestExecutor executor = volleyerContext.getRequestExecutor();
-		executor.executeRequest(request);
+		// TODO : Warning! This is a temporarily code!! RequestQueue should be delivered from outside! Code it!
+		RequestQueue requestQueue = null;
+		executor.executeRequest(requestQueue, request);
 	}
 }
