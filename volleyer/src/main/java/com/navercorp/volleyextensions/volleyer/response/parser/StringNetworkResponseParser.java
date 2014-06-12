@@ -17,14 +17,15 @@ public class StringNetworkResponseParser implements NetworkResponseParser {
 		return new String(response.data, HttpHeaderParser.parseCharset(response.headers));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> Response<T> parseNetworkResponse(NetworkResponse response, Class<T> clazz) {
 		Assert.notNull(response, "The response");
 		Assert.notNull(clazz, "The class token");
 		try {
 			String result = getBodyString(response);
-			return (Response<T>) Response.success(result, HttpHeaderParser.parseCacheHeaders(response));
+			@SuppressWarnings("unchecked")
+			Response<T> successResponse = (Response<T>) Response.success(result, HttpHeaderParser.parseCacheHeaders(response));
+			return successResponse;
 		} catch (UnsupportedEncodingException e) {
 			return Response.error(new ParseError(e));
 		}
