@@ -14,8 +14,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.navercorp.volleyextensions.volleyer.DefaultVolleyerContextFactory;
-import com.navercorp.volleyextensions.volleyer.VolleyerContext;
+import com.navercorp.volleyextensions.volleyer.DefaultVolleyerConfigurationFactory;
+import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
 @RunWith(RobolectricTestRunner.class)
@@ -29,14 +29,14 @@ public class RequestBuilderTest {
 	}
 
 	@Test(expected=NullPointerException.class)
-	public void requestBuilderConstructorShouldThrowNpeWhenVolleyerContextIsNull() {
+	public void requestBuilderConstructorShouldThrowNpeWhenVolleyerConfigurationIsNull() {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext nullVolleyerContext = null;
+		VolleyerConfiguration nullVolleyerConfiguration = null;
 		
 		// When & Then
-		new TestPurposeRequestBuilder(nullVolleyerContext, url, method);
+		new TestPurposeRequestBuilder(nullVolleyerConfiguration, url, method);
 	}
 
 	@Test(expected=NullPointerException.class)
@@ -44,10 +44,10 @@ public class RequestBuilderTest {
 		// Given
 		String nullUrl = null;
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		
 		// When & Then
-		new TestPurposeRequestBuilder(volleyerContext, nullUrl, method);
+		new TestPurposeRequestBuilder(configuration, nullUrl, method);
 	}
 
 	@Test(expected=NullPointerException.class)
@@ -55,10 +55,10 @@ public class RequestBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod nullMethod = null;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		
 		// When & Then
-		new TestPurposeRequestBuilder(volleyerContext, url, nullMethod);
+		new TestPurposeRequestBuilder(configuration, url, nullMethod);
 	}
 
 	@Test(expected=NullPointerException.class)
@@ -69,8 +69,8 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		
 		// When & Then
 		builder.addHeader(nullKey, value);
@@ -84,8 +84,8 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		
 		// When & Then
 		builder.addHeader(key, nullValue);
@@ -99,8 +99,8 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		
 		// When
 		TestPurposeRequestBuilder newBuilder = builder.addHeader(key, value);
@@ -113,8 +113,8 @@ public class RequestBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		
 		// When
 		ResponseBuilder<String> responseBuilder = builder.setTargetClass(String.class);
@@ -130,8 +130,8 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		
 		// When & Then
 		builder.setTargetClass(String.class);
@@ -145,8 +145,8 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		Class<?> clazz = null;
 		// When & Then
 		builder.setTargetClass(clazz);
@@ -160,8 +160,8 @@ public class RequestBuilderTest {
 		
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		Class<String> clazz = String.class;
 		// When
 		ResponseBuilder<String> responseBuilder = builder.setTargetClass(clazz);
@@ -174,8 +174,8 @@ public class RequestBuilderTest {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		Class<String> clazz = String.class;
 		// When
 		builder.setTargetClass(clazz);
@@ -188,8 +188,8 @@ public class RequestBuilderTest {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		// When
 		Request<String> request = builder.execute();
 		// Then
@@ -202,8 +202,8 @@ public class RequestBuilderTest {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		// When
 		builder.execute();
 		// Then
@@ -215,8 +215,8 @@ public class RequestBuilderTest {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		Listener<String> listener = new Listener<String>(){
 
 			@Override
@@ -233,8 +233,8 @@ public class RequestBuilderTest {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url, method);
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
 		ErrorListener errorListener = new ErrorListener(){
 
 			@Override

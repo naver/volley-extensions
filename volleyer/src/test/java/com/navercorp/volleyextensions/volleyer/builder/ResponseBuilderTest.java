@@ -12,8 +12,8 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
-import com.navercorp.volleyextensions.volleyer.DefaultVolleyerContextFactory;
-import com.navercorp.volleyextensions.volleyer.VolleyerContext;
+import com.navercorp.volleyextensions.volleyer.DefaultVolleyerConfigurationFactory;
+import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
@@ -23,25 +23,25 @@ public class ResponseBuilderTest {
 	RequestQueue requestQueue = mock(RequestQueue.class);
 
 	@Test(expected=NullPointerException.class)
-	public void responseBuilderConstructorShouldThrowNpeWhenVolleyerContextIsNull() {
+	public void responseBuilderConstructorShouldThrowNpeWhenVolleyerConfigurationIsNull() {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext nullVolleyerContext = null;
+		VolleyerConfiguration nullConfiguration = null;
 		Class<String> clazz = String.class;
 		// When & Then
-		new ResponseBuilder<String>(nullVolleyerContext, httpContent, clazz);
+		new ResponseBuilder<String>(nullConfiguration, httpContent, clazz);
 	}
 
 	@Test(expected=NullPointerException.class)
 	public void responseBuilderConstructorShouldThrowNpeWhenHttpContentIsNull() {
 		// Given
 		HttpContent nullHttpContent = null;
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
 		// When & Then
-		new ResponseBuilder<String>(volleyerContext, nullHttpContent, clazz);
+		new ResponseBuilder<String>(configuration, nullHttpContent, clazz);
 	}
 	
 	@Test(expected=NullPointerException.class)
@@ -50,10 +50,10 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> nullClazz = null;
 		// When & Then
-		new ResponseBuilder<String>(volleyerContext, httpContent, nullClazz);
+		new ResponseBuilder<String>(configuration, httpContent, nullClazz);
 	}
 
 	@Test
@@ -62,9 +62,9 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
-		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
+		ResponseBuilder<String> builder = new ResponseBuilder<String>(configuration, httpContent, clazz);
 		Listener<String> listener = new Listener<String>(){
 			@Override
 			public void onResponse(String response) {
@@ -81,9 +81,9 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
-		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
+		ResponseBuilder<String> builder = new ResponseBuilder<String>(configuration, httpContent, clazz);
 		ErrorListener errorListener = new ErrorListener (){
 			@Override
 			public void onErrorResponse(VolleyError error) {
@@ -100,9 +100,9 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
-		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
+		ResponseBuilder<String> builder = new ResponseBuilder<String>(configuration, httpContent, clazz);
 		Listener<String> listener = new Listener<String>(){
 			@Override
 			public void onResponse(String response) {
@@ -119,9 +119,9 @@ public class ResponseBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		HttpContent httpContent = new HttpContent(url, method);
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
-		ResponseBuilder<String> builder = new ResponseBuilder<String>(volleyerContext, httpContent, clazz);
+		ResponseBuilder<String> builder = new ResponseBuilder<String>(configuration, httpContent, clazz);
 		ErrorListener errorListener = new ErrorListener (){
 			@Override
 			public void onErrorResponse(VolleyError error) {

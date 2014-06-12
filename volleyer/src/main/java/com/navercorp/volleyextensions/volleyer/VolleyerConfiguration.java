@@ -6,7 +6,7 @@ import com.navercorp.volleyextensions.volleyer.request.creator.RequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.executor.RequestExecutor;
 import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
 
-public class VolleyerContext {
+public class VolleyerConfiguration {
 	private RequestCreator requestCreator;
 	private RequestExecutor requestExecutor;
 	private NetworkResponseParser networkResponseParser;
@@ -14,7 +14,7 @@ public class VolleyerContext {
 	private Listener listener;
 	private ErrorListener errorListener;
 
-	public VolleyerContext(RequestCreator requestCreator, RequestExecutor requestExecutor, NetworkResponseParser networkResponseParser, @SuppressWarnings("rawtypes") Listener listener, ErrorListener errorListener) {
+	public VolleyerConfiguration(RequestCreator requestCreator, RequestExecutor requestExecutor, NetworkResponseParser networkResponseParser, @SuppressWarnings("rawtypes") Listener listener, ErrorListener errorListener) {
 		this.requestCreator = requestCreator;
 		this.requestExecutor = requestExecutor;
 		this.networkResponseParser = networkResponseParser;

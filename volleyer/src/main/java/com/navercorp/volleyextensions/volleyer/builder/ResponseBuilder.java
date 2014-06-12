@@ -5,7 +5,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.navercorp.volleyextensions.volleyer.VolleyerContext;
+import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.request.creator.RequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.executor.RequestExecutor;
@@ -15,7 +15,7 @@ import com.navercorp.volleyextensions.volleyer.util.Assert;
 
 class ResponseBuilder<T> {
 	
-	private VolleyerContext volleyerContext;
+	private VolleyerConfiguration configuration;
 	private HttpContent httpContent;
 	private Class<T> clazz;
 	private Listener<T> listener;
@@ -24,12 +24,12 @@ class ResponseBuilder<T> {
 
 	private boolean isDoneToBuild = false;
 
-	ResponseBuilder(VolleyerContext volleyerContext, HttpContent httpContent, Class<T> clazz) {
-		Assert.notNull(volleyerContext, "VolleyerContext");
+	ResponseBuilder(VolleyerConfiguration configuration, HttpContent httpContent, Class<T> clazz) {
+		Assert.notNull(configuration, "VolleyerConfiguration");
 		Assert.notNull(httpContent, "HttpContent");
 		Assert.notNull(clazz, "Target class token");
 
-		this.volleyerContext = volleyerContext;
+		this.configuration = configuration;
 		this.httpContent = httpContent;
 		this.clazz = clazz;
 	}
@@ -106,16 +106,16 @@ class ResponseBuilder<T> {
 			return;
 		}
 
-		responseParser = volleyerContext.getDefaultNetworkResponseParser();
+		responseParser = configuration.getDefaultNetworkResponseParser();
 	}
 
 	private Request<T> buildRequest() {
-		RequestCreator requestCreator = volleyerContext.getRequestCreator();
+		RequestCreator requestCreator = configuration.getRequestCreator();
 		return requestCreator.createRequest(httpContent, clazz, responseParser, listener, errorListener);
 	}
 
 	private void executeRequest(Request<T> request) {
-		RequestExecutor executor = volleyerContext.getRequestExecutor();
+		RequestExecutor executor = configuration.getRequestExecutor();
 		// TODO : Warning! This is a temporarily code!! RequestQueue should be delivered from outside! Code it!
 		RequestQueue requestQueue = null;
 		executor.executeRequest(requestQueue, request);

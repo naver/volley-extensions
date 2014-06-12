@@ -17,7 +17,7 @@ import com.navercorp.volleyextensions.volleyer.response.parser.SimpleXmlNetworkR
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
-public class DefaultVolleyerContextFactory {
+public class DefaultVolleyerConfigurationFactory {
 
 	@SuppressWarnings("rawtypes")
 	private static Listener defaultListener = new Listener() {
@@ -69,19 +69,19 @@ public class DefaultVolleyerContextFactory {
 	}
 
 	/**
-	 * Create a VolleyerContext instance which includes default implementations.
-	 * @return VolleyerContext instance
+	 * Create a VolleyerConfiguration instance which includes default implementations.
+	 * @return VolleyerConfiguration instance
 	 */
 	@SuppressWarnings("rawtypes")
-	public static VolleyerContext create() {
+	public static VolleyerConfiguration create() {
 		RequestCreator requestCreator = createRequestCreator();
 		RequestExecutor requestExecutor = createRequestExecutor();
 		NetworkResponseParser networkResponseParser = createNetworkResponseParser();
 		Listener listener = createListener();
 		ErrorListener errorListener = createErrorListener();
 
-		VolleyerContext defaultVolleyerContext = new VolleyerContext(requestCreator, requestExecutor, networkResponseParser, listener, errorListener);
-		return defaultVolleyerContext;
+		VolleyerConfiguration configuration = new VolleyerConfiguration(requestCreator, requestExecutor, networkResponseParser, listener, errorListener);
+		return configuration;
 	}
 
 }

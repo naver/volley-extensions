@@ -3,21 +3,21 @@ package com.navercorp.volleyextensions.volleyer.builder;
 import com.android.volley.Request;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.navercorp.volleyextensions.volleyer.VolleyerContext;
+import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
 abstract class RequestBuilder<B extends RequestBuilder<B>> {
-	private final VolleyerContext volleyerContext;
+	private final VolleyerConfiguration configuration;
 	protected final HttpContent httpContent;
 
 	protected boolean isDoneToBuild = false;
 
-	public RequestBuilder(VolleyerContext volleyerContext, String url, HttpMethod method) {
-		Assert.notNull(volleyerContext, "VolleyerContext");
+	public RequestBuilder(VolleyerConfiguration configuration, String url, HttpMethod method) {
+		Assert.notNull(configuration, "VolleyerConfiguration");
 
-		this.volleyerContext = volleyerContext;
+		this.configuration = configuration;
 		httpContent = new HttpContent(url, method);
 	}
 
@@ -40,7 +40,7 @@ abstract class RequestBuilder<B extends RequestBuilder<B>> {
 
 		assertFinishState();
 
-		ResponseBuilder<T> builder = new ResponseBuilder<T>(volleyerContext, httpContent, clazz);
+		ResponseBuilder<T> builder = new ResponseBuilder<T>(configuration, httpContent, clazz);
 		isDoneToBuild = true;
 		return builder;
 	}

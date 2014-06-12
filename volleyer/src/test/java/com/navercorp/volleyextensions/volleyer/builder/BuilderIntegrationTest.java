@@ -16,14 +16,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.navercorp.volleyextensions.volleyer.DefaultVolleyerContextFactory;
-import com.navercorp.volleyextensions.volleyer.VolleyerContext;
+import com.navercorp.volleyextensions.volleyer.DefaultVolleyerConfigurationFactory;
+import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
 public class BuilderIntegrationTest {
-	static VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+	static VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 	static String url = "http://test";
 	static String body = "Test body";
 
@@ -46,14 +46,14 @@ public class BuilderIntegrationTest {
 
 	@Test
 	public void getBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
-		GetBuilder getBuilder = new GetBuilder(volleyerContext, url);
+		GetBuilder getBuilder = new GetBuilder(configuration, url);
 		Request<String> request = createRequest(url, getBuilder);
 		assertRequest(url, HttpMethod.GET, request);
 	}
 
 	@Test
 	public void postBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
-		PostBuilder postBuilder = new PostBuilder(volleyerContext, url);
+		PostBuilder postBuilder = new PostBuilder(configuration, url);
 		buildPostOptionsFor(postBuilder);
 		Request<String> request = createRequest(url, postBuilder);
 		assertRequest(url, HttpMethod.POST, request);
@@ -70,14 +70,14 @@ public class BuilderIntegrationTest {
 
 	@Test
 	public void putBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
-		PutBuilder putBuilder = new PutBuilder(volleyerContext, url);
+		PutBuilder putBuilder = new PutBuilder(configuration, url);
 		Request<String> request = createRequest(url, putBuilder);
 		assertRequest(url, HttpMethod.PUT, request);
 	}
 
 	@Test
 	public void deleteBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
-		DeleteBuilder deleteBuilder = new DeleteBuilder(volleyerContext, url);
+		DeleteBuilder deleteBuilder = new DeleteBuilder(configuration, url);
 		Request<String> request = createRequest(url, deleteBuilder);
 		assertRequest(url, HttpMethod.DELETE, request);
 	}

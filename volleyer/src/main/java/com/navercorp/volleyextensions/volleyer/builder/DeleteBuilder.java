@@ -1,12 +1,12 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
-import com.navercorp.volleyextensions.volleyer.VolleyerContext;
+import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
 public class DeleteBuilder extends RequestBuilder<DeleteBuilder>{
 
-	public DeleteBuilder(VolleyerContext volleyerContext, String url) {
-		super(volleyerContext, url, HttpMethod.DELETE);
+	public DeleteBuilder(VolleyerConfiguration configuration, String url) {
+		super(configuration, url, HttpMethod.DELETE);
 	}
 
 }

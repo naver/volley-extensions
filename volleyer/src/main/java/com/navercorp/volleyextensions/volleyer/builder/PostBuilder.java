@@ -1,13 +1,13 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
-import com.navercorp.volleyextensions.volleyer.VolleyerContext;
+import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
 public class PostBuilder extends RequestBuilder<PostBuilder> {
 
-	public PostBuilder(VolleyerContext volleyerContext, String url) {
-		super(volleyerContext, url, HttpMethod.POST);
+	public PostBuilder(VolleyerConfiguration configuration, String url) {
+		super(configuration, url, HttpMethod.POST);
 	}
 
 	public PostBuilder setBody(byte[] body) {
