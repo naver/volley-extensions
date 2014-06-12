@@ -8,11 +8,11 @@ import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
-public class RequestBuilder {
-	private VolleyerContext volleyerContext;
-	private HttpContent httpContent;
+abstract class RequestBuilder<B extends RequestBuilder<B>> {
+	private final VolleyerContext volleyerContext;
+	protected final HttpContent httpContent;
 
-	private boolean isDoneToBuild = false;
+	protected boolean isDoneToBuild = false;
 
 	public RequestBuilder(VolleyerContext volleyerContext, String url, HttpMethod method) {
 		Assert.notNull(volleyerContext, "VolleyerContext");
@@ -21,14 +21,15 @@ public class RequestBuilder {
 		httpContent = new HttpContent(url, method);
 	}
 
-	public RequestBuilder addHeader(String key, String value) {
+	@SuppressWarnings("unchecked")
+	public B addHeader(String key, String value) {
 		assertFinishState();
 
 		httpContent.addHeader(key, value);
-		return this;
+		return (B) this;
 	}
 
-	private void assertFinishState() {
+	protected final void assertFinishState() {
 		if (isDoneToBuild == true) {
 			throw new IllegalStateException("RequestBuilder should not be used any more. Because afterRequest() has been called.");
 		}

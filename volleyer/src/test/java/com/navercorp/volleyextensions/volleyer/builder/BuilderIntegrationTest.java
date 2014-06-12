@@ -31,10 +31,9 @@ public class BuilderIntegrationTest {
 		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create(requestQueue);
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
-		RequestBuilder builder = new RequestBuilder(volleyerContext, url,
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url,
 				method);
 		Class<String> clazz = String.class;
-		String body = "Test body";
 		Listener<String> listener = new Listener<String>() {
 
 			@Override
@@ -54,7 +53,6 @@ public class BuilderIntegrationTest {
 				.addHeader("name", "JohnDoe")
 				.addHeader("age", "23")
 				.addHeader("job", "student")
-				.setBody(body)
 				.setTargetClass(String.class)
 					.setListener(listener)
 					.setErrorListener(errorListener)
@@ -67,6 +65,5 @@ public class BuilderIntegrationTest {
 		assertThat(request.getHeaders().get("name"), is("JohnDoe"));
 		assertThat(request.getHeaders().get("age"), is("23"));
 		assertThat(request.getHeaders().get("job"), is("student"));
-		assertThat(request.getBody(), is(body.getBytes()));
 	}
 }
