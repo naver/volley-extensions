@@ -19,14 +19,6 @@ import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
 public class DefaultVolleyerConfigurationFactory {
 
-	@SuppressWarnings("rawtypes")
-	private static Listener defaultListener = new Listener() {
-
-		@Override
-		public void onResponse(Object response) {
-			VolleyerLog.debug("RESPONSE : " + response);
-		}};
-
 	private static ErrorListener defaultErrorListener = new ErrorListener() {
 
 		@Override
@@ -50,16 +42,6 @@ public class DefaultVolleyerConfigurationFactory {
 	}
 
 	/**
-	 * Create a default listener.
-	 * (But, This method just returns the same instance actually.)
-	 * @return default listener
-	 */
-	@SuppressWarnings("rawtypes")
-	public static Listener createListener() {
-		return defaultListener;
-	}
-
-	/**
 	 * Create a default error listener.
 	 * (But, This method just returns the same instance actually.)
 	 * @return default error listener
@@ -72,15 +54,12 @@ public class DefaultVolleyerConfigurationFactory {
 	 * Create a VolleyerConfiguration instance which includes default implementations.
 	 * @return VolleyerConfiguration instance
 	 */
-	@SuppressWarnings("rawtypes")
 	public static VolleyerConfiguration create() {
 		RequestCreator requestCreator = createRequestCreator();
 		RequestExecutor requestExecutor = createRequestExecutor();
 		NetworkResponseParser networkResponseParser = createNetworkResponseParser();
-		Listener listener = createListener();
 		ErrorListener errorListener = createErrorListener();
-
-		VolleyerConfiguration configuration = new VolleyerConfiguration(requestCreator, requestExecutor, networkResponseParser, listener, errorListener);
+		VolleyerConfiguration configuration = new VolleyerConfiguration(requestCreator, requestExecutor, networkResponseParser, errorListener);
 		return configuration;
 	}
 

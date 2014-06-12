@@ -5,20 +5,26 @@ import com.android.volley.Response.Listener;
 import com.navercorp.volleyextensions.volleyer.request.creator.RequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.executor.RequestExecutor;
 import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
+import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
 public class VolleyerConfiguration {
+	@SuppressWarnings("rawtypes")
+	private static final Listener listener = new Listener() {
+
+		@Override
+		public void onResponse(Object response) {
+			VolleyerLog.debug("RESPONSE : " + response);
+		}};
+
 	private RequestCreator requestCreator;
 	private RequestExecutor requestExecutor;
 	private NetworkResponseParser networkResponseParser;
-	@SuppressWarnings("rawtypes")
-	private Listener listener;
 	private ErrorListener errorListener;
 
-	public VolleyerConfiguration(RequestCreator requestCreator, RequestExecutor requestExecutor, NetworkResponseParser networkResponseParser, @SuppressWarnings("rawtypes") Listener listener, ErrorListener errorListener) {
+	public VolleyerConfiguration(RequestCreator requestCreator, RequestExecutor requestExecutor, NetworkResponseParser networkResponseParser, ErrorListener errorListener) {
 		this.requestCreator = requestCreator;
 		this.requestExecutor = requestExecutor;
 		this.networkResponseParser = networkResponseParser;
-		this.listener = listener;
 		this.errorListener = errorListener;
 	}
 
