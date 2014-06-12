@@ -6,7 +6,7 @@ public class UnsupportedContentTypeException extends Exception {
 		super();
 	}
 
-	public UnsupportedContentTypeException(String s) {
-		super(s);
+	public UnsupportedContentTypeException(String message) {
+		super(message);
 	}
 }
