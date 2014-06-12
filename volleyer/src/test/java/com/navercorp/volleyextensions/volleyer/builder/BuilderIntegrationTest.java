@@ -23,31 +23,66 @@ import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
 public class BuilderIntegrationTest {
+	static VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
+	static String url = "http://test";
+	static String body = "Test body";
+
+	static Listener<String> listener = new Listener<String>() {
+
+		@Override
+		public void onResponse(String response) {
+			ShadowLog.d("TestClass", "Result : " + response);
+		}
+	};
+
+	static ErrorListener errorListener = new ErrorListener() {
+		@Override
+		public void onErrorResponse(VolleyError error) {
+			ShadowLog.d("TestClass", "Error : " + error);
+		}
+	};
+
 	RequestQueue requestQueue = mock(RequestQueue.class);
 
 	@Test
-	public void builderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
-		// Given
-		VolleyerContext volleyerContext = DefaultVolleyerContextFactory.create();
-		String url = "http://test";
-		HttpMethod method = HttpMethod.GET;
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(volleyerContext, url,
-				method);
-		Class<String> clazz = String.class;
-		Listener<String> listener = new Listener<String>() {
+	public void getBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
+		GetBuilder getBuilder = new GetBuilder(volleyerContext, url);
+		Request<String> request = createRequest(url, getBuilder);
+		assertRequest(url, HttpMethod.GET, request);
+	}
 
-			@Override
-			public void onResponse(String response) {
-				ShadowLog.d("TestClass", "Result : " + response);
-			}
-		};
-		ErrorListener errorListener = new ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				ShadowLog.d("TestClass", "Error : " + error);
-			}
-		};
-		// When
+	@Test
+	public void postBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
+		PostBuilder postBuilder = new PostBuilder(volleyerContext, url);
+		buildPostOptionsFor(postBuilder);
+		Request<String> request = createRequest(url, postBuilder);
+		assertRequest(url, HttpMethod.POST, request);
+		assertPostOptions(request);
+	}
+
+	private static void buildPostOptionsFor(PostBuilder postBuilder) {
+		postBuilder.setBody(body);
+	}
+
+	private static void assertPostOptions(Request<String> request) throws AuthFailureError {
+		assertThat(request.getBody(), is(body.getBytes()));
+	}
+
+	@Test
+	public void putBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
+		PutBuilder putBuilder = new PutBuilder(volleyerContext, url);
+		Request<String> request = createRequest(url, putBuilder);
+		assertRequest(url, HttpMethod.PUT, request);
+	}
+
+	@Test
+	public void deleteBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
+		DeleteBuilder deleteBuilder = new DeleteBuilder(volleyerContext, url);
+		Request<String> request = createRequest(url, deleteBuilder);
+		assertRequest(url, HttpMethod.DELETE, request);
+	}
+
+	private static <B extends RequestBuilder<B>> Request<String> createRequest(String url, RequestBuilder<B> builder) throws AuthFailureError {
 		Request<String> request = 
 				builder
 				.addHeader("name", "JohnDoe")
@@ -58,6 +93,10 @@ public class BuilderIntegrationTest {
 					.setErrorListener(errorListener)
 					.execute();
 
+		return request;
+	}
+
+	private static void assertRequest(String url, HttpMethod method, Request<String> request) throws AuthFailureError {
 		// Then
 		assertTrue(request != null);
 		assertThat(request.getUrl(), is(url));
