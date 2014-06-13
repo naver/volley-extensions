@@ -1,13 +1,14 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
+import com.android.volley.RequestQueue;
 import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
 public class PostBuilder extends RequestBuilder<PostBuilder> {
 
-	public PostBuilder(VolleyerConfiguration configuration, String url) {
-		super(configuration, url, HttpMethod.POST);
+	public PostBuilder(RequestQueue requestQueue, VolleyerConfiguration configuration, String url) {
+		super(requestQueue, configuration, url, HttpMethod.POST);
 	}
 
 	public PostBuilder setBody(byte[] body) {

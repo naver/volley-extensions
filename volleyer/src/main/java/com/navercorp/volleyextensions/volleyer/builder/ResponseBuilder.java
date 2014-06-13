@@ -15,6 +15,7 @@ import com.navercorp.volleyextensions.volleyer.util.Assert;
 
 class ResponseBuilder<T> {
 	
+	private RequestQueue requestQueue;
 	private VolleyerConfiguration configuration;
 	private HttpContent httpContent;
 	private Class<T> clazz;
@@ -24,11 +25,13 @@ class ResponseBuilder<T> {
 
 	private boolean isDoneToBuild = false;
 
-	ResponseBuilder(VolleyerConfiguration configuration, HttpContent httpContent, Class<T> clazz) {
+	ResponseBuilder(RequestQueue requestQueue, VolleyerConfiguration configuration, HttpContent httpContent, Class<T> clazz) {
+		Assert.notNull(requestQueue, "RequestQueue");
 		Assert.notNull(configuration, "VolleyerConfiguration");
 		Assert.notNull(httpContent, "HttpContent");
 		Assert.notNull(clazz, "Target class token");
 
+		this.requestQueue = requestQueue;
 		this.configuration = configuration;
 		this.httpContent = httpContent;
 		this.clazz = clazz;
@@ -67,6 +70,8 @@ class ResponseBuilder<T> {
 		isDoneToBuild = true;
 		Request<T> request = buildRequest();
 		executeRequest(request);
+		// Let requestQueue be null for avoiding memory leak when this builder is referenced by some variable.
+		requestQueue = null;
 		return request;
 	}
 
@@ -116,8 +121,6 @@ class ResponseBuilder<T> {
 
 	private void executeRequest(Request<T> request) {
 		RequestExecutor executor = configuration.getRequestExecutor();
-		// TODO : Warning! This is a temporarily code!! RequestQueue should be delivered from outside! Code it!
-		RequestQueue requestQueue = null;
 		executor.executeRequest(requestQueue, request);
 	}
 }

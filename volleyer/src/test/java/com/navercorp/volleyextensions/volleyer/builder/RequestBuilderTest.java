@@ -36,7 +36,7 @@ public class RequestBuilderTest {
 		VolleyerConfiguration nullVolleyerConfiguration = null;
 		
 		// When & Then
-		new TestPurposeRequestBuilder(nullVolleyerConfiguration, url, method);
+		new TestPurposeRequestBuilder(requestQueue, nullVolleyerConfiguration, url, method);
 	}
 
 	@Test(expected=NullPointerException.class)
@@ -47,7 +47,7 @@ public class RequestBuilderTest {
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		
 		// When & Then
-		new TestPurposeRequestBuilder(configuration, nullUrl, method);
+		new TestPurposeRequestBuilder(requestQueue, configuration, nullUrl, method);
 	}
 
 	@Test(expected=NullPointerException.class)
@@ -58,7 +58,7 @@ public class RequestBuilderTest {
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		
 		// When & Then
-		new TestPurposeRequestBuilder(configuration, url, nullMethod);
+		new TestPurposeRequestBuilder(requestQueue, configuration, url, nullMethod);
 	}
 
 	@Test(expected=NullPointerException.class)
@@ -70,7 +70,7 @@ public class RequestBuilderTest {
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		
 		// When & Then
 		builder.addHeader(nullKey, value);
@@ -85,7 +85,7 @@ public class RequestBuilderTest {
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		
 		// When & Then
 		builder.addHeader(key, nullValue);
@@ -100,7 +100,7 @@ public class RequestBuilderTest {
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		
 		// When
 		TestPurposeRequestBuilder newBuilder = builder.addHeader(key, value);
@@ -114,7 +114,7 @@ public class RequestBuilderTest {
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		
 		// When
 		ResponseBuilder<String> responseBuilder = builder.setTargetClass(String.class);
@@ -131,7 +131,7 @@ public class RequestBuilderTest {
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		
 		// When & Then
 		builder.setTargetClass(String.class);
@@ -146,7 +146,7 @@ public class RequestBuilderTest {
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		Class<?> clazz = null;
 		// When & Then
 		builder.setTargetClass(clazz);
@@ -161,7 +161,7 @@ public class RequestBuilderTest {
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		Class<String> clazz = String.class;
 		// When
 		ResponseBuilder<String> responseBuilder = builder.setTargetClass(clazz);
@@ -175,7 +175,7 @@ public class RequestBuilderTest {
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		Class<String> clazz = String.class;
 		// When
 		builder.setTargetClass(clazz);
@@ -189,12 +189,11 @@ public class RequestBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		// When
 		Request<String> request = builder.execute();
 		// Then
-		// TODO : RequestQueue is not used at all. some volleyer api that take a requestQueue will be added soon.
-		// verify(requestQueue).add(request);
+		verify(requestQueue).add(request);
 	}
 
 	@Test(expected = IllegalStateException.class)
@@ -203,7 +202,7 @@ public class RequestBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		// When
 		builder.execute();
 		// Then
@@ -216,7 +215,7 @@ public class RequestBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		Listener<String> listener = new Listener<String>(){
 
 			@Override
@@ -234,7 +233,7 @@ public class RequestBuilderTest {
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
-		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(configuration, url, method);
+		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		ErrorListener errorListener = new ErrorListener(){
 
 			@Override

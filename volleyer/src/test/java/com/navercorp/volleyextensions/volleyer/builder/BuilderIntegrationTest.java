@@ -46,14 +46,14 @@ public class BuilderIntegrationTest {
 
 	@Test
 	public void getBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
-		GetBuilder getBuilder = new GetBuilder(configuration, url);
+		GetBuilder getBuilder = new GetBuilder(requestQueue, configuration, url);
 		Request<String> request = createRequest(url, getBuilder);
 		assertRequest(url, HttpMethod.GET, request);
 	}
 
 	@Test
 	public void postBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
-		PostBuilder postBuilder = new PostBuilder(configuration, url);
+		PostBuilder postBuilder = new PostBuilder(requestQueue, configuration, url);
 		buildPostOptionsFor(postBuilder);
 		Request<String> request = createRequest(url, postBuilder);
 		assertRequest(url, HttpMethod.POST, request);
@@ -70,14 +70,14 @@ public class BuilderIntegrationTest {
 
 	@Test
 	public void putBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
-		PutBuilder putBuilder = new PutBuilder(configuration, url);
+		PutBuilder putBuilder = new PutBuilder(requestQueue, configuration, url);
 		Request<String> request = createRequest(url, putBuilder);
 		assertRequest(url, HttpMethod.PUT, request);
 	}
 
 	@Test
 	public void deleteBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
-		DeleteBuilder deleteBuilder = new DeleteBuilder(configuration, url);
+		DeleteBuilder deleteBuilder = new DeleteBuilder(requestQueue, configuration, url);
 		Request<String> request = createRequest(url, deleteBuilder);
 		assertRequest(url, HttpMethod.DELETE, request);
 	}

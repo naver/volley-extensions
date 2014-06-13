@@ -31,7 +31,7 @@ public class ResponseBuilderTest {
 		VolleyerConfiguration nullConfiguration = null;
 		Class<String> clazz = String.class;
 		// When & Then
-		new ResponseBuilder<String>(nullConfiguration, httpContent, clazz);
+		new ResponseBuilder<String>(requestQueue, nullConfiguration, httpContent, clazz);
 	}
 
 	@Test(expected=NullPointerException.class)
@@ -41,7 +41,7 @@ public class ResponseBuilderTest {
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
 		// When & Then
-		new ResponseBuilder<String>(configuration, nullHttpContent, clazz);
+		new ResponseBuilder<String>(requestQueue, configuration, nullHttpContent, clazz);
 	}
 	
 	@Test(expected=NullPointerException.class)
@@ -53,7 +53,7 @@ public class ResponseBuilderTest {
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> nullClazz = null;
 		// When & Then
-		new ResponseBuilder<String>(configuration, httpContent, nullClazz);
+		new ResponseBuilder<String>(requestQueue, configuration, httpContent, nullClazz);
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class ResponseBuilderTest {
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
-		ResponseBuilder<String> builder = new ResponseBuilder<String>(configuration, httpContent, clazz);
+		ResponseBuilder<String> builder = new ResponseBuilder<String>(requestQueue, configuration, httpContent, clazz);
 		Listener<String> listener = new Listener<String>(){
 			@Override
 			public void onResponse(String response) {
@@ -83,7 +83,7 @@ public class ResponseBuilderTest {
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
-		ResponseBuilder<String> builder = new ResponseBuilder<String>(configuration, httpContent, clazz);
+		ResponseBuilder<String> builder = new ResponseBuilder<String>(requestQueue, configuration, httpContent, clazz);
 		ErrorListener errorListener = new ErrorListener (){
 			@Override
 			public void onErrorResponse(VolleyError error) {
@@ -102,7 +102,7 @@ public class ResponseBuilderTest {
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
-		ResponseBuilder<String> builder = new ResponseBuilder<String>(configuration, httpContent, clazz);
+		ResponseBuilder<String> builder = new ResponseBuilder<String>(requestQueue, configuration, httpContent, clazz);
 		Listener<String> listener = new Listener<String>(){
 			@Override
 			public void onResponse(String response) {
@@ -121,7 +121,7 @@ public class ResponseBuilderTest {
 		HttpContent httpContent = new HttpContent(url, method);
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		Class<String> clazz = String.class;
-		ResponseBuilder<String> builder = new ResponseBuilder<String>(configuration, httpContent, clazz);
+		ResponseBuilder<String> builder = new ResponseBuilder<String>(requestQueue, configuration, httpContent, clazz);
 		ErrorListener errorListener = new ErrorListener (){
 			@Override
 			public void onErrorResponse(VolleyError error) {
