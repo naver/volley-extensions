@@ -1,4 +1,4 @@
-package com.navercorp.volleyextensions.volleyer;
+package com.navercorp.volleyextensions.volleyer.factory;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HttpStack;
+import com.navercorp.volleyextensions.volleyer.factory.DefaultRequestQueueFactory;
 
 import android.content.Context;
 

@@ -1,13 +1,12 @@
-package com.navercorp.volleyextensions.volleyer;
+package com.navercorp.volleyextensions.volleyer.factory;
 
 import static org.hamcrest.CoreMatchers.*;
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.navercorp.volleyextensions.volleyer.DefaultVolleyerConfigurationFactory;
 import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
+import com.navercorp.volleyextensions.volleyer.factory.DefaultVolleyerConfigurationFactory;
 import com.navercorp.volleyextensions.volleyer.request.creator.DefaultRequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.executor.DefaultRequestExecutor;
 import com.navercorp.volleyextensions.volleyer.response.parser.IntegratedNetworkResponseParser;

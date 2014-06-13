@@ -14,8 +14,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.navercorp.volleyextensions.volleyer.DefaultVolleyerConfigurationFactory;
 import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
+import com.navercorp.volleyextensions.volleyer.factory.DefaultVolleyerConfigurationFactory;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
 
 @RunWith(RobolectricTestRunner.class)

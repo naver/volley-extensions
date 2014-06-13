@@ -5,6 +5,7 @@ import java.util.WeakHashMap;
 
 import com.android.volley.RequestQueue;
 import com.navercorp.volleyextensions.volleyer.builder.*;
+import com.navercorp.volleyextensions.volleyer.factory.DefaultVolleyerConfigurationFactory;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
