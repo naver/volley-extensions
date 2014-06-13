@@ -10,7 +10,6 @@ import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.request.creator.RequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.executor.RequestExecutor;
 import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
-import com.navercorp.volleyextensions.volleyer.response.parser.StringNetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
 public class ResponseBuilder<T> {

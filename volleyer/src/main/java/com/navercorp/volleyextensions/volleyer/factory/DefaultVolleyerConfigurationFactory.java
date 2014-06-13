@@ -1,18 +1,13 @@
 package com.navercorp.volleyextensions.volleyer.factory;
 
-import android.util.Log;
-
-import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
 import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.request.creator.DefaultRequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.creator.RequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.executor.DefaultRequestExecutor;
 import com.navercorp.volleyextensions.volleyer.request.executor.RequestExecutor;
 import com.navercorp.volleyextensions.volleyer.response.parser.*;
-import com.navercorp.volleyextensions.volleyer.util.Assert;
 import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
 public class DefaultVolleyerConfigurationFactory {
