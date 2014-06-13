@@ -45,10 +45,14 @@ abstract class RequestBuilder<B extends RequestBuilder<B>> {
 		assertFinishState();
 
 		ResponseBuilder<T> builder = new ResponseBuilder<T>(requestQueue, configuration, httpContent, clazz);
+		markFinishState();
+		return builder;
+	}
+
+	protected final void markFinishState() {
 		isDoneToBuild = true;
 		// Let requestQueue be null for avoiding memory leak when this builder is referenced by some variable.
 		requestQueue = null;
-		return builder;
 	}
 
 	public ResponseBuilder<String> setListener(Listener<String> listener) {

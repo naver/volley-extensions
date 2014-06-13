@@ -67,12 +67,16 @@ class ResponseBuilder<T> {
 		setDefaultErrorListenerIfNull();
 		setDefaultResponseParserIfNull();
 
-		isDoneToBuild = true;
 		Request<T> request = buildRequest();
 		executeRequest(request);
+		markFinishState();
+		return request;
+	}
+
+	protected final void markFinishState() {
+		isDoneToBuild = true;
 		// Let requestQueue be null for avoiding memory leak when this builder is referenced by some variable.
 		requestQueue = null;
-		return request;
 	}
 
 	private void setDefaultListenerIfNull() {
