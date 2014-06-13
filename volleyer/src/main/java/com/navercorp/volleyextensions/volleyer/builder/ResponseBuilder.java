@@ -13,7 +13,7 @@ import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponsePa
 import com.navercorp.volleyextensions.volleyer.response.parser.StringNetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
-class ResponseBuilder<T> {
+public class ResponseBuilder<T> {
 	
 	private RequestQueue requestQueue;
 	private VolleyerConfiguration configuration;
