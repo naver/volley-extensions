@@ -10,15 +10,32 @@ import com.navercorp.volleyextensions.volleyer.request.creator.DefaultRequestCre
 import com.navercorp.volleyextensions.volleyer.request.creator.RequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.executor.DefaultRequestExecutor;
 import com.navercorp.volleyextensions.volleyer.request.executor.RequestExecutor;
-import com.navercorp.volleyextensions.volleyer.response.parser.IntegratedNetworkResponseParserBuilder;
-import com.navercorp.volleyextensions.volleyer.response.parser.Jackson2NetworkResponseParser;
-import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
-import com.navercorp.volleyextensions.volleyer.response.parser.SimpleXmlNetworkResponseParser;
+import com.navercorp.volleyextensions.volleyer.response.parser.*;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
 public class DefaultVolleyerConfigurationFactory {
+	/**
+	 * Default VolleyerConfiguration is immutable and properties of it are immutable too.
+	 * Internally, DefaultVolleyerConfigurationFactory keeps default VolleyerConfiguration as singleton.
+	 * 
+	 * @author Wonjun Kim
+	 *
+	 */
+	private static class ConfigurationHolder {
+		private final static VolleyerConfiguration configuration;
+		static {
+			RequestCreator requestCreator = createRequestCreator();
+			RequestExecutor requestExecutor = createRequestExecutor();
+			NetworkResponseParser networkResponseParser = createNetworkResponseParser();
+			ErrorListener errorListener = createErrorListener();
+			configuration = new VolleyerConfiguration(requestCreator, requestExecutor, networkResponseParser, errorListener);
+		}
 
+		private static VolleyerConfiguration getConfiguration() {
+			return configuration;
+		}
+	}
 	private static ErrorListener defaultErrorListener = new ErrorListener() {
 
 		@Override
@@ -55,12 +72,7 @@ public class DefaultVolleyerConfigurationFactory {
 	 * @return VolleyerConfiguration instance
 	 */
 	public static VolleyerConfiguration create() {
-		RequestCreator requestCreator = createRequestCreator();
-		RequestExecutor requestExecutor = createRequestExecutor();
-		NetworkResponseParser networkResponseParser = createNetworkResponseParser();
-		ErrorListener errorListener = createErrorListener();
-		VolleyerConfiguration configuration = new VolleyerConfiguration(requestCreator, requestExecutor, networkResponseParser, errorListener);
-		return configuration;
+		return ConfigurationHolder.getConfiguration();
 	}
 
 }

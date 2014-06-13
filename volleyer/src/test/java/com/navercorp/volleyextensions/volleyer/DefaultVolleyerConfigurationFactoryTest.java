@@ -1,5 +1,7 @@
 package com.navercorp.volleyextensions.volleyer;
 
+import static org.hamcrest.CoreMatchers.*;
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -11,6 +13,15 @@ import com.navercorp.volleyextensions.volleyer.request.executor.DefaultRequestEx
 import com.navercorp.volleyextensions.volleyer.response.parser.IntegratedNetworkResponseParser;
 
 public class DefaultVolleyerConfigurationFactoryTest {
+
+	@Test
+	public void volleyerConfigurationShouldSameInstance() {
+		// When
+		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
+		VolleyerConfiguration otherConfiguration = DefaultVolleyerConfigurationFactory.create();
+		// Then
+		assertThat(configuration, is(otherConfiguration));
+	}
 
 	@Test
 	public void volleyerConfigurationShouldContain() {
