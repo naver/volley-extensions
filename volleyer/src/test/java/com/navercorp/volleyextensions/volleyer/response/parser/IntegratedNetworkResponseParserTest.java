@@ -45,6 +45,20 @@ public class IntegratedNetworkResponseParserTest {
 	}
 
 	@Test
+	public void resultShouldBeNullWhenTargetClassIsVoid() {
+		// Given
+		networkResponse = new NetworkResponse(jsonContent.getBytes());
+		parsers = createDefaultParsersMap();
+		integratedResponseParser = createIntegratedNetworkResponseParser(parsers);
+		Class<Void> clazz = Void.class;
+		// When
+		Response<Void> response = integratedResponseParser.parseNetworkResponse(networkResponse, clazz);
+		// Then
+		assertNull(response.result);
+		assertNull(response.cacheEntry);
+	}
+
+	@Test
 	public void parserShouldSelectJsonMappedResponseParserWhenContentTypeIsApplicationJson() {
 		// Given
 		networkResponse = createJsonNetworkResponse();

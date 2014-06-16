@@ -69,9 +69,9 @@ abstract class RequestBuilder<B extends RequestBuilder<B>> {
 		return builder;
 	}
 
-	public Request<String> execute() {
+	public Request<Void> execute() {
 		assertFinishState();
-		ResponseBuilder<String> builder = setTargetClass(String.class);
+		ResponseBuilder<Void> builder = setTargetClass(Void.class);
 		return builder.execute();
 	}
 

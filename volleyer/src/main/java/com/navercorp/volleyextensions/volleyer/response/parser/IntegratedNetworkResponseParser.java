@@ -30,6 +30,11 @@ public class IntegratedNetworkResponseParser implements NetworkResponseParser {
 		Assert.notNull(response, "NetworkResponse");
 		Assert.notNull(clazz, "Target class token");
 
+		// Skip parsing if target class is {@code Void}
+		if (clazz == Void.class) {
+			return (Response<T>) Response.success(null, null);
+		}
+
 		// Use StringNetworkResponseParser if target class is String
 		if (clazz == String.class) {
 			return STRING_NETWORK_RESPONSE_PARSER.parseNetworkResponse(response, clazz);

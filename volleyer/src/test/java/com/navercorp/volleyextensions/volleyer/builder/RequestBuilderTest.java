@@ -191,7 +191,7 @@ public class RequestBuilderTest {
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		// When
-		Request<String> request = builder.execute();
+		Request<Void> request = builder.execute();
 		// Then
 		verify(requestQueue).add(request);
 	}
