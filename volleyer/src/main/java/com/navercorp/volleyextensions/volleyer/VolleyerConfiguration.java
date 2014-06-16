@@ -8,14 +8,6 @@ import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponsePa
 import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
 public class VolleyerConfiguration {
-	@SuppressWarnings("rawtypes")
-	private static final Listener listener = new Listener() {
-
-		@Override
-		public void onResponse(Object response) {
-			VolleyerLog.debug("RESPONSE : " + response);
-		}};
-
 	private RequestCreator requestCreator;
 	private RequestExecutor requestExecutor;
 	private NetworkResponseParser networkResponseParser;
@@ -38,11 +30,6 @@ public class VolleyerConfiguration {
 
 	public NetworkResponseParser getDefaultNetworkResponseParser() {
 		return networkResponseParser;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public Listener getDefaultListener() {
-		return listener;
 	}
 
 	public ErrorListener getDefaultErrorListener() {
