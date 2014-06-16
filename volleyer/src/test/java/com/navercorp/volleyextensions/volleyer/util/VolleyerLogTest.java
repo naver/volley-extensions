@@ -24,15 +24,11 @@ public class VolleyerLogTest {
 		VolleyerLog.info("Don't be suprised if exceptions are printed on console!");
 		VolleyerLog.info("*******************************************************");
 		VolleyerLog.debug("DEBUG");
-		VolleyerLog.debug("DEBUG", new Exception("Debug Test"));
+		VolleyerLog.debug(new Exception("Debug Test"), "DEBUG");
 		VolleyerLog.warn("WARN");
-		VolleyerLog.warn("WARN", new Exception("Warn Test"));
-		VolleyerLog.info("INFO");
-		VolleyerLog.info("INFO", new Exception("Info Test"));
+		VolleyerLog.warn(new Exception("Warn Test"), "WARN");
 		VolleyerLog.error("ERROR");
-		VolleyerLog.error("ERROR", new Exception("Error Test"));
-		VolleyerLog.verbose("VERBOSE");
-		VolleyerLog.verbose("VERBOSE", new Exception("Verbose Test"));
+		VolleyerLog.error(new Exception("Error Test"), "ERROR");
 		VolleyerLog.info("**************************");
 		VolleyerLog.info("The end of VolleyerLogTest");
 		VolleyerLog.info("**************************");

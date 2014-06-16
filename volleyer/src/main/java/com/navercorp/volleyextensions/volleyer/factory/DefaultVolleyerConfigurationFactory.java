@@ -36,7 +36,7 @@ public class DefaultVolleyerConfigurationFactory {
 
 		@Override
 		public void onErrorResponse(VolleyError error) {
-			VolleyerLog.debug("ERROR : ", error);
+			VolleyerLog.debug(error, "ERROR : ");
 		}};
 
 	public static NetworkResponseParser createNetworkResponseParser() {

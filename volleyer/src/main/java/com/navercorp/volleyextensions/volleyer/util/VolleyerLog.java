@@ -4,70 +4,49 @@ import android.util.Log;
 
 public class VolleyerLog {
 	public static final String TAG = "Volleyer";
-	
-	public static void info(String message) {
-		log(Log.INFO, message);
-	}
+	public static final int LEVEL_PRIORITY = Log.DEBUG;
 
-	public static void info(String message, Throwable throwable) {
-		int level = Log.INFO;
-		if (Log.isLoggable(TAG, level)) {
-			Log.i(TAG, message, throwable);
+	public static void debug(String format, Object... args) {
+		if (isLoggable()) {
+			Log.d(TAG, buildMessage(format, args));
 		}
 	}
 
-	public static void debug(String message) {
-		log(Log.DEBUG, message);
-	}
-
-	public static void debug(String message, Throwable throwable) {
-		int level = Log.DEBUG;
-		if (Log.isLoggable(TAG, level)) {
-			Log.d(TAG, message, throwable);
+	public static void debug(Throwable throwable, String format, Object... args) {
+		if (isLoggable()) {
+			Log.d(TAG, buildMessage(format, args), throwable);
 		}
 	}
 
-	public static void warn(String message) {
-		log(Log.WARN, message);
+	public static void info(String format, Object... args) {
+		Log.i(TAG, buildMessage(format, args));
 	}
 
-	public static void warn(String message, Throwable throwable) {
-		int level = Log.WARN;
-		if (Log.isLoggable(TAG, level)) {
-			Log.w(TAG, message, throwable);
-		}
+	public static void info(Throwable throwable, String format, Object... args) {
+		Log.i(TAG, buildMessage(format, args), throwable);
 	}
 
-	public static void verbose(String message) {
-		log(Log.VERBOSE, message);
+	public static void warn(String format, Object... args) {
+		Log.w(TAG, buildMessage(format, args));
 	}
 
-	public static void verbose(String message, Throwable throwable) {
-		int level = Log.VERBOSE;
-		if (Log.isLoggable(TAG, level)) {
-			Log.v(TAG, message, throwable);
-		}
+	public static void warn(Throwable throwable, String format, Object... args) {
+		Log.w(TAG, buildMessage(format, args), throwable);
 	}
 
-	public static void error(String message) {
-		log(Log.ERROR, message);
+	public static void error(String format, Object... args) {
+		Log.e(TAG, buildMessage(format, args));
 	}
 
-	public static void error(String message, Throwable throwable) {
-		int level = Log.ERROR;
-		if (Log.isLoggable(TAG, level)) {
-			Log.e(TAG, message, throwable);
-		}
+	public static void error(Throwable throwable, String format, Object... args) {
+		Log.e(TAG, buildMessage(format, args), throwable);
 	}
 
-	/**
-	 * Log if {@code TAG} is on {@code level}.
-	 * @param level
-	 * @param message
-	 */
-	public static void log(int level, String message) {
-		if (Log.isLoggable(TAG, level)) {
-			Log.println(level, TAG, message);
-		}
+	private static String buildMessage(String format, Object... args) {
+		return String.format(format, args);
+	}
+
+	private static boolean isLoggable() {
+		return Log.isLoggable(TAG, LEVEL_PRIORITY);
 	}
 }
