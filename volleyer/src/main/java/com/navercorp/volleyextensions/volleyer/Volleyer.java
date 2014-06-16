@@ -35,8 +35,9 @@ import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
  *
  *
  * <b>NOTE</b> : RequestQueue must be already started before using volleyer. Volleyer doesn't control RequestQueue.
- * <b>WARNING</b> : Don't make a reference to a volleyer instance. ex) <b>{@code Volleyer someVolleyer = volleyer(requestQueue);}</b>
- * 	It may causes memory leak by keeping a reference to it, because each volleyer contains a reference to {@code RequestQueue}.     
+ * <b>WARNING</b> : Don't make a direct reference to a volleyer instance. ex) <b>{@code Volleyer someVolleyer = volleyer(requestQueue);}</b>
+ * 	It may causes that RequestQueue remains on memory even if it isn't necessary any more.
+ * 	This is because each volleyer contains a reference to {@code RequestQueue}.
  * </pre>
  * @author Wonjun Kim
  *
