@@ -28,11 +28,11 @@ public class VolleyerConfiguration {
 		return requestExecutor;
 	}
 
-	public NetworkResponseParser getDefaultNetworkResponseParser() {
+	public NetworkResponseParser getFallbackNetworkResponseParser() {
 		return networkResponseParser;
 	}
 
-	public ErrorListener getDefaultErrorListener() {
+	public ErrorListener getFallbackErrorListener() {
 		return errorListener;
 	}
 }

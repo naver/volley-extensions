@@ -27,8 +27,8 @@ public class DefaultVolleyerConfigurationFactoryTest {
 		// When
 		VolleyerConfiguration configuration = DefaultVolleyerConfigurationFactory.create();
 		// Then
-		assertEquals(configuration.getDefaultNetworkResponseParser().getClass(), IntegratedNetworkResponseParser.class);
-		assertEquals(configuration.getDefaultErrorListener(), DefaultVolleyerConfigurationFactory.createErrorListener());
+		assertEquals(configuration.getFallbackNetworkResponseParser().getClass(), IntegratedNetworkResponseParser.class);
+		assertEquals(configuration.getFallbackErrorListener(), DefaultVolleyerConfigurationFactory.createErrorListener());
 		assertEquals(configuration.getRequestCreator().getClass(), DefaultRequestCreator.class);
 		assertEquals(configuration.getRequestExecutor().getClass(), DefaultRequestExecutor.class);
 	}

@@ -62,9 +62,9 @@ public class ResponseBuilder<T> {
 	}
 
 	public Request<T> execute() {
-		setDefaultListenerIfNull();
-		setDefaultErrorListenerIfNull();
-		setDefaultResponseParserIfNull();
+		setFallbackListenerIfNull();
+		setFallbackErrorListenerIfNull();
+		setFallbackResponseParserIfNull();
 
 		Request<T> request = buildRequest();
 		executeRequest(request);
@@ -78,7 +78,7 @@ public class ResponseBuilder<T> {
 		requestQueue = null;
 	}
 
-	private void setDefaultListenerIfNull() {
+	private void setFallbackListenerIfNull() {
 		if (listener != null) {
 			return;
 		}
@@ -94,19 +94,19 @@ public class ResponseBuilder<T> {
 		};
 	}
 
-	private void setDefaultErrorListenerIfNull() {
+	private void setFallbackErrorListenerIfNull() {
 		if (errorListener != null) {
 			return;
 		}
-		errorListener = configuration.getDefaultErrorListener();
+		errorListener = configuration.getFallbackErrorListener();
 	}
 
-	private void setDefaultResponseParserIfNull() {
+	private void setFallbackResponseParserIfNull() {
 		if (responseParser != null) {
 			return;
 		}
 
-		responseParser = configuration.getDefaultNetworkResponseParser();
+		responseParser = configuration.getFallbackNetworkResponseParser();
 	}
 
 	private Request<T> buildRequest() {
