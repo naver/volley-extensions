@@ -98,15 +98,7 @@ public class ResponseBuilder<T> {
 		if (errorListener != null) {
 			return;
 		}
-		errorListener = createEmptyErrorListener();
-	}
-
-	private ErrorListener createEmptyErrorListener() {
-		return new ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-			}
-		};
+		errorListener = configuration.getDefaultErrorListener();
 	}
 
 	private void setDefaultResponseParserIfNull() {
