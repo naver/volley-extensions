@@ -17,7 +17,7 @@ public class IntegratedNetworkResponseParserBuilderTest {
 	public void addParserShouldUseGetContentTypesMethodWhenTypedNetworkResponseParserIsTheArgument() {
 		// Given
 		MockTypedNetworkResponseParser typedResponseParser = new MockTypedNetworkResponseParser();
-		IntegratedNetworkResponseParserBuilder builder = new IntegratedNetworkResponseParserBuilder();
+		IntegratedNetworkResponseParser.Builder builder = new IntegratedNetworkResponseParser.Builder();
 		// When
 		builder.addParser(typedResponseParser);
 		// Then
@@ -28,7 +28,7 @@ public class IntegratedNetworkResponseParserBuilderTest {
 	public void addParserShouldThrowNpeWhenTypedNetworkResponseParserIsNull() {
 		// Given
 		TypedNetworkResponseParser typedResponseParser = null;
-		IntegratedNetworkResponseParserBuilder builder = new IntegratedNetworkResponseParserBuilder();
+		IntegratedNetworkResponseParser.Builder builder = new IntegratedNetworkResponseParser.Builder();
 		// When & Then
 		builder.addParser(typedResponseParser);
 	}
@@ -37,7 +37,7 @@ public class IntegratedNetworkResponseParserBuilderTest {
 	public void addParserShouldThrowNpeWhenNetworkResponseParserIsNull() {
 		// Given
 		NetworkResponseParser responseParser = null;
-		IntegratedNetworkResponseParserBuilder builder = new IntegratedNetworkResponseParserBuilder();
+		IntegratedNetworkResponseParser.Builder builder = new IntegratedNetworkResponseParser.Builder();
 		// When & Then
 		builder.addParser(ContentType.CONTENT_TYPE_APPLICATION_JSON, responseParser);
 	}
@@ -46,7 +46,7 @@ public class IntegratedNetworkResponseParserBuilderTest {
 	public void addParserShouldThrowNpeWhenNetworkContentTypeIsNull() {
 		// Given
 		NetworkResponseParser responseParser = mock(NetworkResponseParser.class);
-		IntegratedNetworkResponseParserBuilder builder = new IntegratedNetworkResponseParserBuilder();
+		IntegratedNetworkResponseParser.Builder builder = new IntegratedNetworkResponseParser.Builder();
 		ContentType nullContentType = null;
 		// When & Then
 		builder.addParser(nullContentType, responseParser);
@@ -57,7 +57,7 @@ public class IntegratedNetworkResponseParserBuilderTest {
 		// Given
 		TypedNetworkResponseParser typedResponseParser = null;
 		// When
-		IntegratedNetworkResponseParser integratedResponseParser = new IntegratedNetworkResponseParserBuilder()
+		IntegratedNetworkResponseParser integratedResponseParser = new IntegratedNetworkResponseParser.Builder()
 																		.addParser(typedResponseParser)
 																		.build();
 		// Then

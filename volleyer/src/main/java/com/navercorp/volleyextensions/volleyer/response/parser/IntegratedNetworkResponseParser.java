@@ -1,6 +1,7 @@
 package com.navercorp.volleyextensions.volleyer.response.parser;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.android.volley.NetworkResponse;
@@ -9,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.navercorp.volleyextensions.volleyer.exception.UnsupportedContentTypeException;
 import com.navercorp.volleyextensions.volleyer.http.ContentType;
+import com.navercorp.volleyextensions.volleyer.http.ContentTypes;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
 public class IntegratedNetworkResponseParser implements NetworkResponseParser {
@@ -62,5 +64,43 @@ public class IntegratedNetworkResponseParser implements NetworkResponseParser {
 
 	protected String getResponseHeader(NetworkResponse response, String headerKey) {
 		return response.headers.get(headerKey);
+	}
+
+	/**
+	 * Builder class for IntegratedNetworkResponseParser
+	 * @author Wonjun Kim
+	 *
+	 */
+	public static class Builder {
+		private final Map<ContentType, NetworkResponseParser> parsers = new HashMap<ContentType, NetworkResponseParser>();
+
+		public Builder addParser(TypedNetworkResponseParser typedParser) {
+			Assert.notNull(typedParser, "TypedNetworkResponseParser");
+
+			ContentTypes contentTypes = typedParser.getContentTypes();
+			addParserForContentTypes(typedParser, contentTypes);
+
+			return this;
+		}
+
+		private void addParserForContentTypes(TypedNetworkResponseParser typedParser, ContentTypes contentTypes) {
+			List<ContentType> contentTypeList = contentTypes.getListOfContentTypes();
+			for(ContentType contentType : contentTypeList) {
+				addParser(contentType, typedParser);
+			}
+		}
+
+		public Builder addParser(ContentType contentType, NetworkResponseParser parser) {
+			Assert.notNull(contentType, "ContentType");
+			Assert.notNull(parser, "NetworkResponseParser");
+
+			parsers.put(contentType, parser);
+
+			return this;
+		}
+
+		public IntegratedNetworkResponseParser build() {
+			return new IntegratedNetworkResponseParser(parsers);
+		}
 	}
 }
