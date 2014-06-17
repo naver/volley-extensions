@@ -24,7 +24,6 @@ public class IntegratedNetworkResponseParser implements NetworkResponseParser {
 		this.parsers.putAll(parsers);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> Response<T> parseNetworkResponse(NetworkResponse response, Class<T> clazz) {
 		Assert.notNull(response, "NetworkResponse");
@@ -32,7 +31,7 @@ public class IntegratedNetworkResponseParser implements NetworkResponseParser {
 
 		// Skip parsing if target class is {@code Void}
 		if (clazz == Void.class) {
-			return (Response<T>) Response.success(null, null);
+			return Response.success(null, null);
 		}
 
 		// Use StringNetworkResponseParser if target class is String
@@ -42,7 +41,9 @@ public class IntegratedNetworkResponseParser implements NetworkResponseParser {
 
 		// Return the response without using any other parser if target class is NetworkResponse
 		if (clazz == NetworkResponse.class) {
-			return (Response<T>) Response.success(response, HttpHeaderParser.parseCacheHeaders(response));
+			@SuppressWarnings("unchecked")
+			Response<T> successResponse = (Response<T>) Response.success(response, HttpHeaderParser.parseCacheHeaders(response));
+			return successResponse;
 		}
 
 		// Get a content type string from the response header
