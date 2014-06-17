@@ -67,6 +67,10 @@ public class ResponseBuilder<T> {
 		setFallbackResponseParserIfNull();
 
 		Request<T> request = buildRequest();
+		// Do not execute if request is null
+		if (request == null) {
+			return request;
+		}
 		executeRequest(request);
 		markFinishState();
 		return request;

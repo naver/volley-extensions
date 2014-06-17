@@ -8,10 +8,6 @@ public class DefaultRequestExecutor implements RequestExecutor {
 
 	@Override
 	public <T> void executeRequest(RequestQueue requestQueue, Request<T> request) {
-		if (request == null) {
-			return;
-		}
-
 		if (requestQueue == null) {
 			deliverError(request, "RequestQueue is null. It cannot execute the request of " + request.toString() + ".");
 			return;
