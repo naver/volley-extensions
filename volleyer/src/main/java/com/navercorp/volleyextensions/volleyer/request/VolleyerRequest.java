@@ -9,10 +9,12 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
+import com.navercorp.volleyextensions.volleyer.multipart.Multipart;
+import com.navercorp.volleyextensions.volleyer.multipart.MultipartContainer;
 import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
-public class VolleyerRequest<T> extends Request<T> {
+public class VolleyerRequest<T> extends Request<T> implements MultipartContainer {
 
 	private NetworkResponseParser responseParser;
 	private Listener<T> listener;
@@ -56,5 +58,15 @@ public class VolleyerRequest<T> extends Request<T> {
 
 	protected Response<T> parseNetworkResponse(NetworkResponse response) {
 		return responseParser.parseNetworkResponse(response, clazz);
+	}
+
+	@Override
+	public boolean hasMultipart() {
+		return httpContent.hasMultipart();
+	}
+
+	@Override
+	public Multipart getMultipart() {
+		return httpContent.getMultipart();
 	}
 }

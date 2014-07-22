@@ -1,8 +1,13 @@
 package com.navercorp.volleyextensions.volleyer.builder;
 
+import java.io.File;
+
 import com.android.volley.RequestQueue;
 import com.navercorp.volleyextensions.volleyer.VolleyerConfiguration;
 import com.navercorp.volleyextensions.volleyer.http.HttpMethod;
+import com.navercorp.volleyextensions.volleyer.multipart.FilePart;
+import com.navercorp.volleyextensions.volleyer.multipart.Part;
+import com.navercorp.volleyextensions.volleyer.multipart.StringPart;
 import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
 
 public class PostBuilder extends RequestBuilder<PostBuilder> {
@@ -38,5 +43,24 @@ public class PostBuilder extends RequestBuilder<PostBuilder> {
 		}
 
 		return isNull;
+	}
+
+	public PostBuilder addFilePart(File file) {
+		return addFilePart(file.getName(), file);
+	}
+
+	public PostBuilder addFilePart(String name, File file) {
+		httpContent.addPart(new FilePart(name, file));
+		return this;
+	}
+
+	public PostBuilder addStringPart(String name, String value) {
+		httpContent.addPart(new StringPart(name, value));
+		return this;
+	}
+
+	public PostBuilder addPart(Part part) {
+		httpContent.addPart(part);
+		return this;
 	}
 }
