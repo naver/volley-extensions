@@ -49,7 +49,7 @@ public class DefaultRequestQueueFactoryTest {
 	@Test
 	public void factoryShouldReturnHttpStack() {
 		// When
-		HttpStack httpStack = DefaultRequestQueueFactory.getDefaultStack();
+		HttpStack httpStack =  HttpStackFactory.createDefaultHttpStack();
 		// Then
 		assertNotNull(httpStack);
 	}
@@ -57,7 +57,7 @@ public class DefaultRequestQueueFactoryTest {
 	@Test
 	public void factoryShouldReturnBasicNetwork() {
 		// Given
-		HttpStack httpStack = DefaultRequestQueueFactory.getDefaultStack();
+		HttpStack httpStack = HttpStackFactory.createDefaultHttpStack();
 		// When
 		Network network = DefaultRequestQueueFactory.getDefaultNetwork(httpStack);
 		// Then

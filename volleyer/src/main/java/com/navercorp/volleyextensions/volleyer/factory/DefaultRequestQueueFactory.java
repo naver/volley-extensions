@@ -10,7 +10,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HttpStack;
-import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.NoCache;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 
@@ -19,7 +18,7 @@ public class DefaultRequestQueueFactory {
 	public static RequestQueue create(Context context) {
 		Assert.notNull(context, "Context");
 		Cache diskCache = getDefaultDiskCache(context);
-		HttpStack httpStack = getDefaultStack();
+		HttpStack httpStack = HttpStackFactory.createDefaultHttpStack();
 		Network network = getDefaultNetwork(httpStack);
 
 		return new RequestQueue(diskCache, network);
@@ -28,10 +27,6 @@ public class DefaultRequestQueueFactory {
 	public static Network getDefaultNetwork(HttpStack httpStack) {
 		Assert.notNull(httpStack, "HttpStack");
 		return new BasicNetwork(httpStack);
-	}
-
-	public static HttpStack getDefaultStack() {
-		return new HurlStack();
 	}
 
 	public static Cache getDefaultDiskCache(Context context) {
