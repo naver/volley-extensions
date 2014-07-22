@@ -18,6 +18,8 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.toolbox.HttpStack;
+import com.navercorp.volleyextensions.volleyer.multipart.Multipart;
+import com.navercorp.volleyextensions.volleyer.multipart.MultipartContainer;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -32,6 +34,7 @@ import org.apache.http.message.BasicStatusLine;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -50,9 +53,10 @@ import javax.net.ssl.SSLSocketFactory;
  * //github.com/mcxiaoke/android-volley/blob/1.0.2/src/com/android/volley/toolbox/HurlStack.java
  * </pre>
  */
-public class MultipartHurlStack implements HttpStack {
+public class MultipartHurlStack implements MultipartHttpStack {
 
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
+	private static final int DEFAULT_CHUNK_LENGTH = 1024;
 
     /**
      * An interface for transforming URLs before use.
@@ -107,6 +111,7 @@ public class MultipartHurlStack implements HttpStack {
         for (String headerName : map.keySet()) {
             connection.addRequestProperty(headerName, map.get(headerName));
         }
+
         setConnectionParametersForRequest(connection, request);
         // Initialize HttpResponse with data from the HttpURLConnection.
         ProtocolVersion protocolVersion = new ProtocolVersion("HTTP", 1, 1);
@@ -211,11 +216,11 @@ public class MultipartHurlStack implements HttpStack {
                 break;
             case Method.POST:
                 connection.setRequestMethod("POST");
-                addBodyIfExists(connection, request);
+                addMultipartIfExists(connection, request);
                 break;
             case Method.PUT:
                 connection.setRequestMethod("PUT");
-                addBodyIfExists(connection, request);
+                addMultipartIfExists(connection, request);
                 break;
             case Method.HEAD:
                 connection.setRequestMethod("HEAD");
@@ -227,23 +232,42 @@ public class MultipartHurlStack implements HttpStack {
                 connection.setRequestMethod("TRACE");
                 break;
             case Method.PATCH:
-                addBodyIfExists(connection, request);
                 connection.setRequestMethod("PATCH");
+                addMultipartIfExists(connection, request);
                 break;
             default:
                 throw new IllegalStateException("Unknown method type.");
         }
     }
 
-    private static void addBodyIfExists(HttpURLConnection connection, Request<?> request)
+    private static void addMultipartIfExists(HttpURLConnection connection, Request<?> request)
             throws IOException, AuthFailureError {
-        byte[] body = request.getBody();
-        if (body != null) {
+        OutputStream os = null;
+        try {
+            if (!(request instanceof MultipartContainer)) {
+                return;
+            }
+
+            MultipartContainer container = (MultipartContainer) request;
+            if (!container.hasMultipart()) {
+                return;
+            }
+
+            Multipart multipart = container.getMultipart();
+            if (multipart == null) {
+                return;
+            }
+
             connection.setDoOutput(true);
-            connection.addRequestProperty(HEADER_CONTENT_TYPE, request.getBodyContentType());
-            DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-            out.write(body);
-            out.close();
+            connection.addRequestProperty("Content-Type", multipart.getContentType());
+            connection.setChunkedStreamingMode(DEFAULT_CHUNK_LENGTH);
+            os = connection.getOutputStream();
+            multipart.write(os);
+            os.flush();
+        } finally {
+            if (os != null) {
+                os.close();
+            }
         }
     }
 }

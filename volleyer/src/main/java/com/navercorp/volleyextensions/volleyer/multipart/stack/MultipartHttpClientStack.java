@@ -17,7 +17,9 @@ package com.navercorp.volleyextensions.volleyer.multipart.stack;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
-import com.android.volley.toolbox.HttpStack;
+import com.navercorp.volleyextensions.volleyer.multipart.HttpEntityWrapper;
+import com.navercorp.volleyextensions.volleyer.multipart.Multipart;
+import com.navercorp.volleyextensions.volleyer.multipart.MultipartContainer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -51,7 +53,7 @@ import java.util.Map;
  * //github.com/mcxiaoke/android-volley/blob/1.0.2/src/com/android/volley/toolbox/HttpClientStack.java
  * </pre>
  */
-public class MultipartHttpClientStack implements HttpStack {
+public class MultipartHttpClientStack implements MultipartHttpStack {
     protected final HttpClient mClient;
 
     private final static String HEADER_CONTENT_TYPE = "Content-Type";
@@ -120,14 +122,12 @@ public class MultipartHttpClientStack implements HttpStack {
                 return new HttpDelete(request.getUrl());
             case Method.POST: {
                 HttpPost postRequest = new HttpPost(request.getUrl());
-                postRequest.addHeader(HEADER_CONTENT_TYPE, request.getBodyContentType());
-                setEntityIfNonEmptyBody(postRequest, request);
+                setEntityIfNonEmptyMultipart(postRequest, request);
                 return postRequest;
             }
             case Method.PUT: {
                 HttpPut putRequest = new HttpPut(request.getUrl());
-                putRequest.addHeader(HEADER_CONTENT_TYPE, request.getBodyContentType());
-                setEntityIfNonEmptyBody(putRequest, request);
+                setEntityIfNonEmptyMultipart(putRequest, request);
                 return putRequest;
             }
             case Method.HEAD:
@@ -139,7 +139,7 @@ public class MultipartHttpClientStack implements HttpStack {
             case Method.PATCH: {
                 HttpPatch patchRequest = new HttpPatch(request.getUrl());
                 patchRequest.addHeader(HEADER_CONTENT_TYPE, request.getBodyContentType());
-                setEntityIfNonEmptyBody(patchRequest, request);
+                setEntityIfNonEmptyMultipart(patchRequest, request);
                 return patchRequest;
             }
             default:
@@ -147,14 +147,30 @@ public class MultipartHttpClientStack implements HttpStack {
         }
     }
 
-    private static void setEntityIfNonEmptyBody(HttpEntityEnclosingRequestBase httpRequest,
+    private static void setEntityIfNonEmptyMultipart(HttpEntityEnclosingRequestBase httpRequest,
             Request<?> request) throws AuthFailureError {
-        byte[] body = request.getBody();
-        if (body != null) {
-            HttpEntity entity = new ByteArrayEntity(body);
-            httpRequest.setEntity(entity);
+        if (!(request instanceof MultipartContainer)) {
+            return;
         }
+
+        MultipartContainer container = (MultipartContainer) request;
+        if (!container.hasMultipart()) {
+            return;
+        }
+
+        Multipart multipart = container.getMultipart();
+        if (multipart == null) {
+            return;
+        }
+        httpRequest.addHeader("Content-Type", multipart.getContentType());
+        HttpEntity entity = createMultipartHttpEntity(multipart);
+        httpRequest.setEntity(entity);
     }
+
+	private static HttpEntity createMultipartHttpEntity(Multipart multipart) {
+		HttpEntity entity = new HttpEntityWrapper(multipart);
+		return entity;
+	}
 
     /**
      * Called before the request is executed using the underlying HttpClient.
