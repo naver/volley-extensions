@@ -6,7 +6,7 @@
 	<parent>
 			<groupId>com.navercorp.volleyextensions</groupId>
 			<artifactId>samples</artifactId>
-			<version>1.1.1</version>
+			<version>1.2.0-SNAPSHOT</version>
 			<relativePath>../pom.xml</relativePath>
 	</parent>
 	<properties>
@@ -15,7 +15,7 @@
 		<android.platform>17</android.platform>
 		<android-support.version>r7</android-support.version>
 		<java.version>1.6</java.version>
-		<volley-ext.version>1.1.1</volley-ext.version>
+		<volley-ext.version>1.2.0-SNAPSHOT</volley-ext.version>
 	</properties>
 	<dependencies>
 		<dependency>
