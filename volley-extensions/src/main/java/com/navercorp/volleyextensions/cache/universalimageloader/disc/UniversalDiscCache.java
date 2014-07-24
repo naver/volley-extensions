@@ -85,11 +85,10 @@ public class UniversalDiscCache implements Cache {
 		try {
 			cis = new CountingInputStream(new FileInputStream(file));
 
-			CacheHeader.readHeader(cis); // eat header
+			CacheHeader header = CacheHeader.readHeader(cis); // eat header
 			byte[] data = StreamUtils.streamToBytes(cis,
 					(int) (file.length() - cis.bytesRead));
 
-			CacheHeader header = new CacheHeader();
 			return header.toCacheEntry(data);
 		} catch (IOException e) {
 			VolleyLog.e(e, "Exception in file path %s", file.getAbsolutePath());

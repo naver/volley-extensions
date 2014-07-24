@@ -18,8 +18,10 @@ package com.navercorp.volleyextensions.cache.universalimageloader.disc;
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.io.File;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -109,4 +111,35 @@ public class UniversalDiscCacheTest {
 		verify(delegate).put(keyForTest, file);
 	}
 
+	@Test
+	public void shouldContainEntryValuesFromCache() {
+		// Given
+		Entry entry = new Entry();
+		entry.data = new byte[] { 0x01, 0x01, 0x02 };
+		entry.etag = "tag";
+		entry.ttl = 1000;
+		entry.softTtl = 5321;
+		entry.serverDate = 1234;
+		entry.responseHeaders = new HashMap<String, String>(){{
+			put("header1", "value1");
+			put("header2", "value2");
+		}};
+
+		String keyForTest = "test";
+		// make a file for real
+		File file = new File("realfile");
+		given(delegate.get(keyForTest)).willReturn(file);
+		inOrder(delegate);
+		// When
+		discCache.put(keyForTest, entry);
+		Entry newEntry = discCache.get(keyForTest);
+		file.delete();
+		// Then
+		assertThat(newEntry.data, is(entry.data));
+		assertThat(newEntry.etag, is(entry.etag));
+		assertThat(newEntry.ttl, is(entry.ttl));
+		assertThat(newEntry.softTtl, is(entry.softTtl));
+		assertThat(newEntry.serverDate, is(entry.serverDate));
+		assertThat(newEntry.responseHeaders, is(entry.responseHeaders));
+	}
 }
