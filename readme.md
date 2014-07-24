@@ -6,20 +6,20 @@ It provides useful classes such as various requests, disk caches, memory caches,
 
 # Features and usage
 ## Request classes supporting JSON type of the response
-### [JacksonRequest](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/request/JacksonRequest.java)
+### [JacksonRequest](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/request/JacksonRequest.java)
 - JSON parsing with [Jackson 1.x](http://jackson.codehaus.org/) library
 
 		Request<Person> request = new JacksonRequest<Person>(url, Person.class, listener, errorListener);
 		requestQueue.add(request);
 
-### [Jackson2Request](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/request/Jackson2Request.java)
+### [Jackson2Request](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/request/Jackson2Request.java)
 - JSON parsing with [Jackson 2.x](http://wiki.fasterxml.com/JacksonHome) library
 
 		Request<Person> request = new Jackson2Request<Person>(url, Person.class, listener, errorListener);
 		requestQueue.add(request);
 
 ## Request classes supporting XML type of the response
-### [SimpleXmlRequest](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/request/SimpleXmlRequest.java)
+### [SimpleXmlRequest](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/request/SimpleXmlRequest.java)
 - XML parsing with [Simple XML](http://simple.sourceforge.net/) library
 
 		Request<Person> request = new SimpleXmlRequest<Person>(url, Person.class, listener, errorListener);
@@ -27,7 +27,7 @@ It provides useful classes such as various requests, disk caches, memory caches,
 		
 ## Disk caches
 
-### [Improved DiskBasedCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/disk/DiskBasedCache.java)
+### [Improved DiskBasedCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/disk/DiskBasedCache.java)
 Improved `DiskBasedCache` is a version of which has been fixed the performance issue on `initialize()` method. Click [here](http://stackoverflow.com/questions/20916478/performance-issue-with-volleys-diskbasedcache) if you want to know the issue in detail.
 
 The issue has not been resolved in official Volley yet. so you need to use this version instead of original `DiskBasedCache`.
@@ -43,19 +43,19 @@ You can use the cache as below,
 										/* Disc cache's instance here */, 
 										new BasicNetwork(new HurlStack()));
 
-#### [UniversalFileCountLimitedDiscCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalFileCountLimitedDiscCache.java)
+#### [UniversalFileCountLimitedDiscCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalFileCountLimitedDiscCache.java)
 - Disc cache limited by file count. If file count in cache directory exceeds specified limit then file with the most oldest last usage date will be deleted.
 - An adapter class of [FileCountLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/FileCountLimitedDiscCache.java)
 
-#### [UniversalLimitedAgeDiscCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalLimitedAgeDiscCache.java)
+#### [UniversalLimitedAgeDiscCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalLimitedAgeDiscCache.java)
 - Cache which deletes files which were loaded more than defined time. Cache size is unlimited.
 - An adapter class of [LimitedAgeDiscCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/LimitedAgeDiscCache.java)
 
-#### [UniversalTotalSizeLimitedDiscCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalTotalSizeLimitedDiscCache.java)
+#### [UniversalTotalSizeLimitedDiscCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalTotalSizeLimitedDiscCache.java)
 - Cache limited by total cache size. If cache size exceeds specified limit then file with the most oldest last usage date will be deleted.
 - An adapter class of [TotalSizeLimitedDiscCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/TotalSizeLimitedDiscCache.java)
 
-#### [UniversalUnlimitedDiscCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalUnlimitedDiscCache.java)
+#### [UniversalUnlimitedDiscCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/disc/impl/UniversalUnlimitedDiscCache.java)
 - The fastest cache, doesn't limit cache size.
 - An adapter class of [UnlimitedDiscCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/disc/impl/UnlimitedDiscCache.java)
 
@@ -69,36 +69,36 @@ You can use the cache as below,
 		imageLoader = new ImageLoader(requestQueue, new UniversalLruMemoryCache(cacheSize)
 													/* ImageCache's instance here */);
 
-#### [UniversalFifoLimitedMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalFifoLimitedMemoryCache.java)
+#### [UniversalFifoLimitedMemoryCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalFifoLimitedMemoryCache.java)
 - Size of all stored bitmaps will not to exceed size limit. When cache reaches limit size then cache clearing is processed by FIFO principle.
 - An adapter class of [FIFOLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FIFOLimitedMemoryCache.java)
 
-#### [UniversalFuzzyKeyMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalFuzzyKeyMemoryCache.java)
+#### [UniversalFuzzyKeyMemoryCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalFuzzyKeyMemoryCache.java)
 - Some different keys are considered as equals using `java.util.Comparator`, And when you try to put some value into cache by key so entries with "equals" keys will be removed from cache before. 
 (_NOTE : Normally you don't need to use this class._)
 - An adapter class of [FuzzyKeyMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/FuzzyKeyMemoryCache.java)
 
-#### [UniversalLargestLimitedMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalLargestLimitedMemoryCache.java)
+#### [UniversalLargestLimitedMemoryCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalLargestLimitedMemoryCache.java)
 - The largest bitmap is deleted when cache size limit is exceeded.
 - An adapter class of [LargestLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LargestLimitedMemoryCache.java)
 
-#### [UniversalLimitedAgeMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalLimitedAgeMemoryCache.java)
+#### [UniversalLimitedAgeMemoryCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalLimitedAgeMemoryCache.java)
 - Cached object is deleted when its age exceeds defined value.
 - An adapter class of [LimitedAgeMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LimitedAgeMemoryCache.java)
 
-#### [UniversalLruLimitedMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalLruLimitedMemoryCache.java)
+#### [UniversalLruLimitedMemoryCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalLruLimitedMemoryCache.java)
 - Least recently used bitmap is deleted when cache size limit is exceeded.
 - An adapter class of [LRULimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LRULimitedMemoryCache.java)
 
-#### [UniversalLruMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalLruMemoryCache.java)
+#### [UniversalLruMemoryCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalLruMemoryCache.java)
 - Least recently used bitmap is deleted when cache size limit is exceeded.
 - An adapter class of [LruMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/LruMemoryCache.java)
 
-#### [UniversalUsingFreqLimitedMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalUsingFreqLimitedMemoryCache.java)
+#### [UniversalUsingFreqLimitedMemoryCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalUsingFreqLimitedMemoryCache.java)
 - Least frequently used bitmap is deleted when cache size limit is exceeded.
 - An adapter class of [UsingFreqLimitedMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/UsingFreqLimitedMemoryCache.java)
 
-#### [UniversalWeakMemoryCache](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalWeakMemoryCache.java)
+#### [UniversalWeakMemoryCache](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/cache/universalimageloader/memory/impl/UniversalWeakMemoryCache.java)
 - Cache using _only weak_ references
 - An adapter class of [WeakMemoryCache](https://github.com/nostra13/Android-Universal-Image-Loader/blob/master/library/src/com/nostra13/universalimageloader/cache/memory/impl/WeakMemoryCache.java)
 
@@ -131,11 +131,11 @@ There are two sub types of ZoomableNetworkImageView as you can see below.
 
 These types have each own UI interactions.
 
-#### [TwoLevelDoubleTapZoomNetworkImageView](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/view/TwoLevelDoubleTapZoomNetworkImageView.java)
+#### [TwoLevelDoubleTapZoomNetworkImageView](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/view/TwoLevelDoubleTapZoomNetworkImageView.java)
 - Zoom-in/out by double tapping or pinch gesture.
 - The maximum level that users can zoom to is 2.
 
-#### [MultiLevelSingleTapZoomNetworkImageView](https://github.com/nhnopensource/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/view/MultiLevelSingleTapZoomNetworkImageView.java)
+#### [MultiLevelSingleTapZoomNetworkImageView](https://github.com/naver/volley-extensions/blob/master/volley-extensions/src/main/java/com/navercorp/volleyextensions/view/MultiLevelSingleTapZoomNetworkImageView.java)
 - Zoom-in by single tapping or pinch-out gesture.
 - Zoom-out by double tapping or pinch-in gesture.
 - The maximum level that users can zoom to is 6.
@@ -149,14 +149,14 @@ These types have each own UI interactions.
 <dependency>
 	<groupId>com.navercorp.volleyextensions</groupId>
 	<artifactId>volley-extensions</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.1</version>
 </dependency>
 ```
 
 ##### Gradle
 ```
 dependencies {
-	compile 'com.nhncorp.volleyextensions:volley-extensions:1.0.+'
+	compile 'com.navercorp.volleyextensions:volley-extensions:1.1.+'
 }
 ```
 
@@ -247,13 +247,13 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 
 ### How to add jar directly
 1. Download the jar package of volley-extensions.
-	- [volley-extensions-1.0.0.jar](http://github.com/nhnopensource/volley-extensions/wiki/downloads/1.0.0/volley-extensions-1.0.0.jar)
+	- [volley-extensions-1.1.1.jar](http://github.com/naver/volley-extensions/wiki/downloads/1.1.1/volley-extensions-1.1.1.jar)
 2. Import the jar package into your project.
 3. Download and import Jackson, Simple XML, or Universal Image Loader as needed.
 
 # Sample Application
 Sample application is being provided as APK file (the source is in the repository):
- * [Download Here!](http://github.com/nhnopensource/volley-extensions/wiki/downloads/1.1.0/sample-demos-1.1.0.apk)
+ * [Download Here!](http://github.com/naver/volley-extensions/wiki/downloads/1.1.1/sample-demos-1.1.1.apk)
 
 # Volley mirror dependency
 This library depends on [Volley mirror project](https://github.com/mcxiaoke/android-volley). The mirror project keeps an up-to-date version of [Volley](https://android.googlesource.com/platform/frameworks/volley/) and automatically uploads to Maven Central. 
