@@ -40,10 +40,7 @@ public class DefaultVolleyerConfigurationFactory {
 		}};
 
 	public static NetworkResponseParser createNetworkResponseParser() {
-		return new IntegratedNetworkResponseParser.Builder()
-				.addParser(new Jackson2NetworkResponseParser())
-				.addParser(new SimpleXmlNetworkResponseParser())
-				.build();
+		return DefaultNetworkResponseParserFactory.create();
 	}
 
 	public static RequestCreator createRequestCreator() {
