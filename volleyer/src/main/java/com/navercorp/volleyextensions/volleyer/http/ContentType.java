@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.navercorp.volleyextensions.volleyer.util.Assert;
+import com.navercorp.volleyextensions.volleyer.util.StringUtils;
 
 public final class ContentType {
 
@@ -35,7 +36,7 @@ public final class ContentType {
 	}
 
 	private void assertContentTypeString(String contentTypeString) {
-		if (contentTypeString.isEmpty()) {
+		if (StringUtils.isEmpty(contentTypeString)) {
 			throw new IllegalArgumentException("Content type must not be empty.");
 		}
 	}
