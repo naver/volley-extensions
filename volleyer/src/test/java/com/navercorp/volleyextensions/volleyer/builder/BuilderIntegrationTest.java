@@ -54,25 +54,27 @@ public class BuilderIntegrationTest {
 	@Test
 	public void postBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
 		PostBuilder postBuilder = new PostBuilder(requestQueue, configuration, url);
-		buildPostOptionsFor(postBuilder);
+		buildBodyOptionFor(postBuilder);
 		Request<String> request = createRequest(url, postBuilder);
 		assertRequest(url, HttpMethod.POST, request);
-		assertPostOptions(request);
+		assertBodyOption(request);
 	}
 
-	private static void buildPostOptionsFor(PostBuilder postBuilder) {
-		postBuilder.setBody(body);
+	private static void buildBodyOptionFor(BodyBuilder<?> builder) {
+		builder.setBody(body);
 	}
 
-	private static void assertPostOptions(Request<String> request) throws AuthFailureError {
+	private static void assertBodyOption(Request<String> request) throws AuthFailureError {
 		assertThat(request.getBody(), is(body.getBytes()));
 	}
 
 	@Test
 	public void putBuilderChainShouldMakeRequestInstanceFinally() throws AuthFailureError {
 		PutBuilder putBuilder = new PutBuilder(requestQueue, configuration, url);
+		buildBodyOptionFor(putBuilder);
 		Request<String> request = createRequest(url, putBuilder);
 		assertRequest(url, HttpMethod.PUT, request);
+		assertBodyOption(request);
 	}
 
 	@Test
