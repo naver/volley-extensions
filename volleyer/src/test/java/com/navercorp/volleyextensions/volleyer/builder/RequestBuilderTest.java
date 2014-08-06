@@ -117,7 +117,7 @@ public class RequestBuilderTest {
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		
 		// When
-		ResponseBuilder<String> responseBuilder = builder.setTargetClass(String.class);
+		ResponseBuilder<String> responseBuilder = builder.withTargetClass(String.class);
 		// Then
 		assertNotNull(responseBuilder);
 	}
@@ -134,11 +134,11 @@ public class RequestBuilderTest {
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		
 		// When & Then
-		builder.setTargetClass(String.class);
+		builder.withTargetClass(String.class);
 		builder.addHeader(key, value);
 	}
 	@Test(expected = NullPointerException.class)
-	public void setTargetClassMethodShouldThrowNpeWhenTargetClassIsNull() {
+	public void withTargetClassMethodShouldThrowNpeWhenTargetClassIsNull() {
 		// Given
 		String key = "testKey";
 		String value = "testValue";
@@ -149,11 +149,11 @@ public class RequestBuilderTest {
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		Class<?> clazz = null;
 		// When & Then
-		builder.setTargetClass(clazz);
+		builder.withTargetClass(clazz);
 	}
 
 	@Test
-	public void setTargetClassMethodShouldReturnAnActualInstanceWhenTargetClassIsNotNull() {
+	public void withTargetClassMethodShouldReturnAnActualInstanceWhenTargetClassIsNotNull() {
 		// Given
 		String key = "testKey";
 		String value = "testValue";
@@ -164,13 +164,13 @@ public class RequestBuilderTest {
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		Class<String> clazz = String.class;
 		// When
-		ResponseBuilder<String> responseBuilder = builder.setTargetClass(clazz);
+		ResponseBuilder<String> responseBuilder = builder.withTargetClass(clazz);
 		// Then
 		assertNotNull(responseBuilder);
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void setTargetClassMethodShouldThrowIllegalStateExceptionWhenSetTargetClassMethodIsCalledAgain() {
+	public void withTargetClassMethodShouldThrowIllegalStateExceptionWhenSetTargetClassMethodIsCalledAgain() {
 		// Given
 		String url = "test";
 		HttpMethod method = HttpMethod.GET;
@@ -178,9 +178,9 @@ public class RequestBuilderTest {
 		TestPurposeRequestBuilder builder = new TestPurposeRequestBuilder(requestQueue, configuration, url, method);
 		Class<String> clazz = String.class;
 		// When
-		builder.setTargetClass(clazz);
+		builder.withTargetClass(clazz);
 		// Then
-		builder.setTargetClass(clazz);
+		builder.withTargetClass(clazz);
 	}	
 
 	@Test()
@@ -222,9 +222,9 @@ public class RequestBuilderTest {
 			public void onResponse(String response) {
 			}};
 		// When
-		builder.setListener(listener);
+		builder.withListener(listener);
 		// Then
-		builder.setListener(listener);
+		builder.withListener(listener);
 	}
 
 	@Test(expected = IllegalStateException.class)
@@ -240,8 +240,8 @@ public class RequestBuilderTest {
 			public void onErrorResponse(VolleyError error) {
 			}};
 		// When
-		builder.setErrorListener(errorListener);
+		builder.withErrorListener(errorListener);
 		// Then
-		builder.setErrorListener(errorListener);
+		builder.withErrorListener(errorListener);
 	}
 }

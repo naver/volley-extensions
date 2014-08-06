@@ -36,13 +36,13 @@ public class ResponseBuilder<T> {
 		this.clazz = clazz;
 	}
 	
-	public ResponseBuilder<T> setListener(Listener<T> listener) {
+	public ResponseBuilder<T> withListener(Listener<T> listener) {
 		assertFinishState();
 		this.listener = listener;
 		return this;
 	}
 
-	public ResponseBuilder<T> setErrorListener(ErrorListener errorListener) {
+	public ResponseBuilder<T> withErrorListener(ErrorListener errorListener) {
 		assertFinishState();
 		this.errorListener = errorListener;
 		return this;
@@ -54,7 +54,7 @@ public class ResponseBuilder<T> {
 		}
 	}
 
-	public ResponseBuilder<T> setResponseParser(NetworkResponseParser responseParser) {
+	public ResponseBuilder<T> withResponseParser(NetworkResponseParser responseParser) {
 		Assert.notNull(responseParser, "Response Parser");
 		assertFinishState();
 		this.responseParser = responseParser;

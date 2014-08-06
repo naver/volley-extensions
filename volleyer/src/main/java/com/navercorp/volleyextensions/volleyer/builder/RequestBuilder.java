@@ -39,7 +39,7 @@ abstract class RequestBuilder<B extends RequestBuilder<B>> {
 		}
 	}
 
-	public <T> ResponseBuilder<T> setTargetClass(Class<T> clazz) {
+	public <T> ResponseBuilder<T> withTargetClass(Class<T> clazz) {
 		Assert.notNull(clazz, "Target Class token");
 
 		assertFinishState();
@@ -55,23 +55,23 @@ abstract class RequestBuilder<B extends RequestBuilder<B>> {
 		requestQueue = null;
 	}
 
-	public ResponseBuilder<String> setListener(Listener<String> listener) {
+	public ResponseBuilder<String> withListener(Listener<String> listener) {
 		assertFinishState();
-		ResponseBuilder<String> builder = setTargetClass(String.class);
-		builder.setListener(listener);
+		ResponseBuilder<String> builder = withTargetClass(String.class);
+		builder.withListener(listener);
 		return builder;
 	}
 
-	public ResponseBuilder<String> setErrorListener(ErrorListener errorListener) {
+	public ResponseBuilder<String> withErrorListener(ErrorListener errorListener) {
 		assertFinishState();
-		ResponseBuilder<String> builder = setTargetClass(String.class);
-		builder.setErrorListener(errorListener);
+		ResponseBuilder<String> builder = withTargetClass(String.class);
+		builder.withErrorListener(errorListener);
 		return builder;
 	}
 
 	public Request<Void> execute() {
 		assertFinishState();
-		ResponseBuilder<Void> builder = setTargetClass(Void.class);
+		ResponseBuilder<Void> builder = withTargetClass(Void.class);
 		return builder.execute();
 	}
 

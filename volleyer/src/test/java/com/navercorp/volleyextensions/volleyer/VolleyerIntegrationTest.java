@@ -84,7 +84,7 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.get(url)
-							.setErrorListener(errorListener)
+							.withErrorListener(errorListener)
 							.execute();
 		// Then
 		with().await("400Error").until(
@@ -100,8 +100,8 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.post(url)
-							.setListener(listener)
-							.setErrorListener(errorListener)
+							.withListener(listener)
+							.withErrorListener(errorListener)
 							.execute();
 		// Then
 		with().await("postMethodShouldListenResponse").until(
@@ -117,8 +117,8 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.put(url)
-							.setListener(listener)
-							.setErrorListener(errorListener)
+							.withListener(listener)
+							.withErrorListener(errorListener)
 							.execute();
 		// Then
 		with().await("putMethodShouldListenResponse").until(
@@ -134,8 +134,8 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.delete(url)
-							.setListener(listener)
-							.setErrorListener(errorListener)
+							.withListener(listener)
+							.withErrorListener(errorListener)
 							.execute();
 		// Then
 		with().await("deleteMethodShouldListenResponse").until(
@@ -152,7 +152,7 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.get(url)
-							.setListener(listener)
+							.withListener(listener)
 							.execute();
 		// Then
 		with().await("responseShouldBeParsedString").until(
@@ -173,8 +173,8 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.get(url)
-							.setTargetClass(clazz)
-							.setListener(listener)
+							.withTargetClass(clazz)
+							.withListener(listener)
 							.execute();
 		// Then
 		with().await("jsonResponseShouldBeParsedObject").until(
@@ -196,8 +196,8 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.get(url)
-							.setTargetClass(clazz)
-							.setListener(listener)
+							.withTargetClass(clazz)
+							.withListener(listener)
 							.execute();
 		// Then
 		with().await("xmlResponseShouldBeParsedObject").until(
@@ -216,8 +216,8 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.get(url)
-							.setTargetClass(clazz)
-							.setErrorListener(errorListener)
+							.withTargetClass(clazz)
+							.withErrorListener(errorListener)
 							.execute();
 		// Then
 		with().await("errorShouldBeListenedWhenParseInvalidFormat").until(
@@ -236,8 +236,8 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.get(url)
-							.setTargetClass(clazz)
-							.setErrorListener(errorListener)
+							.withTargetClass(clazz)
+							.withErrorListener(errorListener)
 							.execute();
 		// Then
 		with().await("errorShouldBeListenedWhenParseInvalidXmlFormat").until(
@@ -256,8 +256,8 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.get(url)
-							.setTargetClass(clazz)
-							.setErrorListener(errorListener)
+							.withTargetClass(clazz)
+							.withErrorListener(errorListener)
 							.execute();
 		// Then
 		with().await("errorShouldBeListenedWhenResponseContentTypeIsUnknown").until(
@@ -279,9 +279,9 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.get(url)
-							.setTargetClass(clazz)
-							.setResponseParser(new JacksonNetworkResponseParser())
-							.setListener(listener)
+							.withTargetClass(clazz)
+							.withResponseParser(new JacksonNetworkResponseParser())
+							.withListener(listener)
 							.execute();
 		// Then
 		with().await("volleyerShouldUseCustomReponseParserIfSet").until(
@@ -389,8 +389,8 @@ public class VolleyerIntegrationTest {
 		// When
 		volleyer(requestQueue)
 							.get(url)
-							.setTargetClass(clazz)
-							.setErrorListener(errorListener)
+							.withTargetClass(clazz)
+							.withErrorListener(errorListener)
 							.execute();
 		// Then
 		with().await("fallbackResponseParserShouldBeConsumedByVolleyer").until(

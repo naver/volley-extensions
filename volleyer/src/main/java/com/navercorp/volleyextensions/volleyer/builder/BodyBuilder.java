@@ -17,7 +17,7 @@ abstract class BodyBuilder<B extends BodyBuilder<B>> extends RequestBuilder<B> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public B setBody(byte[] body) {
+	public B withBody(byte[] body) {
 		if (isBodyNull(body)) {
 			return (B) this;
 		}
@@ -27,13 +27,13 @@ abstract class BodyBuilder<B extends BodyBuilder<B>> extends RequestBuilder<B> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public B setBody(String body) {
+	public B withBody(String body) {
 		if (isBodyNull(body)) {
 			return (B) this;
 		}
 
 		byte[] bytes = body.getBytes();
-		return setBody(bytes);
+		return withBody(bytes);
 	}
 
 	private boolean isBodyNull(Object body) {
