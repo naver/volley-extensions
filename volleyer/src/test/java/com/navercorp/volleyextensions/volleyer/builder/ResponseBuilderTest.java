@@ -57,7 +57,7 @@ public class ResponseBuilderTest {
 	}
 
 	@Test
-	public void setListenerMethodShouldReturnSameInstanceOfBuilder() {
+	public void withListenerMethodShouldReturnSameInstanceOfBuilder() {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
@@ -70,13 +70,13 @@ public class ResponseBuilderTest {
 			public void onResponse(String response) {
 			}};
 		// When
-		ResponseBuilder<String> newBuilder = builder.setListener(listener);
+		ResponseBuilder<String> newBuilder = builder.withListener(listener);
 		// Then
 		assertTrue(builder == newBuilder);
 	}
 
 	@Test
-	public void setErrorListenerMethodShouldReturnSameInstanceOfBuilder() {
+	public void withErrorListenerMethodShouldReturnSameInstanceOfBuilder() {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
@@ -89,13 +89,13 @@ public class ResponseBuilderTest {
 			public void onErrorResponse(VolleyError error) {
 			}};
 		// When
-		ResponseBuilder<String> newBuilder = builder.setErrorListener(errorListener);
+		ResponseBuilder<String> newBuilder = builder.withErrorListener(errorListener);
 		// Then
 		assertTrue(builder == newBuilder);
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void setListenerMethodShouldThrowIllegalStateExceptionWhenExecuteMethodIsAlreadyCalled() {
+	public void withListenerMethodShouldThrowIllegalStateExceptionWhenExecuteMethodIsAlreadyCalled() {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
@@ -110,11 +110,11 @@ public class ResponseBuilderTest {
 		// When
 		builder.execute();
 		// Then
-		builder.setListener(listener);
+		builder.withListener(listener);
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void setErrorListenerMethodShouldThrowIllegalStateExceptionWhenExecuteMethodIsAlreadyCalled() {
+	public void withErrorListenerMethodShouldThrowIllegalStateExceptionWhenExecuteMethodIsAlreadyCalled() {
 		// Given
 		String url = "http://test";
 		HttpMethod method = HttpMethod.GET;
@@ -129,7 +129,7 @@ public class ResponseBuilderTest {
 		// When
 		builder.execute();
 		// Then
-		builder.setErrorListener(errorListener);
+		builder.withErrorListener(errorListener);
 	}
 
 }

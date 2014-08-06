@@ -61,7 +61,7 @@ public class BuilderIntegrationTest {
 	}
 
 	private static void buildBodyOptionFor(BodyBuilder<?> builder) {
-		builder.setBody(body);
+		builder.withBody(body);
 	}
 
 	private static void assertBodyOption(Request<String> request) throws AuthFailureError {
@@ -90,9 +90,9 @@ public class BuilderIntegrationTest {
 				.addHeader("name", "JohnDoe")
 				.addHeader("age", "23")
 				.addHeader("job", "student")
-				.setTargetClass(String.class)
-					.setListener(listener)
-					.setErrorListener(errorListener)
+				.withTargetClass(String.class)
+					.withListener(listener)
+					.withErrorListener(errorListener)
 					.execute();
 
 		return request;
