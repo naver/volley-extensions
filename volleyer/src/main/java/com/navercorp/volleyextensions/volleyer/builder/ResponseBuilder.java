@@ -11,7 +11,12 @@ import com.navercorp.volleyextensions.volleyer.request.creator.RequestCreator;
 import com.navercorp.volleyextensions.volleyer.request.executor.RequestExecutor;
 import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
-
+/**
+ * A builder class that enables settings for response and that executes a request.
+ * @author Wonjun Kim
+ *
+ * @param <T> Target class that content of a response will be parsed to
+ */
 public class ResponseBuilder<T> {
 	
 	private RequestQueue requestQueue;
@@ -23,7 +28,13 @@ public class ResponseBuilder<T> {
 	private NetworkResponseParser responseParser;
 
 	private boolean isDoneToBuild = false;
-
+	/**
+	 * Default constructor for ResponseBuilder
+	 * @param requestQueue running RequestQueue instance which will executes a request
+	 * @param configuration VolleyerConfiguration instance. See {@link VolleyerConfiguration}.
+	 * @param httpContent HttpContent instance which is previously set from {@code RequestBuilder}
+	 * @param clazz Target class that content of a response will be parsed to.
+	 */
 	ResponseBuilder(RequestQueue requestQueue, VolleyerConfiguration configuration, HttpContent httpContent, Class<T> clazz) {
 		Assert.notNull(requestQueue, "RequestQueue");
 		Assert.notNull(configuration, "VolleyerConfiguration");
@@ -35,25 +46,48 @@ public class ResponseBuilder<T> {
 		this.httpContent = httpContent;
 		this.clazz = clazz;
 	}
-	
+
+	/**
+	 * Set a listener for a response.
+	 * @param listener volley listener
+	 */
 	public ResponseBuilder<T> withListener(Listener<T> listener) {
 		assertFinishState();
 		this.listener = listener;
 		return this;
 	}
 
+	/**
+	 * <pre>
+	 * Set an error listener for a response.
+	 * NOTE : If this is not set, volleyer sets up an ErrorListener instance
+	 *        of {@code VolleyerConfiguration} as a fallback for a Request.
+	 * </pre>
+	 * @param errorListener volley error listener
+	 */
 	public ResponseBuilder<T> withErrorListener(ErrorListener errorListener) {
 		assertFinishState();
 		this.errorListener = errorListener;
 		return this;
 	}
 
+	/**
+	 * Check whether execution has been done. 
+	 */
 	private void assertFinishState() {
 		if (isDoneToBuild == true) {
 			throw new IllegalStateException("ResponseBuilder should not be used any more. Because execute() has been called.");
 		}
 	}
 
+	/**
+	 * Set a parser for which content of a response is converted to a target class.
+	 * <pre>
+	 * NOTE : If this is not set, volleyer sets up an NetworkResponseParser instance
+	 *        of {@code VolleyerConfiguration} as a fallback for a Request.
+	 * </pre>
+	 * @param responseParser
+	 */
 	public ResponseBuilder<T> withResponseParser(NetworkResponseParser responseParser) {
 		Assert.notNull(responseParser, "Response Parser");
 		assertFinishState();
@@ -61,6 +95,10 @@ public class ResponseBuilder<T> {
 		return this;
 	}
 
+	/**
+	 * Execute a request finally on a running RequestQueue.
+	 * @return Request instance being executed
+	 */
 	public Request<T> execute() {
 		setFallbackListenerIfNull();
 		setFallbackErrorListenerIfNull();
@@ -76,12 +114,18 @@ public class ResponseBuilder<T> {
 		return request;
 	}
 
+	/**
+	 * Make this builder being disabled settings.
+	 */
 	protected final void markFinishState() {
 		isDoneToBuild = true;
 		// Let requestQueue be null for avoiding memory leak when this builder is referenced by some variable.
 		requestQueue = null;
 	}
 
+	/**
+	 * Set a empty listener if listener is not set.
+	 */
 	private void setFallbackListenerIfNull() {
 		if (listener != null) {
 			return;
@@ -113,11 +157,18 @@ public class ResponseBuilder<T> {
 		responseParser = configuration.getFallbackNetworkResponseParser();
 	}
 
+	/**
+	 * Create a {@code Request} object by {@link RequestCreator} of {@code VolleyerConfiguration}.
+	 * @return Newly built Request object
+	 */
 	private Request<T> buildRequest() {
 		RequestCreator requestCreator = configuration.getRequestCreator();
 		return requestCreator.createRequest(httpContent, clazz, responseParser, listener, errorListener);
 	}
 
+	/**
+	 * Execute a given request by {@link RequestExecutor} of {@code VolleyerConfiguration}.
+	 */
 	private void executeRequest(Request<T> request) {
 		RequestExecutor executor = configuration.getRequestExecutor();
 		executor.executeRequest(requestQueue, request);

@@ -13,14 +13,27 @@ import com.navercorp.volleyextensions.volleyer.multipart.Multipart;
 import com.navercorp.volleyextensions.volleyer.multipart.MultipartContainer;
 import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
-
+/**
+ * <pre>
+ * A Request class that is made from a {@link ResponseBuilder} after completion of settings by volleyer.
+ * If you want to use other Request class, implement other {@link RequestCreator} class.
+ * 
+ * @see RequestCreator
+ * </pre>
+ */
 public class VolleyerRequest<T> extends Request<T> implements MultipartContainer {
 
 	private NetworkResponseParser responseParser;
 	private Listener<T> listener;
 	private Class<T> clazz;
 	private HttpContent httpContent;
-
+	/**
+	 * @param httpContent HttpContent instance from builder
+	 * @param clazz Target class from builder
+	 * @param responseParser NetworkResponseParser instance from builder
+	 * @param listener Volley listener instance from builder
+	 * @param errorListener error listener instance from builder
+	 */
 	public VolleyerRequest(HttpContent httpContent, Class<T> clazz, NetworkResponseParser responseParser, Listener<T> listener, ErrorListener errorListener) {
 		super(httpContent.getMethod().getMethodCode(), httpContent.getUrl(), errorListener);
 

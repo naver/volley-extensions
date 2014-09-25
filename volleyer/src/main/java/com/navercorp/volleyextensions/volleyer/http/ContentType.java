@@ -5,7 +5,13 @@ import java.util.Map;
 
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 import com.navercorp.volleyextensions.volleyer.util.StringUtils;
-
+/**
+ * <pre>
+ * Model class which represents a content type(without charset).
+ * </pre>
+ * @author Wonjun Kim
+ *
+ */
 public final class ContentType {
 
 	private static final char SEPERATOR_CHARACTER_OF_CONTENT_TYPE_HEADER = ';';
@@ -27,25 +33,36 @@ public final class ContentType {
 	}
 
 	private String contentTypeString;
-
+	/**
+	 * NOTE : You must call {@link #createContentType(String)} instead of a constructor.
+	 * @param contentTypeString string like as "Content-Type: text/xml".
+	 */
 	private ContentType(String contentTypeString) {
 		Assert.notNull(contentTypeString, "Content type");
 		assertContentTypeString(contentTypeString);
 
 		this.contentTypeString = ContentType.filterContentTypeString(contentTypeString);
 	}
-
+	/**
+	 * Check whether {code contentTypeString} is not empty.
+	 * @param contentTypeString string like as "Content-Type: text/xml"
+	 */
 	private void assertContentTypeString(String contentTypeString) {
 		if (StringUtils.isEmpty(contentTypeString)) {
 			throw new IllegalArgumentException("Content type must not be empty.");
 		}
 	}
-	
+	/**
+	 * Returns string of a filtered content type.
+	 */
 	@Override
 	public String toString() {
 		return contentTypeString;
 	}
-	
+
+	/**
+	 * Check whether content type equals with an object.
+	 */
 	@Override
 	public boolean equals(Object object) {
 		if (object instanceof ContentType == false) {

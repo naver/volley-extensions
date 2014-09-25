@@ -146,7 +146,14 @@ public class MultipartHttpClientStack implements MultipartHttpStack {
                 throw new IllegalStateException("Unknown request method.");
         }
     }
-
+    /**
+     * <pre>
+     * Set a multipart entity if it exists.
+     *
+     * NOTE : {@code MultipartEntityWrapper} is a chunked transfer encoding mode, 
+     *        the server should supports it.
+     * </pre>
+     */
     private static void setEntityIfNonEmptyMultipart(HttpEntityEnclosingRequestBase httpRequest,
             Request<?> request) throws AuthFailureError {
         if (!(request instanceof MultipartContainer)) {

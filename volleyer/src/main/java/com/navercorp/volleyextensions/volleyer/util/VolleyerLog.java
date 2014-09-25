@@ -1,7 +1,9 @@
 package com.navercorp.volleyextensions.volleyer.util;
 
 import android.util.Log;
-
+/**
+ * A simple log class for Volleyer.
+ */
 public class VolleyerLog {
 	public static final String TAG = "Volleyer";
 	public static final int LEVEL_PRIORITY = Log.DEBUG;

@@ -8,7 +8,11 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 
 import com.navercorp.volleyextensions.volleyer.util.Assert;
-
+/**
+ * {@code HttpEntity} wrapper for sending {@code Multipart}.
+ *
+ * @see MultipartHttpClientStack
+ */
 public class HttpEntityWrapper implements HttpEntity {
 
 	private static final int UNKNOWN_LENGTH = -1;
@@ -24,7 +28,9 @@ public class HttpEntityWrapper implements HttpEntity {
 	public boolean isRepeatable() {
 		return true;
 	}
-
+	/**
+	 * Set a chunked encoding as a default.
+	 */
 	@Override
 	public boolean isChunked() {
 		return true;

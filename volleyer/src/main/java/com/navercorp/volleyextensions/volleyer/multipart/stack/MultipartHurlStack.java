@@ -239,7 +239,14 @@ public class MultipartHurlStack implements MultipartHttpStack {
                 throw new IllegalStateException("Unknown method type.");
         }
     }
-
+    /**
+     * <pre>
+     * Add a multipart and write it to output of a connection.
+     *
+     * NOTE : It only supports chunked transfer encoding mode,
+     *        the server should supports it.
+     * </pre>
+     */
     private static void addMultipartIfExists(HttpURLConnection connection, Request<?> request)
             throws IOException, AuthFailureError {
         OutputStream os = null;
@@ -260,6 +267,7 @@ public class MultipartHurlStack implements MultipartHttpStack {
 
             connection.setDoOutput(true);
             connection.addRequestProperty("Content-Type", multipart.getContentType());
+	    // Set chunked encoding mode.
             connection.setChunkedStreamingMode(DEFAULT_CHUNK_LENGTH);
             os = connection.getOutputStream();
             multipart.write(os);

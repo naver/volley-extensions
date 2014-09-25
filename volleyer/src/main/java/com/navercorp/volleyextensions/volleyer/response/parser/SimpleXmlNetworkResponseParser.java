@@ -18,7 +18,18 @@ import com.navercorp.volleyextensions.volleyer.http.ContentType;
 import com.navercorp.volleyextensions.volleyer.http.ContentTypes;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
 import com.navercorp.volleyextensions.volleyer.util.IoUtils;
-
+/**
+ * <pre>
+ * A parser class which converts xml data to T object.
+ *
+ * NOTE : If this class is added into {@link IntegratedNetworkResponseParser},
+ * and the content type of a response is "application/xml" or "text/xml" type,
+ * integrated parser automatically delegates to this class.
+ *
+ * WARN : You have to import simple xml library to use this class.
+ * If not, this class throws an error when initializing.
+ * </pre>
+ */
 public class SimpleXmlNetworkResponseParser implements TypedNetworkResponseParser {
 	/** Default {@link Persister} is singleton */
 	private static class PersisterHolder {

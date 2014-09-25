@@ -12,9 +12,15 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HttpStack;
 import com.android.volley.toolbox.NoCache;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
-
+/**
+ * A factory which creates a {@code RequestQueue} instance without any settings.
+ */
 public class DefaultRequestQueueFactory {
-
+	/**
+	 * Create a {@code RequestQueue} instance.
+	 * @param context must not be null.
+	 * @return RequestQueue well-made RequestQueue instance
+	 */
 	public static RequestQueue create(Context context) {
 		Assert.notNull(context, "Context");
 		Cache diskCache = getDefaultDiskCache(context);

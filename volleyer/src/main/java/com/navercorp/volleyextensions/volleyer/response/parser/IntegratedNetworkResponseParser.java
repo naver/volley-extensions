@@ -12,18 +12,35 @@ import com.navercorp.volleyextensions.volleyer.exception.UnsupportedContentTypeE
 import com.navercorp.volleyextensions.volleyer.http.ContentType;
 import com.navercorp.volleyextensions.volleyer.http.ContentTypes;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
-
+/**
+ * <pre>
+ * A composite class which can contain several {@code TypedNetworkResponseParser}.
+ * This class reads content type of a response when volley receives the response,
+ * and choose a right parser among the contained parsers. The chosen parser converts content to T object.
+ * NOTE : Use {@link Builder} and add actual parsers by using it when creating IntegratedNetworkResponseParser.
+ *
+ * </pre>
+ */
 public class IntegratedNetworkResponseParser implements NetworkResponseParser {
 
 	private static final String CONTENT_TYPE_HEADER_KEY = "Content-Type";
 	private static final NetworkResponseParser STRING_NETWORK_RESPONSE_PARSER = new StringNetworkResponseParser();
 
 	private final Map<ContentType, NetworkResponseParser> parsers = new HashMap<ContentType, NetworkResponseParser>(); 
-
+	/**
+	 * Default constructor
+	 * @param parsers Actual parsers from builder
+	 */
 	IntegratedNetworkResponseParser(Map<ContentType, NetworkResponseParser> parsers) {
 		this.parsers.putAll(parsers);
 	}
-
+	/**
+	 * Choose a right parser among actual parsers and Parse the data of a response to T object.
+	 * @param response NetworkResponse instance which has content.
+	 * @param clazz Target class that content of a response will be parsed to.
+	 * 		(It does not parse if clazz is {@code Void}.)
+	 * @return Response which contains parsed T object or contains some error if it happened.
+	 */
 	@Override
 	public <T> Response<T> parseNetworkResponse(NetworkResponse response, Class<T> clazz) {
 		Assert.notNull(response, "NetworkResponse");
@@ -79,7 +96,12 @@ public class IntegratedNetworkResponseParser implements NetworkResponseParser {
 	 */
 	public static class Builder {
 		private final Map<ContentType, NetworkResponseParser> parsers = new HashMap<ContentType, NetworkResponseParser>();
-
+		/**
+		 * <pre>
+		 * Add a parser into IntegratedNetworkResponseParser.
+		 * NOTE : If some duplicate content type exists, newly added parser overwrites it.
+		 * </pre>
+		 */
 		public Builder addParser(TypedNetworkResponseParser typedParser) {
 			Assert.notNull(typedParser, "TypedNetworkResponseParser");
 
@@ -95,7 +117,12 @@ public class IntegratedNetworkResponseParser implements NetworkResponseParser {
 				addParser(contentType, typedParser);
 			}
 		}
-
+		/**
+		 * <pre>
+		 * Add a parser into IntegratedNetworkResponseParser.
+		 * NOTE : If some duplicate content type exists, newly added parser overwrites it.
+		 * </pre>
+		 */
 		public Builder addParser(ContentType contentType, NetworkResponseParser parser) {
 			Assert.notNull(contentType, "ContentType");
 			Assert.notNull(parser, "NetworkResponseParser");
@@ -104,7 +131,9 @@ public class IntegratedNetworkResponseParser implements NetworkResponseParser {
 
 			return this;
 		}
-
+		/**
+		 * Create a IntegratedNetworkResponseParser.
+		 */
 		public IntegratedNetworkResponseParser build() {
 			return new IntegratedNetworkResponseParser(parsers);
 		}

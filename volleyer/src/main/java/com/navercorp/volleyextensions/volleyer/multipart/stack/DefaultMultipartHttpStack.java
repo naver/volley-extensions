@@ -11,20 +11,37 @@ import android.os.Build;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-
+/**
+ * <pre>
+ * Default multipart http stack.
+ * It includes a internal multipart stack which is determined by an Android version on a device.
+ * </pre>
+ */
 public class DefaultMultipartHttpStack implements MultipartHttpStack {
 
 	private static final String DEFAULT_USER_AGENT = "volleyer-multipart";
 	private MultipartHttpStack stack;
-
+	/**
+	 * Default constructor
+	 */
 	public DefaultMultipartHttpStack() {
 		determineMultipartStack(DEFAULT_USER_AGENT);
 	}
-
+	/**
+	 * <pre>
+	 * Constructor with custom user agent for Apache client.
+	 * (This user agent is valid only if the device chooses not UrlConnection, but Apache client.).
+	 * </pre>
+	 */
 	public DefaultMultipartHttpStack(String userAgent) {
 		determineMultipartStack(userAgent);
 	}
-
+	/**
+	 * <pre>
+	 * Constructor with custom Apache http client.
+	 * (This client is valid only if the device chooses not UrlConnection, but Apache client.).
+	 * </pre>
+	 */
 	public DefaultMultipartHttpStack(HttpClient httpClient) {
 		determineMultipartStack(httpClient);
 	}

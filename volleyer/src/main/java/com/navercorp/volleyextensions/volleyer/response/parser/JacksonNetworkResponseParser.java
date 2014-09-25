@@ -17,7 +17,18 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.navercorp.volleyextensions.volleyer.http.ContentType;
 import com.navercorp.volleyextensions.volleyer.http.ContentTypes;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
-
+/**
+ * <pre>
+ * A parser class which converts json data to T object.
+ *
+ * NOTE : If this class is added into {@link IntegratedNetworkResponseParser}, 
+ * and the content type of a response is "application/json" or "text/json" type,
+ * integrated parser automatically delegates to this class.
+ *
+ * WARN : You have to import jackson 1.x library to use this class. 
+ * If not, this class throws an error when initializing.
+ * </pre>
+ */
 public class JacksonNetworkResponseParser implements TypedNetworkResponseParser {
 	/** Default {@link ObjectMapper} is singleton. */
 	private static class ObjectMapperHolder {

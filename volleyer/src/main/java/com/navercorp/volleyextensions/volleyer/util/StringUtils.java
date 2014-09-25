@@ -10,14 +10,20 @@ public class StringUtils {
 	static {
 		initDefaultChars();
 	}
-
+	/**
+	 * Prepare a-z characters for {@link #generateRandom(int)}.
+	 */
 	private static void initDefaultChars() {
 		String charsStr = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		int length = charsStr.length();
 		chars = new char[length];
 		charsStr.getChars(0, length, chars, 0);
 	}
-
+	/**
+	 * Generate string which contains random characters.
+	 * @param length must be a positive number or 0
+	 * @return Generated random string
+	 */
 	public static String generateRandom(int length) {
 		String generatedStr = null;
 		// Return null if length is invalid
@@ -42,7 +48,10 @@ public class StringUtils {
 		generatedStr = String.valueOf(generatedChar);
 		return generatedStr;
 	}
-
+	/**
+	 * Check whether string is empty.
+	 * @return true if {@code str} is null or empty
+	 */
 	public static boolean isEmpty(String str) {
 		return (str == null) || ("".equals(str));
 	}

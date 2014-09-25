@@ -7,7 +7,9 @@ import java.io.UnsupportedEncodingException;
 
 import com.navercorp.volleyextensions.volleyer.http.ContentType;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
-
+/**
+ * A part class for string.
+ */
 public class StringPart extends AbstractPart {
 
 	private static final String DEFAULT_CHARSET = "utf-8";
@@ -15,15 +17,30 @@ public class StringPart extends AbstractPart {
 	private final String content;
 	private final String charset;
 	private ContentType contentType;
-
+	/**
+	 * Constructor with default charset and default content type.
+	 * @param name part name
+	 * @param content string of a content
+	 */
 	public StringPart(String name, String content) {
 		this(name, content, DEFAULT_CHARSET);
 	}
-
+	/**
+	 * Constructor with custom charset and default content type.
+	 * @param name part name
+	 * @param content string of a content
+	 * @param charset character set of a content
+	 */
 	public StringPart(String name, String content, String charset) {
 		this(name, content, DEFAULT_CHARSET, PLAIN_TEXT);
 	}
-
+	/**
+	 * Constructor with custom charset and custom content type
+	 * @param name part name
+	 * @param content string of a content
+	 * @param charset character set of a content
+	 * @param contentType content type of a content
+	 */
 	public StringPart(String name, String content, String charset, ContentType contentType) {
 		super(name);
 		Assert.notNull(content, "Content");

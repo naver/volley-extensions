@@ -7,7 +7,10 @@ import com.android.volley.ParseError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
-
+/**
+ * A parser class which converts data to string.
+ *
+ */
 public class StringNetworkResponseParser implements NetworkResponseParser {
 
 	public StringNetworkResponseParser() {

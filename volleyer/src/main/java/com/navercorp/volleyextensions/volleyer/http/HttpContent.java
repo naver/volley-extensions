@@ -9,7 +9,11 @@ import com.navercorp.volleyextensions.volleyer.multipart.Multipart;
 import com.navercorp.volleyextensions.volleyer.multipart.MultipartContainer;
 import com.navercorp.volleyextensions.volleyer.multipart.Part;
 import com.navercorp.volleyextensions.volleyer.util.Assert;
-
+/**
+ * A class containing an information of HTTP request.
+ * @author Wonjun Kim
+ *
+ */
 public class HttpContent implements MultipartContainer {
 	private HttpMethod method;
 	private String url;
@@ -17,6 +21,11 @@ public class HttpContent implements MultipartContainer {
 	private byte[] body;
 	private Multipart multipart;
 
+	/**
+	 * Default constructor for HttpContent
+	 * @param url url string, must not null and start url scheme.
+	 * @param method Http method, must not null.
+	 */
 	public HttpContent(String url, HttpMethod method) {
 		Assert.notNull(url, "url");
 		Assert.notNull(method, "HttpMethod");
@@ -27,46 +36,83 @@ public class HttpContent implements MultipartContainer {
 		multipart = new Multipart();
 	}
 
+	/**
+	 * Return a Http method.
+	 */
 	public HttpMethod getMethod() {
 		return method;
 	}
 
+	/**
+	 * Return a url string.
+	 */
 	public String getUrl() {
 		return url;
 	}
 
+	/**
+	 * Add a request header.
+	 * 
+	 * @param key key of a header, must not be null.
+	 * @param value value of a header, must not be null.
+	 */
 	public void addHeader(String key, String value) {
 		Assert.notNull(key, "Header key");
 		Assert.notNull(value, "Header value");
 		headers.put(key, value);
 	}
 
+	/**
+	 * Return value of a header.
+	 * @param key header key to find
+	 * @return value if it exists
+	 */
 	public String getHeader(String key) {
 		return headers.get(key);
 	}
 
+	/**
+	 * Return a map of headers.
+	 * @return unmodifiable map of headers
+	 */
 	public Map<String, String> getHeaders() {
 		return Collections.unmodifiableMap(headers);
 	}
 
+	/**
+	 * <pre>
+	 * Set body.
+	 * NOTE : Volleyer includes a body for a Request if and only if HttpContent does not have a multipart.
+	 * </pre>
+	 * @param body byte array of body
+	 */
 	public void setBody(byte[] body) {
 		this.body = body;
 	}
-
+	/**
+	 * Return body as a byte array.
+	 */
 	public byte[] getBody() {
 		return body;
 	}
-
+	/**
+	 * @return true if multipart exists
+	 */
 	@Override
 	public boolean hasMultipart() {
 		return !multipart.isEmpty();
 	}
-
+	/**
+	 * Return a Multipart instance.
+	 */
 	@Override
 	public Multipart getMultipart() {
 		return multipart;
 	}
-
+	/**
+	 * Add a part into multipart.
+	 * @param part must not be null
+	 */
 	public void addPart(Part part) {
 		multipart.add(part);
 	}

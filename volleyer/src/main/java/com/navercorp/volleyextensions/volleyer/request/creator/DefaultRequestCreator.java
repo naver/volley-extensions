@@ -6,7 +6,9 @@ import com.android.volley.Response.Listener;
 import com.navercorp.volleyextensions.volleyer.http.HttpContent;
 import com.navercorp.volleyextensions.volleyer.request.VolleyerRequest;
 import com.navercorp.volleyextensions.volleyer.response.parser.NetworkResponseParser;
-
+/**
+ * A RequestCreator implementation class which creates VolleyerRequest.
+ */
 public class DefaultRequestCreator implements RequestCreator {
 
 	@Override

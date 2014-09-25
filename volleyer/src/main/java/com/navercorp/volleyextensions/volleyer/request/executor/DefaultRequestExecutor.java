@@ -3,7 +3,9 @@ package com.navercorp.volleyextensions.volleyer.request.executor;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
-
+/**
+ * A RequestExecutor implementation class which executes {@code Request} immediately by adding it into {@code Requestqueue}.
+ */
 public class DefaultRequestExecutor implements RequestExecutor {
 
 	@Override

@@ -8,7 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.navercorp.volleyextensions.volleyer.util.StringUtils;
-
+/**
+ * A collection of {@link Part}s.
+ * @author Wonjun Kim
+ *
+ */
 public class Multipart implements Collection<Part>, Writable {
 
 	private static final int DEFAULT_BOUNDARY_LENGTH = 30;
@@ -30,6 +34,9 @@ public class Multipart implements Collection<Part>, Writable {
 		}
 	}
 
+	/**
+	 * Make the integrated multipart content by combining {@code Part}s and write it to {@code OutputStream}.
+	 */
 	@Override
 	public void write(OutputStream out) throws IOException {
 		if (parts.size() == 0) {
@@ -140,6 +147,9 @@ public class Multipart implements Collection<Part>, Writable {
 		return parts.size();
 	}
 
+	/**
+	 * Return a multipart boundary string.
+	 */
 	public String getBoundary() {
 		return boundary;
 	}

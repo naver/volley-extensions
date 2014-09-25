@@ -9,7 +9,9 @@ import com.navercorp.volleyextensions.volleyer.request.executor.DefaultRequestEx
 import com.navercorp.volleyextensions.volleyer.request.executor.RequestExecutor;
 import com.navercorp.volleyextensions.volleyer.response.parser.*;
 import com.navercorp.volleyextensions.volleyer.util.VolleyerLog;
-
+/**
+ * A factory which creates a {@code VolleyerConfiguration} instance without any settings.
+ */
 public class DefaultVolleyerConfigurationFactory {
 	/**
 	 * Default VolleyerConfiguration is immutable and properties of it are immutable too.
