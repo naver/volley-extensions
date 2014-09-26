@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Volleyer Twitter Sample</string>
+    <string name="action_settings">Settings</string>
+	<string name="pinhere">Enter a pin number here</string>
+	<string name="access">access</string>
+	<string name="logout">Logout</string>
+	<string name="update_status">Update status</string>
+	<string name="home_timeline">View home timeline</string>
+	<string name="statushere">Enter a status here</string>
+	<string name="add_image">Add an image</string>
+	<string name="image_uri">Image uri : </string>
+	<string name="sample_image_uri">http://nikonrumors.com/wp-content/uploads/2014/03/Nikon-1-V3-sample-photo.jpg</string>
+</resources>

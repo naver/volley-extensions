@@ -12,5 +12,6 @@
 	</parent>
 	<modules>
 		<module>demos</module>
+		<module>sample-volleyer-twitter</module>
 	</modules>
 </project>
