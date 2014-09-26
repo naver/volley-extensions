@@ -30,6 +30,8 @@ import org.junit.rules.TemporaryFolder;
 import com.android.volley.Cache;
 import com.android.volley.Cache.Entry;
 import com.navercorp.volleyextensions.cache.universalimageloader.disc.impl.UniversalFileCountLimitedDiscCache;
+import com.navercorp.volleyextensions.cache.universalimageloader.disc.naming.CustomizedFileNameGeneratorFactory;
+import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 
 public class UniversalFileCountLimitedDiscCacheTest {
@@ -81,9 +83,11 @@ public class UniversalFileCountLimitedDiscCacheTest {
     	// Given
     	Md5FileNameGenerator nameGenerator = new Md5FileNameGenerator();
     	Cache cache = new UniversalFileCountLimitedDiscCache(cacheDir, nameGenerator, 30);
+    	FileNameGenerator wrappedGenerator = CustomizedFileNameGeneratorFactory.createFileNameGenerator(nameGenerator);
+    	String expected = wrappedGenerator.generate(key);
 		// When
 		cache.put(key, entry);
 		// Then
-		assertThat(cacheDir.list()[0], is("266ups70gzf5c2qtog8x4rzv4"));
+		assertThat(cacheDir.list()[0], is(expected));
     }
 }

@@ -35,6 +35,8 @@ import org.robolectric.shadows.ShadowLog;
 import com.android.volley.Cache;
 import com.android.volley.Cache.Entry;
 import com.navercorp.volleyextensions.cache.universalimageloader.disc.impl.UniversalTotalSizeLimitedDiscCache;
+import com.navercorp.volleyextensions.cache.universalimageloader.disc.naming.CustomizedFileNameGeneratorFactory;
+import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 
 @RunWith(RobolectricTestRunner.class)
@@ -97,12 +99,14 @@ public class UniversalTotalSizeLimitedDiscCacheTest {
     	// Given
     	Md5FileNameGenerator nameGenerator = new Md5FileNameGenerator();
     	Cache cache = new UniversalTotalSizeLimitedDiscCache(cacheDir, nameGenerator, 500);
+    	FileNameGenerator wrappedGenerator = CustomizedFileNameGeneratorFactory.createFileNameGenerator(nameGenerator);
+    	String expected = wrappedGenerator.generate(key);
 		// When
 		cache.put(key, entry);
 		// Then
 		Entry hit = cache.get(key);
 		assertThat(hit.data, is(value));
 		assertThat(cacheDir.list().length, is(1));
-		assertThat(cacheDir.list()[0], is("266ups70gzf5c2qtog8x4rzv4"));
+		assertThat(cacheDir.list()[0], is(expected));
     }
 }

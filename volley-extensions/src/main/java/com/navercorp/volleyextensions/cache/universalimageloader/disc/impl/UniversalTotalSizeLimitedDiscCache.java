@@ -18,6 +18,7 @@ package com.navercorp.volleyextensions.cache.universalimageloader.disc.impl;
 import java.io.File;
 
 import com.navercorp.volleyextensions.cache.universalimageloader.disc.UniversalBaseDiscCache;
+import com.navercorp.volleyextensions.cache.universalimageloader.disc.naming.CustomizedFileNameGeneratorFactory;
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 /**
@@ -35,7 +36,7 @@ public class UniversalTotalSizeLimitedDiscCache extends UniversalBaseDiscCache {
 	 */
 	public UniversalTotalSizeLimitedDiscCache(File cacheDir,
 			int maxCacheSize) {
-		super(cacheDir, new TotalSizeLimitedDiscCache(cacheDir, maxCacheSize));
+		super(cacheDir, new TotalSizeLimitedDiscCache(cacheDir, CustomizedFileNameGeneratorFactory.createFileNameGenerator(), maxCacheSize));
 	}
 	
 	/**
@@ -47,7 +48,7 @@ public class UniversalTotalSizeLimitedDiscCache extends UniversalBaseDiscCache {
 	 */	
 	public UniversalTotalSizeLimitedDiscCache(File cacheDir,
 			FileNameGenerator fileNameGenerator, int maxCacheSize) {
-		super(cacheDir, new TotalSizeLimitedDiscCache(cacheDir, fileNameGenerator, maxCacheSize));
+		super(cacheDir, new TotalSizeLimitedDiscCache(cacheDir, CustomizedFileNameGeneratorFactory.createFileNameGenerator(fileNameGenerator), maxCacheSize));
 	}
 	
 }
