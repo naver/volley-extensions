@@ -18,6 +18,7 @@ package com.navercorp.volleyextensions.cache.universalimageloader.disc.impl;
 import java.io.File;
 
 import com.navercorp.volleyextensions.cache.universalimageloader.disc.UniversalBaseDiscCache;
+import com.navercorp.volleyextensions.cache.universalimageloader.disc.naming.CustomizedFileNameGeneratorFactory;
 import com.nostra13.universalimageloader.cache.disc.impl.FileCountLimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 /**
@@ -33,7 +34,7 @@ public class UniversalFileCountLimitedDiscCache extends UniversalBaseDiscCache {
 	 *                     with the most oldest last usage date will be deleted.
 	 */
 	public UniversalFileCountLimitedDiscCache(File cacheDir, int maxFileCount) {
-		super(cacheDir, new FileCountLimitedDiscCache(cacheDir, maxFileCount));
+		super(cacheDir, new FileCountLimitedDiscCache(cacheDir, CustomizedFileNameGeneratorFactory.createFileNameGenerator(), maxFileCount));
 	}
 	
 	/**
@@ -45,7 +46,7 @@ public class UniversalFileCountLimitedDiscCache extends UniversalBaseDiscCache {
 	 */
 	public UniversalFileCountLimitedDiscCache(File cacheDir,
 			FileNameGenerator fileNameGenerator, int maxFileCount) {
-		super(cacheDir, new FileCountLimitedDiscCache(cacheDir, fileNameGenerator, maxFileCount));
+		super(cacheDir, new FileCountLimitedDiscCache(cacheDir, CustomizedFileNameGeneratorFactory.createFileNameGenerator(fileNameGenerator), maxFileCount));
 	}
 
 }

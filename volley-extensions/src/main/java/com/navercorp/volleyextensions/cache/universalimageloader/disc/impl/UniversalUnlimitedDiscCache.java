@@ -18,6 +18,7 @@ package com.navercorp.volleyextensions.cache.universalimageloader.disc.impl;
 import java.io.File;
 
 import com.navercorp.volleyextensions.cache.universalimageloader.disc.UniversalBaseDiscCache;
+import com.navercorp.volleyextensions.cache.universalimageloader.disc.naming.CustomizedFileNameGeneratorFactory;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 /**
@@ -29,7 +30,7 @@ import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 public class UniversalUnlimitedDiscCache extends UniversalBaseDiscCache {
 	/** @param cacheDir Directory for file caching */
 	public UniversalUnlimitedDiscCache(File cacheDir) {
-		super(cacheDir, new UnlimitedDiscCache(cacheDir));
+		super(cacheDir, new UnlimitedDiscCache(cacheDir, CustomizedFileNameGeneratorFactory.createFileNameGenerator()));
 	}
 	/**
 	 * @param cacheDir          Directory for file caching
@@ -37,6 +38,6 @@ public class UniversalUnlimitedDiscCache extends UniversalBaseDiscCache {
 	 */
 	public UniversalUnlimitedDiscCache(File cacheDir,
 			FileNameGenerator fileNameGenerator) {
-		super(cacheDir, new UnlimitedDiscCache(cacheDir, fileNameGenerator));
+		super(cacheDir, new UnlimitedDiscCache(cacheDir, CustomizedFileNameGeneratorFactory.createFileNameGenerator(fileNameGenerator)));
 	}
 }
