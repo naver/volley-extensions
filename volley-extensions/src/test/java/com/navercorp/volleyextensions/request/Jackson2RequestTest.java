@@ -33,9 +33,9 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.navercorp.volleyextensions.mock.ErrorResponseHoldListener;
 import com.navercorp.volleyextensions.mock.ResponseHoldListener;
@@ -112,7 +112,7 @@ public class Jackson2RequestTest {
 		// Then
 		assertNull(response.result);
 		assertThat(response.error, is(instanceOf(ParseError.class)));
-		assertThat(response.error.getCause(), is(instanceOf(JsonParseException.class)));
+		assertThat(response.error.getCause(), is(instanceOf(JsonMappingException.class)));
 	}
 
 	@Test
