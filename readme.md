@@ -180,7 +180,7 @@ _(NOTE : The dependencies below were set to be `optional` as default in pom.xml 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.2.1</version>
+			<version>2.2.2</version>
 		</dependency>
 
 - Simple XML (when using SimpleXmlRequest)
