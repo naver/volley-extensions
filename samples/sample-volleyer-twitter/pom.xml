@@ -15,7 +15,6 @@
 		<android.platform>17</android.platform>
 		<android-support.version>r7</android-support.version>
 		<java.version>1.6</java.version>
-		<volleyer.version>0.1.0-SNAPSHOT</volleyer.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -41,7 +40,7 @@
 		<dependency>
 			<groupId>com.navercorp.volleyextensions</groupId>
 			<artifactId>volleyer</artifactId>
-			<version>${volleyer.version}</version>
+			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.nostra13.universalimageloader</groupId>

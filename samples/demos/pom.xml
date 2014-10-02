@@ -15,7 +15,6 @@
 		<android.platform>17</android.platform>
 		<android-support.version>r7</android-support.version>
 		<java.version>1.6</java.version>
-		<volley-ext.version>1.2.0-SNAPSHOT</volley-ext.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -63,17 +62,17 @@
 		<dependency>
 			<groupId>com.navercorp.volleyextensions</groupId>
 			<artifactId>volley-requests</artifactId>
-			<version>${volley-ext.version}</version>
+			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.navercorp.volleyextensions</groupId>
 			<artifactId>volley-caches</artifactId>
-			<version>${volley-ext.version}</version>
+			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.navercorp.volleyextensions</groupId>
 			<artifactId>volley-views</artifactId>
-			<version>${volley-ext.version}</version>
+			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.nostra13.universalimageloader</groupId>
