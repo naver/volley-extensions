@@ -3,7 +3,6 @@
 	<artifactId>volleyer</artifactId>
 	<packaging>jar</packaging>
 	<name>Volleyer</name>
-	<version>0.1.0-SNAPSHOT</version>
 	<parent>
 		<groupId>com.navercorp.volleyextensions</groupId>
 		<artifactId>parent</artifactId>
