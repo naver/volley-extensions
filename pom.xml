@@ -37,7 +37,10 @@
 			</developer>
 	</developers>
 	<modules>
-		<module>volley-extensions</module>
+		<module>common-utils</module>
+		<module>volley-caches</module>
+		<module>volley-requests</module>
+		<module>volley-views</module>
 		<module>volleyer</module>
 		<module>samples</module>
 	</modules>

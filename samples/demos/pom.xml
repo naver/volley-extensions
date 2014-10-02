@@ -62,7 +62,17 @@
 		</dependency>
 		<dependency>
 			<groupId>com.navercorp.volleyextensions</groupId>
-			<artifactId>volley-extensions</artifactId>
+			<artifactId>volley-requests</artifactId>
+			<version>${volley-ext.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.navercorp.volleyextensions</groupId>
+			<artifactId>volley-caches</artifactId>
+			<version>${volley-ext.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.navercorp.volleyextensions</groupId>
+			<artifactId>volley-views</artifactId>
 			<version>${volley-ext.version}</version>
 		</dependency>
 		<dependency>
