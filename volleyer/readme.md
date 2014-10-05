@@ -299,9 +299,21 @@ After IntegratedNetworkResponseParser instance is created, this can be used as a
 </dependency>
 ```
 
+##### Gradle
+```
+dependencies {
+	compile 'com.navercorp.volleyextensions:volleyer:2.0.+'
+}
+```
+
+#### 2. Add the appropriate dependency as per the classes you are using. 
+For example, if you are using a json parser(for example, JacksonNetworkResponseParser or Jackson2NetworkResponseParser), you need to add the dependency of [Jackson 1.x](http://jackson.codehaus.org/) library the dependency of or [Jackson 2.x](http://jackson.codehaus.org/) library. See the following settings below.
+
+_(NOTE : The dependencies below were set to be `optional` as default in pom.xml of the library. Because I assumed that each developer will use different parts of it.)_
+
 ##### Maven
 
-- Jackson 1.x (when using JacksonRequest)
+- Jackson 1.x (when using JacksonNetworkResponseParser)
 		
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -309,7 +321,7 @@ After IntegratedNetworkResponseParser instance is created, this can be used as a
 			<version>1.9.12</version>
 		</dependency>
 
-- Jackson 2.x (when using Jackson2Request)
+- Jackson 2.x (when using Jackson2NetworkResponseParser)
 		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -317,7 +329,7 @@ After IntegratedNetworkResponseParser instance is created, this can be used as a
 			<version>2.2.2</version>
 		</dependency>
 
-- Simple XML (when using SimpleXmlRequest)
+- Simple XML (when using SimpleXmlNetworkResponseParser)
 		
 		<dependency>
 			<groupId>org.simpleframework</groupId>
@@ -343,19 +355,19 @@ After IntegratedNetworkResponseParser instance is created, this can be used as a
 
 ##### Gradle
 
-- Jackson 1.x (when using JacksonRequest)
+- Jackson 1.x (when using JacksonNetworkResponseParser)
 
 		dependencies {
 			compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.+'
 			}
 
-- Jackson 2.x (when using Jackson2Request)
+- Jackson 2.x (when using Jackson2NetworkResponseParser)
 
 		dependencies {
 			compile 'com.fasterxml.jackson.core:jackson-databind:2.2.+'
 		}
 
-- Simple XML (when using SimpleXmlRequest)
+- Simple XML (when using SimpleXmlNetworkResponseParser)
 
 		dependencies {
 			compile('org.simpleframework:simple-xml:2.7.+') {
@@ -369,7 +381,7 @@ After IntegratedNetworkResponseParser instance is created, this can be used as a
 1. Download the jar package of volley-extensions.
 	- [volleyer-2.0.0.jar](http://github.com/nhnopensource/volley-extensions/wiki/downloads/2.0.0/volleyer-2.0.0.jar)
 2. Import the jar package into your project.
-3. Download and import Jackson, Simple XML, or Universal Image Loader as needed.
+3. Download and import Jackson, Simple XML as needed.
 
 # Sample Application
 Sample application is being provided as APK file ([the source](https://github.com/naver/volley-extensions/blob/master/samples/sample-volleyer-twitter/) is in the repository):
