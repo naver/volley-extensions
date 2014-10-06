@@ -25,7 +25,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.navercorp.volleyextensions</groupId>
-			<artifactId>common-utils</artifactId>
+			<artifactId>volley-extensions-common-utils</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
 		<dependency>

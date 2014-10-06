@@ -6,10 +6,10 @@ It provides useful classes such as various requests, disk caches, memory caches,
 
 Volley Extensions has been divided into following pluggable sub-projects.
 
- - [Volley requests](./volley-requests) : Contains Request classes that parses json and xml using Jackson library and Simple xml library.
- - [Volley caches](./volley-caches) : Contains improved DiskBasedCache and capable AUIL Cache for use in Volley.
- - [Volley custom views](./volley-views) : Added user interaction capabilities to NetworkImageView.
- - [Volleyer](./volleyer) : Volleyer provides a very simple and much improved interface for developers to work with while using Volley. Also includes branch new features previously not in Volley.
+ - [Volleyer](https://github.com/naver/volley-extensions/tree/master/volleyer) : Volleyer provides a very simple and much improved interface for developers to work with while using Volley. Also includes branch new features previously not in Volley.
+ - [Volley requests](https://github.com/naver/volley-extensions/tree/master/volley-requests) : Contains Request classes that parses json and xml using Jackson library and Simple xml library.
+ - [Volley caches](https://github.com/naver/volley-extensions/tree/master/volley-caches) : Contains improved DiskBasedCache and capable AUIL Cache for use in Volley.
+ - [Volley custom views](https://github.com/naver/volley-extensions/tree/master/volley-views) : Added user interaction capabilities to NetworkImageView.
 
 Each sub-project includes guides and samples for installation/development.
 
