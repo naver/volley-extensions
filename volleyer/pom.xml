@@ -78,9 +78,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.mcxiaoke.volley</groupId>
-			<artifactId>library</artifactId>
-			<version>1.0.2</version>
+			<groupId>com.android.volley</groupId>
+			<artifactId>volley</artifactId>
+			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>org.simpleframework</groupId>

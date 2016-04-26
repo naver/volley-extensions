@@ -59,8 +59,20 @@
 				<version>${android.version}</version>
 				<scope>provided</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.android.volley</groupId>
+				<artifactId>volley</artifactId>
+				<version>1.0.0</version>
+				<type>pom</type>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
+	</repositories>
 	<build>
 		<pluginManagement>
 			<plugins>
